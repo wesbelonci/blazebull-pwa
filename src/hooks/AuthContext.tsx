@@ -5,7 +5,6 @@ import React, {
   useContext,
   useEffect,
 } from "react";
-import { setCookie, parseCookies, destroyCookie } from "nookies";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -20,6 +19,10 @@ interface UserProps {
   email: string;
   avatar_url: string;
 }
+
+// interface TokenProps {
+//   token: string;
+// }
 
 interface AuthContextData {
   user: UserProps | null;
@@ -37,14 +40,25 @@ export const AuthContext = createContext<AuthContextData>(
 );
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<UserProps | null>(null);
   const navigate = useNavigate();
+
+  const [user, setUser] = useState<UserProps | null>(() => {
+    const token = localStorage.getItem("@blazebull:token");
+    const user = localStorage.getItem("@blazebull:user");
+
+    api.defaults.headers.common = { Authorization: `Bearer ${token}` };
+
+    if (user) {
+      return JSON.parse(user);
+    }
+
+    return {} as UserProps;
+  });
 
   const isAuthenticated = !!user;
 
   useEffect(() => {
-    const { "blazebull.token": token } = parseCookies();
-    if (token) {
+    if (!isAuthenticated) {
       getUserData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,7 +66,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const getUserData = useCallback(async () => {
     const response = await api.get("/user");
-    console.log(response.data);
     setUser(response.data);
   }, []);
 
@@ -69,9 +82,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       const { token, user } = response.data;
 
-      setCookie(undefined, "blazebull.token", token, {
-        maxAge: 60 * 60 * 1, // 1 hour
-      });
+      localStorage.setItem("@blazebull:token", token);
+      localStorage.setItem("@blazebull:user", JSON.stringify(user));
 
       api.defaults.headers.common = { Authorization: `bearer ${token}` };
 
@@ -85,9 +97,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const signOut = useCallback(() => {
     setUser(null);
 
+    localStorage.removeItem("@blazebull:token");
+    localStorage.removeItem("@blazebull:user");
+
     delete api.defaults.headers.common["Authorization"];
-    destroyCookie(undefined, "blazebull.token");
-    // Router.push("/sign-in");
   }, []);
 
   return (

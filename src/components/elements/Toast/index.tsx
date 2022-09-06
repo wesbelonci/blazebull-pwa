@@ -1,15 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { FiAlertCircle, FiX, FiCheckCircle, FiInfo } from "react-icons/fi";
 import { ToastContext, ToastMessage } from "../../../hooks/ToastContext";
-import AlertTitle from "@mui/material/AlertTitle";
-import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import { SnackbarCustom } from "./styles";
 
 interface ToastProps {
   message: ToastMessage;
-  // style: object;
 }
 
 const Toast: React.FC<ToastProps> = ({ message }) => {
