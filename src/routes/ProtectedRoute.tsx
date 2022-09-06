@@ -1,6 +1,5 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-// import { parseCookies } from "nookies";
 import { useAuth } from "../hooks/AuthContext";
 
 interface ProtectedRouteProps {
@@ -8,9 +7,9 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { user } = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  if (!user) {
+  if (!isAuthenticated) {
     return <Navigate to="/authentication" replace />;
   }
 

@@ -20,10 +20,6 @@ interface UserProps {
   avatar_url: string;
 }
 
-// interface TokenProps {
-//   token: string;
-// }
-
 interface AuthContextData {
   user: UserProps | null;
   isAuthenticated: boolean;
@@ -46,13 +42,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const token = localStorage.getItem("@blazebull:token");
     const user = localStorage.getItem("@blazebull:user");
 
-    api.defaults.headers.common = { Authorization: `Bearer ${token}` };
+    if (token) {
+      api.defaults.headers.common = { Authorization: `Bearer ${token}` };
+    }
 
     if (user) {
       return JSON.parse(user);
     }
 
-    return {} as UserProps;
+    return null;
   });
 
   const isAuthenticated = !!user;

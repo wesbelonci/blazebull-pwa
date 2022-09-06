@@ -1,14 +1,15 @@
 import axios from "axios";
-import { parseCookies } from "nookies";
-
-const { "blazebull.token": token } = parseCookies();
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });
 
-if (token) {
-  api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-}
+api.interceptors.request.use((config) => {
+  //const accessToken = localStorage.getItem("@blazebull:token");
+
+  //api.defaults.headers.common = { Authorization: `bearer ${accessToken}` };
+
+  return config;
+});
 
 export default api;
