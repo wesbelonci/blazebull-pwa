@@ -7,5 +7,5 @@ export const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette["background-dark"].main,
   // padding: "15px 20px;",
   overflowX: "hidden",
-  overFlowY: "scroll",
+  overflowY: "hidden",
 }));

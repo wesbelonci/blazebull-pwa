@@ -26,15 +26,15 @@ export const Content = styled("div")(({ theme }) => ({
 
   "&::before": {
     content: '""',
-    backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0) 5%,${theme.palette["background-dark"].main}), url(/assets/images/logo.svg)`,
+    backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0) 20%,${theme.palette["background-dark"].main}), url(/assets/images/bg-entry.webp)`,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "50% 50%",
     backgroundSize: "cover",
     position: "fixed",
     maxWidth: "390px",
     width: "100%",
-    height: "75vh",
-    opacity: 0.6,
+    height: "90vh",
+    opacity: 0.8,
     top: 0,
     left: 0,
     right: 0,
@@ -75,4 +75,20 @@ export const Button = styled("div")<ButtonProps>(({ theme, variant }) => ({
 export const IconButton = styled("div")(({ theme }) => ({
   color: theme.palette.white.main,
   marginLeft: "10px",
+}));
+
+export const NeedHelp = styled("div")(({ theme }) => ({
+  display: "flex",
+  width: "100%",
+  marginTop: 30,
+  marginBottom: 10,
+  height: 30,
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+  // marginTop: 10,
+
+  position: "relative",
+  bottom: 20,
+  left: 0,
 }));

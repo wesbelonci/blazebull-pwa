@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import {
   Container,
   Button,
@@ -126,7 +127,9 @@ function AuthenticationPage() {
           <NeedHelp>
             <span className="text-white font-normal">
               Precisa de ajuda?{" "}
-              <strong className="text-red underline">Clique aqui</strong>
+              <a href="#" className="text-red underline cursor-pointer">
+                Clique aqui
+              </a>
             </span>
           </NeedHelp>
         </Content>
