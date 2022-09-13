@@ -2,6 +2,7 @@ import React from "react";
 
 import { AuthProvider } from "./AuthContext";
 import { ToastProvider } from "./ToastContext";
+import { LoadingProvider } from "./LoadingContext";
 
 interface AppProviderProps {
   children: any;
@@ -9,7 +10,9 @@ interface AppProviderProps {
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => (
   <AuthProvider>
-    <ToastProvider>{children}</ToastProvider>
+    <ToastProvider>
+      <LoadingProvider>{children}</LoadingProvider>
+    </ToastProvider>
   </AuthProvider>
 );
 

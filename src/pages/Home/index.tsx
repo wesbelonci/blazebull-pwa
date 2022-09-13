@@ -1,10 +1,19 @@
-/* eslint-disable jsx-a11y/iframe-has-title */
-// import { useState } from "react";
-// import { useRef } from "react";
+import { useEffect } from "react";
+import { useLoading } from "../../hooks/LoadingContext";
 import { Layout } from "../../layouts";
 import { Container, Content, Blaze } from "./styles";
 
 function HomePage() {
+  const { setLoadingVisible } = useLoading();
+
+  useEffect(() => {
+    setLoadingVisible(true);
+
+    setTimeout(() => {
+      setLoadingVisible(false);
+    }, 2000);
+  }, [setLoadingVisible]);
+
   return (
     <Layout>
       <Container>
@@ -16,7 +25,6 @@ function HomePage() {
             src="https://blaze.com/en/games/double"
             frameBorder="0"
           />
-          {/* <button onClick={() => setCount(count + 1)}>Clique aqui</button> */}
         </Content>
       </Container>
     </Layout>

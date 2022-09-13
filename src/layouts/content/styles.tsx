@@ -8,4 +8,7 @@ export const Container = styled("div")(({ theme }) => ({
   // padding: "15px 20px;",
   overflowX: "hidden",
   overflowY: "hidden",
+
+  paddingLeft: theme.spacing(1),
+  paddingRight: theme.spacing(1),
 }));

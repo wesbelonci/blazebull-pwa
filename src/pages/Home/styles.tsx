@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 export const Container = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette["background-dark"].main,
-  padding: theme.spacing(1),
+  //padding: theme.spacing(1),
   // justifyContent: "center",
   alignItems: "center",
   width: "100%",
@@ -16,8 +16,8 @@ export const Container = styled("div")(({ theme }) => ({
 export const Content = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette["background-dark"].main,
-  paddingLeft: theme.spacing(2),
-  paddingRight: theme.spacing(2),
+  paddingLeft: theme.spacing(1),
+  paddingRight: theme.spacing(1),
   maxWidth: "390px",
   width: "100%",
   height: "auto",
@@ -52,11 +52,14 @@ export const Content = styled("div")(({ theme }) => ({
 }));
 
 export const Blaze = styled("iframe")(({ theme }) => ({
+  display: "block",
   overflow: "hidden",
   width: "100%",
   height: "690px",
   marginBottom: "-80px",
   resize: "none",
-  overflowX: "hidden",
-  overflowY: "hidden",
+  border: "none",
+  //position: "fixed",
+  //overflowX: "hidden",
+  //overflowY: "hidden",
 }));

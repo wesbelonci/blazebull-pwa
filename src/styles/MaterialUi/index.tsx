@@ -263,6 +263,13 @@ declare module "@mui/material/Checkbox" {
   }
 }
 
+// Update the Button's color prop options
+declare module "@mui/material/CircularProgress" {
+  interface CircularProgressPropsColorOverrides {
+    red: true;
+  }
+}
+
 const defaultTheme = createTheme({
   palette: {
     primary: {
