@@ -14,8 +14,8 @@ export const Container = styled("div")(({ theme }) => ({
 export const Content = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette["background-dark"].main,
-  paddingLeft: theme.spacing(2),
-  paddingRight: theme.spacing(2),
+  paddingLeft: theme.spacing(1),
+  paddingRight: theme.spacing(1),
   maxWidth: "390px",
   width: "100%",
   height: "auto",
