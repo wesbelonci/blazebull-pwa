@@ -48,7 +48,7 @@
     --dark-background-five: #2e3142;
     --light-background: #1b242f;
     --light-grey: #bcbfc7;
-    --light-grey-two: #8c9099;
+    --light-grey-two: #818181;
     --light-grey-three: #9095ab;
     --dark-grey: #8a90a2;
     --white-grey: #aab0c3;
@@ -131,3 +131,17 @@ body::-webkit-scrollbar-track {
   border-radius: 0;
   background: #1b1d2b;
 } */
+
+.sidebar-nav::-webkit-scrollbar {
+    width: 4px;
+      /* width of the entire scrollbar */
+}
+.sidebar-nav::-webkit-scrollbar-track {
+    background: transparent;
+      /* color of the tracking area */
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: transparent;
+  /* color of the tracking area */
+}

@@ -4,6 +4,10 @@ import { HomePage } from "../pages/Home";
 import { InitialAccessPage } from "../pages/InitialAccess";
 import ProtectedRoute from "./ProtectedRoute";
 import { AnimatePresence } from "framer-motion";
+import { RoomCrash } from "../pages/RoomCrash";
+import { RoomDouble } from "../pages/RoomDouble";
+import { Classroom } from "../pages/Classroom";
+import { Settings } from "../pages/Settings";
 
 const App = () => {
   const location = useLocation();
@@ -14,6 +18,10 @@ const App = () => {
         <Route index element={<InitialAccessPage />} />
         <Route element={<ProtectedRoute />}>
           <Route path="home" element={<HomePage />} />
+          <Route path="room-crash" element={<RoomCrash />} />
+          <Route path="room-double" element={<RoomDouble />} />
+          <Route path="classroom" element={<Classroom />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="authentication" element={<AuthenticationPage />} />
         <Route path="*" element={<p>There's nothing here: 404!</p>} />

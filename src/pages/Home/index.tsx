@@ -17,7 +17,7 @@ function HomePage() {
   return (
     <Layout>
       <Container>
-        <Content>
+        {/* <Content>
           <Blaze
             id="iframeTeste"
             // ref={ref}
@@ -25,7 +25,7 @@ function HomePage() {
             src="https://blaze.com/en/games/double"
             frameBorder="0"
           />
-        </Content>
+        </Content> */}
       </Container>
     </Layout>
   );
