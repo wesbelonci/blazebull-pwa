@@ -16,8 +16,8 @@ export const Container = styled("div")(({ theme }) => ({
 export const Content = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette["background-dark"].main,
-  paddingLeft: theme.spacing(1),
-  paddingRight: theme.spacing(1),
+  paddingLeft: theme.spacing(2),
+  paddingRight: theme.spacing(2),
   maxWidth: "390px",
   width: "100%",
   height: "auto",
@@ -31,7 +31,7 @@ export const Content = styled("div")(({ theme }) => ({
   // "&::before": {
   //   content: '""',
   //   // backgroundColor: theme.palette["background-dark"].main,
-  //   backgroundImage: `linear-gradient(to bottom, rgba(255,255,255,0) 10%,${theme.palette["background-dark"].main}), url(/assets/images/bg-login.webp)`,
+  //   backgroundImage:
   //   backgroundRepeat: "no-repeat",
   //   opacity: 0.2,
   //   backgroundPosition: "50% 50%",
@@ -62,4 +62,170 @@ export const Blaze = styled("iframe")(({ theme }) => ({
   //position: "fixed",
   //overflowX: "hidden",
   //overflowY: "hidden",
+}));
+
+export const Rooms = styled("div")(({ theme }) => ({
+  display: "div",
+  width: "100%",
+  height: "auto",
+  //position: "fixed",
+  //overflowX: "hidden",
+  //overflowY: "hidden",
+  justifyContent: "flex-start",
+
+  span: {
+    fontSize: 20,
+    color: theme.palette["white"].main,
+    marginBottom: 10,
+  },
+}));
+
+export const Crash = styled("div")(({ theme }) => ({
+  display: "flex",
+  marginTop: 10,
+  borderWidth: 1,
+  borderColor: theme.palette["red"].main,
+  borderRadius: 12,
+  //backgroundImage: "url(/assets/images/bg-room-crash.webp)",
+  backgroundImage: `linear-gradient(to right, rgba(255,255,255,0) 5%,${theme.palette["background-dark"].main}), url(/assets/images/bg-room-crash.webp)`,
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "contain",
+  height: 161,
+}));
+
+export const Double = styled("div")(({ theme }) => ({
+  display: "flex",
+  marginTop: 20,
+  borderWidth: 1,
+  borderColor: theme.palette["red"].main,
+  borderRadius: 12,
+  //backgroundImage: "url(/assets/images/bg-room-crash.webp)",
+  backgroundImage: `linear-gradient(to right, rgba(255,255,255,0) 5%,${theme.palette["background-dark"].main}), url(/assets/images/bg-room-double.webp)`,
+  backgroundRepeat: "no-repeat",
+  //backgroundPositionX: "-75%",
+  backgroundPosition: "-500% 75%",
+  backgroundSize: "contain",
+  height: 161,
+}));
+
+export const RoomStats = styled("div")(({ theme }) => ({
+  display: "flex",
+  width: "100%",
+  //justifyContent: "flex-end",
+  alignItems: "flex-end",
+  flexDirection: "column",
+  paddingTop: theme.spacing(2),
+  paddingBottom: theme.spacing(1),
+  paddingRight: theme.spacing(1.5),
+
+  span: {
+    color: theme.palette["white"].main,
+    fontSize: 12,
+    paddingLeft: theme.spacing(0.5),
+    paddingRight: theme.spacing(0.5),
+  },
+}));
+
+export const RoomStatsWin = styled("div")(({ theme }) => ({
+  display: "flex",
+  width: "100%",
+  height: "auto",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "center",
+
+  span: {
+    marginBottom: 0,
+    color: theme.palette["white"].main,
+    fontSize: 12,
+    paddingLeft: theme.spacing(0.5),
+    paddingRight: theme.spacing(0.5),
+  },
+
+  svg: {
+    color: theme.palette["lime-green"].main,
+  },
+}));
+
+export const RoomStatsLoss = styled("div")(({ theme }) => ({
+  display: "flex",
+  width: "100%",
+  height: "auto",
+  justifyContent: "center",
+  alignItems: "center",
+  flexDirection: "row",
+
+  span: {
+    marginBottom: 0,
+    color: theme.palette["white"].main,
+    fontSize: 12,
+    paddingLeft: theme.spacing(0.5),
+    paddingRight: theme.spacing(0.5),
+  },
+
+  svg: {
+    color: theme.palette["red"].main,
+  },
+}));
+
+export const Badge = styled("div")<{ type?: "win" | "loss" }>(
+  ({ theme, type }) => ({
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor:
+      type === "win"
+        ? theme.palette["lime-green"].main
+        : theme.palette["red"].main,
+    width: 30,
+    height: 20,
+    borderRadius: 15,
+    color: theme.palette["white"].main,
+    fontSize: 12,
+  })
+);
+
+export const Title = styled("div")(({ theme }) => ({
+  display: "flex",
+  height: 70,
+  alignItems: "center",
+  justifyContent: "center",
+  paddingTop: 10,
+
+  span: {
+    fontSize: 20,
+    fontWeight: 700,
+  },
+}));
+
+export const Rate = styled("div")(({ theme }) => ({
+  display: "flex",
+  //height: "100%",
+  //justifyContent: "flex-end",
+  //height: 80,
+  alignItems: "flex-end",
+  flexDirection: "row",
+
+  span: {
+    fontSize: 12,
+    paddingLeft: theme.spacing(0.2),
+    paddingRight: theme.spacing(0.2),
+    //fontWeight: 700,
+  },
+}));
+
+export const DividerStats = styled("div")(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingLeft: theme.spacing(0.5),
+  paddingRight: theme.spacing(0.5),
+
+  span: {
+    marginBottom: 0,
+    fontSize: 12,
+    paddingLeft: theme.spacing(0.2),
+    paddingRight: theme.spacing(0.2),
+    //fontWeight: 700,
+  },
 }));
