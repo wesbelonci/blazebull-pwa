@@ -3,8 +3,6 @@ import { styled } from "@mui/system";
 export const Container = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette["background-dark"].main,
-  //padding: theme.spacing(1),
-  // justifyContent: "center",
   alignItems: "center",
   width: "100%",
   height: window.innerHeight,
@@ -59,18 +57,12 @@ export const Blaze = styled("iframe")(({ theme }) => ({
   marginBottom: "-80px",
   resize: "none",
   border: "none",
-  //position: "fixed",
-  //overflowX: "hidden",
-  //overflowY: "hidden",
 }));
 
 export const Rooms = styled("div")(({ theme }) => ({
   display: "div",
   width: "100%",
   height: "auto",
-  //position: "fixed",
-  //overflowX: "hidden",
-  //overflowY: "hidden",
   justifyContent: "flex-start",
 
   span: {
@@ -80,38 +72,38 @@ export const Rooms = styled("div")(({ theme }) => ({
   },
 }));
 
-export const Crash = styled("div")(({ theme }) => ({
+export const Crash = styled("button")(({ theme }) => ({
   display: "flex",
   marginTop: 10,
+  width: "100%",
   borderWidth: 1,
   borderColor: theme.palette["red"].main,
   borderRadius: 12,
-  //backgroundImage: "url(/assets/images/bg-room-crash.webp)",
   backgroundImage: `linear-gradient(to right, rgba(255,255,255,0) 5%,${theme.palette["background-dark"].main}), url(/assets/images/bg-room-crash.webp)`,
   backgroundRepeat: "no-repeat",
   backgroundSize: "contain",
   height: 161,
+  position: "relative",
 }));
 
-export const Double = styled("div")(({ theme }) => ({
+export const Double = styled("button")(({ theme }) => ({
   display: "flex",
+  width: "100%",
   marginTop: 20,
   borderWidth: 1,
   borderColor: theme.palette["red"].main,
   borderRadius: 12,
-  //backgroundImage: "url(/assets/images/bg-room-crash.webp)",
   backgroundImage: `linear-gradient(to right, rgba(255,255,255,0) 5%,${theme.palette["background-dark"].main}), url(/assets/images/bg-room-double.webp)`,
   backgroundRepeat: "no-repeat",
-  //backgroundPositionX: "-75%",
   backgroundPosition: "-500% 75%",
   backgroundSize: "contain",
   height: 161,
+  position: "relative",
 }));
 
 export const RoomStats = styled("div")(({ theme }) => ({
   display: "flex",
   width: "100%",
-  //justifyContent: "flex-end",
   alignItems: "flex-end",
   flexDirection: "column",
   paddingTop: theme.spacing(2),
@@ -200,9 +192,6 @@ export const Title = styled("div")(({ theme }) => ({
 
 export const Rate = styled("div")(({ theme }) => ({
   display: "flex",
-  //height: "100%",
-  //justifyContent: "flex-end",
-  //height: 80,
   alignItems: "flex-end",
   flexDirection: "row",
 
@@ -210,7 +199,6 @@ export const Rate = styled("div")(({ theme }) => ({
     fontSize: 12,
     paddingLeft: theme.spacing(0.2),
     paddingRight: theme.spacing(0.2),
-    //fontWeight: 700,
   },
 }));
 
@@ -226,6 +214,31 @@ export const DividerStats = styled("div")(({ theme }) => ({
     fontSize: 12,
     paddingLeft: theme.spacing(0.2),
     paddingRight: theme.spacing(0.2),
-    //fontWeight: 700,
+  },
+}));
+
+export const Live = styled("div")(({ theme }) => ({
+  display: "flex",
+  width: "60px",
+  height: "20px",
+  borderRadius: 15,
+  position: "absolute",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingLeft: theme.spacing(0.5),
+  paddingRight: theme.spacing(0.5),
+  backgroundColor: theme.palette["red"].main,
+  padding: 10,
+  top: -10,
+  right: 10,
+  zIndex: 90,
+  color: theme.palette["white"].main,
+
+  span: {
+    marginBottom: 0,
+    fontSize: 10,
+    color: theme.palette["white"].main,
+    paddingLeft: theme.spacing(0.2),
+    paddingRight: theme.spacing(0.2),
   },
 }));

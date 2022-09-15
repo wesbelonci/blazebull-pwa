@@ -15,10 +15,13 @@ import {
   Title,
   Rate,
   DividerStats,
+  Live,
 } from "./styles";
 import { FiArrowUp, FiArrowDown } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
+  const navigate = useNavigate();
   const { setLoadingVisible } = useLoading();
 
   useEffect(() => {
@@ -35,7 +38,10 @@ function HomePage() {
         <Content>
           <Rooms>
             <span>Salas de sinais</span>
-            <Crash>
+            <Crash onClick={() => navigate("/room-crash")}>
+              <Live>
+                <span>Ao vivo</span>
+              </Live>
               <RoomStats>
                 <div className="flex w-auto h-auto flex-row items-center justify-center">
                   <RoomStatsWin>
@@ -70,7 +76,10 @@ function HomePage() {
                 </Rate>
               </RoomStats>
             </Crash>
-            <Double>
+            <Double onClick={() => navigate("/room-double")}>
+              <Live>
+                <span>Ao vivo</span>
+              </Live>
               <RoomStats>
                 <div className="flex w-auto h-auto flex-row items-center justify-center">
                   <RoomStatsWin>
