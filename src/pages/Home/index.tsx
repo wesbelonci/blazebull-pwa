@@ -4,7 +4,6 @@ import { Layout } from "../../layouts";
 import {
   Container,
   Content,
-  Blaze,
   Rooms,
   Crash,
   Double,

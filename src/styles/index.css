@@ -30,7 +30,7 @@
     --cornflower: #5f6af2;
     --very-light-pink: #fffdfd;
     --blue-blue: #142dcc;
-    --lightish-blue: #4860f9;
+    --lightish-blue: #007AFF;
     --cloudy-blue: #acb1cd;
     --weird-green: #3eed80;
     --pastel-blue: #a6b4ff;
@@ -41,8 +41,8 @@
     --separator: #323b45;
     --background-two: #1a242d;
     --background-three: #252f38;
-    --background-four: #1d2730;
-    --background-five: #2b2b2c;
+    --background-four: #364350;
+    --background-five: #364350;
     --dark-background: #0f1923;
     --dark-background-four: #262f3c;
     --dark-background-five: #2e3142;
@@ -104,6 +104,7 @@
 /* Track */
 ::-webkit-scrollbar-track {
   background: transparent;
+  /* transition: all 200ms ease-out; */
 }
 
 /* Handle */

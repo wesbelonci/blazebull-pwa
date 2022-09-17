@@ -14,9 +14,9 @@ export const Container = styled("div")(({ theme }) => ({
 export const Content = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette["background-dark"].main,
-  paddingLeft: theme.spacing(1),
-  paddingRight: theme.spacing(1),
-  maxWidth: "390px",
+  paddingLeft: theme.spacing(0.8),
+  paddingRight: theme.spacing(0.8),
+  //maxWidth: "390px",
   width: "100%",
   height: "auto",
   flexDirection: "column",
@@ -95,7 +95,7 @@ export const Double = styled("button")(({ theme }) => ({
   borderRadius: 12,
   backgroundImage: `linear-gradient(to right, rgba(255,255,255,0) 5%,${theme.palette["background-dark"].main}), url(/assets/images/bg-room-double.webp)`,
   backgroundRepeat: "no-repeat",
-  backgroundPosition: "-500% 75%",
+  backgroundPosition: "-100% 75%",
   backgroundSize: "contain",
   height: 161,
   position: "relative",
@@ -127,7 +127,7 @@ export const RoomStatsWin = styled("div")(({ theme }) => ({
   alignItems: "center",
 
   span: {
-    marginBottom: 0,
+    marginBottom: "0!important",
     color: theme.palette["white"].main,
     fontSize: 12,
     paddingLeft: theme.spacing(0.5),
@@ -148,7 +148,7 @@ export const RoomStatsLoss = styled("div")(({ theme }) => ({
   flexDirection: "row",
 
   span: {
-    marginBottom: 0,
+    marginBottom: "0!important",
     color: theme.palette["white"].main,
     fontSize: 12,
     paddingLeft: theme.spacing(0.5),
@@ -179,7 +179,7 @@ export const Badge = styled("div")<{ type?: "win" | "loss" }>(
 
 export const Title = styled("div")(({ theme }) => ({
   display: "flex",
-  height: 70,
+  height: "auto",
   alignItems: "center",
   justifyContent: "center",
   paddingTop: 10,
@@ -194,6 +194,7 @@ export const Rate = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "flex-end",
   flexDirection: "row",
+  marginTop: 10,
 
   span: {
     fontSize: 12,

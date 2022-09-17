@@ -3,7 +3,8 @@ import { styled } from "@mui/system";
 export const Container = styled("nav")(({ theme }) => ({
   gridArea: "sidebar",
   display: "flex",
-  width: "390px",
+  width: "100%",
+  maxWidth: 428,
   height: "100%",
   backgroundColor: theme.palette["background-dark"].main,
   position: "fixed",
@@ -27,8 +28,8 @@ export const Header = styled("nav")(({ theme }) => ({
   height: "70px",
   justifyContent: "space-between",
   alignItems: "center",
-  paddingLeft: theme.spacing(3),
-  paddingRight: theme.spacing(3),
+  paddingLeft: theme.spacing(2),
+  paddingRight: theme.spacing(2),
 }));
 
 export const BackButton = styled("button")(({ theme }) => ({

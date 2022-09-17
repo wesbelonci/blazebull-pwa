@@ -3,18 +3,21 @@ import { styled } from "@mui/system";
 export const Container = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette["background-dark"].main,
-  // padding: theme.spacing(1),
   justifyContent: "center",
   alignItems: "center",
+  maxWidth: "428px",
   width: "100%",
-  height: window.innerHeight,
+  //minHeight: window.innerHeight,
+  height: "100%",
   flexDirection: "column",
   overflow: "hidden",
+  margin: "0 auto",
 }));
 
 export const App = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette["background-dark"].main,
-  maxWidth: "390px",
+  //width: "max(100%, 360px)",
+  maxWidth: "428px",
   width: "100%",
   height: "100%",
   overflow: "hidden",
