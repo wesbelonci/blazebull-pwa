@@ -32,6 +32,8 @@ export const Content = styled("div")(({ theme }) => ({
 export const Blaze = styled("iframe")(({ theme }) => ({
   display: "block",
   overflow: "hidden",
+  // overflowX: "hidden",
+  // overflowY: "hidden",
   width: "100%",
   height: "690px",
   marginBottom: "-80px",
