@@ -30,7 +30,7 @@ export const Blaze = styled("div")(({ theme }) => ({
   display: "block",
   overflow: "hidden!important",
   width: "100%",
-  height: "570px",
+  height: "580px",
   touchAction: "none",
   paddingLeft: theme.spacing(1.2),
   paddingRight: theme.spacing(1.2),

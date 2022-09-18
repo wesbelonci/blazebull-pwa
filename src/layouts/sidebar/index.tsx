@@ -102,7 +102,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
             </Icon>
             <span>Double</span>
           </NavItem>
-          <NavItem>
+          {/* <NavItem>
             <Icon>
               <img
                 src="/assets/objects/indique-ganhe.svg"
@@ -110,7 +110,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
               />
             </Icon>
             <span>Indique e Ganhe</span>
-          </NavItem>
+          </NavItem> */}
           <NavItem>
             <Icon>
               <img
