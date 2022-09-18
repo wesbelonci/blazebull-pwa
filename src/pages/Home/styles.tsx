@@ -49,14 +49,13 @@ export const Content = styled("div")(({ theme }) => ({
   // },
 }));
 
-export const Blaze = styled("iframe")(({ theme }) => ({
+export const Blaze = styled("div")(({ theme }) => ({
   display: "block",
   overflow: "hidden",
   width: "100%",
   height: "690px",
   marginBottom: "-80px",
-  resize: "none",
-  border: "none",
+  backgroundColor: theme.palette["background-dark"].main,
 }));
 
 export const Rooms = styled("div")(({ theme }) => ({

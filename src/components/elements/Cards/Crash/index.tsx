@@ -83,7 +83,7 @@ const CardCrash = () => {
         }
         counter++;
       }
-    }, 2000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [count, removeCard]);
 

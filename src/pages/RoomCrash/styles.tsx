@@ -2,15 +2,12 @@ import { styled } from "@mui/system";
 
 export const Container = styled("div")(({ theme }) => ({
   display: "flex",
-  // backgroundColor: theme.palette["background-dark"].main,
   alignItems: "center",
   width: "100%",
   height: "100%",
   justifyContent: "center",
-  //height: window.innerHeight,
   flexDirection: "column",
   overflowY: "hidden",
-  //overflow: "auto",
 }));
 
 export const Content = styled("div")(({ theme }) => ({
@@ -29,14 +26,37 @@ export const Content = styled("div")(({ theme }) => ({
   //overflow: "auto",
 }));
 
-export const Blaze = styled("iframe")(({ theme }) => ({
+export const Blaze = styled("div")(({ theme }) => ({
   display: "block",
-  overflow: "hidden",
-  // overflowX: "hidden",
-  // overflowY: "hidden",
+  overflow: "hidden!important",
+  width: "100%",
+  height: "620px",
+  touchAction: "none",
+  paddingLeft: theme.spacing(1),
+  paddingRight: theme.spacing(1),
+  // overscrollBehavior: "contain",
+  // backgroundColor: theme.palette["red"].main,
+  position: "relative",
+}));
+
+export const Iframe = styled("iframe")(({ theme }) => ({
+  display: "block",
+  overflow: "hidden!important",
   width: "100%",
   height: "690px",
   marginBottom: "-80px",
-  resize: "none",
-  border: "none",
+  touchAction: "none",
+  position: "relative",
+  top: 0,
+
+  "&:after": {
+    content: "''",
+    width: "100%",
+    height: "690px",
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: 999,
+    backgroundColor: theme.palette["blue"].main,
+  },
 }));
