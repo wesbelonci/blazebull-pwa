@@ -27,10 +27,11 @@ export const Content = styled("div")(({ theme }) => ({
 }));
 
 export const Blaze = styled("div")(({ theme }) => ({
+  marginTop: 20,
   display: "block",
   overflow: "hidden!important",
   width: "100%",
-  height: "540px",
+  height: "530px",
   touchAction: "none",
   paddingLeft: theme.spacing(1.2),
   paddingRight: theme.spacing(1.2),
@@ -68,9 +69,8 @@ export const Iframe = styled("iframe")(({ theme }) => ({
   overflow: "hidden!important",
   width: "100%",
   height: "650px",
-  marginTop: "-10px",
+  marginTop: "-15px",
   marginBottom: "-80px",
   //touchAction: "none",
   position: "relative",
-  top: 0,
 }));
