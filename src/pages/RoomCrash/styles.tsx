@@ -32,11 +32,35 @@ export const Blaze = styled("div")(({ theme }) => ({
   width: "100%",
   height: "620px",
   touchAction: "none",
-  paddingLeft: theme.spacing(1),
-  paddingRight: theme.spacing(1),
+  paddingLeft: theme.spacing(1.2),
+  paddingRight: theme.spacing(1.2),
   // overscrollBehavior: "contain",
   // backgroundColor: theme.palette["red"].main,
   position: "relative",
+
+  // "&:after": {
+  //   content: "''",
+  //   width: "10%",
+  //   height: "100%",
+  //   position: "absolute",
+  //   top: 0,
+  //   left: 0,
+  //   zIndex: 999,
+  //   overflowY: "scroll",
+  //   // backgroundColor: theme.palette["blue"].main,
+  // },
+
+  // "&:before": {
+  //   content: "''",
+  //   width: "10%",
+  //   height: "100%",
+  //   position: "absolute",
+  //   top: 0,
+  //   right: 0,
+  //   zIndex: 999,
+  //   overflowY: "scroll",
+  //   // backgroundColor: theme.palette["blue"].main,
+  // },
 }));
 
 export const Iframe = styled("iframe")(({ theme }) => ({
@@ -48,15 +72,4 @@ export const Iframe = styled("iframe")(({ theme }) => ({
   touchAction: "none",
   position: "relative",
   top: 0,
-
-  "&:after": {
-    content: "''",
-    width: "100%",
-    height: "690px",
-    position: "absolute",
-    top: 0,
-    left: 0,
-    zIndex: 999,
-    backgroundColor: theme.palette["blue"].main,
-  },
 }));
