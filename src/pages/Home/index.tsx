@@ -73,9 +73,11 @@ function HomePage() {
                   <span>Taxa de acertos:</span>
                   <span className="text-lime-green">
                     <strong className="text-lime-green font-bold">
-                      {Number(
-                        ((daily.loss / daily.win) * 100 - 100) * -1
-                      ).toFixed(2)}
+                      {daily.win === 0
+                        ? 0
+                        : Number(
+                            ((daily.loss / daily.win) * 100 - 100) * -1
+                          ).toFixed(2)}
                       %
                     </strong>
                   </span>
