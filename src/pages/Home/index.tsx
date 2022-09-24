@@ -18,18 +18,20 @@ import {
 } from "./styles";
 import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { useCrashGame } from "../../hooks/CrashGameContext";
 
 function HomePage() {
   const navigate = useNavigate();
+  const { daily } = useCrashGame();
   const { setLoadingVisible } = useLoading();
 
-  useEffect(() => {
-    setLoadingVisible(true);
+  // useEffect(() => {
+  //   setLoadingVisible(true);
 
-    setTimeout(() => {
-      setLoadingVisible(false);
-    }, 2000);
-  }, [setLoadingVisible]);
+  //   setTimeout(() => {
+  //     setLoadingVisible(false);
+  //   }, 2000);
+  // }, [setLoadingVisible]);
 
   return (
     <Layout>
@@ -47,7 +49,7 @@ function HomePage() {
                     <span>Win</span>
                     <FiArrowUp size={15} />
                     <Badge type="win" className="badge">
-                      98
+                      {daily.win}
                     </Badge>
                   </RoomStatsWin>
                   <DividerStats>
@@ -55,7 +57,7 @@ function HomePage() {
                   </DividerStats>
                   <RoomStatsLoss>
                     <Badge type="loss" className="badge">
-                      2
+                      {daily.loss}
                     </Badge>
                     <FiArrowDown size={15} />
                     <span>Loss</span>
@@ -70,7 +72,12 @@ function HomePage() {
                 <Rate className="">
                   <span>Taxa de acertos:</span>
                   <span className="text-lime-green">
-                    <strong className="text-lime-green font-bold">98%</strong>
+                    <strong className="text-lime-green font-bold">
+                      {Number(
+                        ((daily.loss / daily.win) * 100 - 100) * -1
+                      ).toFixed(2)}
+                      %
+                    </strong>
                   </span>
                 </Rate>
               </RoomStats>

@@ -17,7 +17,7 @@ export const Container = styled("nav")(({ theme }) => ({
   "&.show": {
     transform: "none",
     transition: "all 200ms ease-out",
-    zIndex: 100,
+    zIndex: 9999,
     opacity: 1,
   },
 }));

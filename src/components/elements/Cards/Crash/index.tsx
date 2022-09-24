@@ -1,97 +1,38 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Container, Content, Title, Text } from "./styles";
 import { motion } from "framer-motion";
-
-interface CardProps {
-  id: string;
-  type: "analyzing" | "entry" | "win" | "loss" | "gale";
-  target: number;
-  text?: string;
-  amount?: number;
-  last?: number;
-  result?: number;
-  hour: string;
-}
-
-const response: CardProps[] = [
-  {
-    id: "489037tjfiosd",
-    type: "analyzing",
-    target: 2,
-    hour: "19:10",
-  },
-  {
-    id: "fsduiogh0io4",
-    type: "entry",
-    target: 2,
-    last: 29.4,
-    hour: "19:10",
-  },
-  {
-    id: "fsduiogh03453",
-    type: "gale",
-    text: "Faça Martingale",
-    amount: 5,
-    target: 2,
-    hour: "19:10",
-  },
-  {
-    id: "fsdiop[j4894",
-    type: "gale",
-    text: "Faça Martingale",
-    amount: 10,
-    target: 2,
-    hour: "19:10",
-  },
-  {
-    id: "uiotsdfghjof",
-    type: "win",
-    target: 2,
-    result: 8.29,
-    hour: "19:11",
-  },
-  // {
-  //   id: "4fgj0sdjrt5r",
-  //   type: "loss",
-  //   target: 2,
-  //   result: 1.1,
-  //   hour: "19:11",
-  // },
-];
+import { useSocket } from "../../../../hooks/SocketContext";
+import { IWebSocketCrash } from "../../../../types/ISocketGameCrash";
 
 const CardCrash = () => {
-  const [data, setData] = useState<CardProps[]>([] as CardProps[]);
-  const [count, setCount] = useState(0);
+  const [messages, setMessages] = useState<IWebSocketCrash[]>(
+    [] as IWebSocketCrash[]
+  );
+
+  const { message } = useSocket();
 
   const removeCard = useCallback(() => {
     setTimeout(() => {
-      setData([] as CardProps[]);
+      setMessages([] as IWebSocketCrash[]);
     }, 10000);
   }, []);
 
   useEffect(() => {
-    let counter = count;
-    const interval = setInterval(() => {
-      if (counter >= response.length) {
-        clearInterval(interval);
-      } else {
-        setCount((count) => count + 1);
-        setData((oldValue) => [...oldValue, response[count]]);
+    if (message && message.game === "crash") {
+      setMessages((oldValue) => [...oldValue, message]);
 
-        if (response[count].type === "loss" || response[count].type === "win") {
-          removeCard();
-        }
-        counter++;
+      if (message.type === "loss" || message.type === "win") {
+        removeCard();
       }
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [count, removeCard]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [message]);
 
   return (
     <Container>
-      {data.map((item, index) => (
+      {messages.map((item, index) => (
         <motion.div
-          key={item.id}
+          key={index}
           className="frame"
           initial={{ width: 0, x: window.innerWidth, zIndex: 999 }}
           animate={{ width: "100%", x: 0 }}
@@ -101,7 +42,7 @@ const CardCrash = () => {
           <Content
             className="card"
             type={item.type}
-            position={data.length - index}
+            position={messages.length - index}
           >
             <div className="flex w-full h-5 items-center justify-between">
               <Title type={item.type}>
@@ -130,7 +71,7 @@ const CardCrash = () => {
                 <>
                   <div className="flex flex-row">
                     <Text className="text-white">Entrada após:</Text>
-                    <Text className="font-bold">{item.last}x</Text>
+                    <Text className="font-bold">{item.last_result}x</Text>
                   </div>
                   <div className="flex flex-row">
                     <Text className="text-white">Saida em:</Text>

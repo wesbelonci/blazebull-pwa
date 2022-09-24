@@ -12,6 +12,7 @@ import {
 } from "./styles";
 import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 import { CardCrash } from "../../elements/Cards/Crash";
+import { useCrashGame } from "../../../hooks/CrashGameContext";
 
 interface EntryDataProps {
   win: number;
@@ -24,6 +25,7 @@ interface EntriesProps {
 }
 
 const RoomEntries: React.FC<EntriesProps> = ({ room, result }) => {
+  const { daily } = useCrashGame();
   return (
     <Container>
       <Header>
@@ -38,7 +40,7 @@ const RoomEntries: React.FC<EntriesProps> = ({ room, result }) => {
             <span>Win</span>
             <FiArrowUp size={15} />
             <Badge type="win" className="badge">
-              {result.win}
+              {daily.win}
             </Badge>
           </RoomStatsWin>
           <DividerStats>
@@ -46,7 +48,7 @@ const RoomEntries: React.FC<EntriesProps> = ({ room, result }) => {
           </DividerStats>
           <RoomStatsLoss>
             <Badge type="loss" className="badge">
-              {result.loss}
+              {daily.loss}
             </Badge>
             <FiArrowDown size={15} />
             <span>Loss</span>
