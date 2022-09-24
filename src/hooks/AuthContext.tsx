@@ -99,11 +99,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const getUserData = useCallback(async () => {
     const response = await api.get("/user");
 
-    if (response.status === 401) {
+    if (response.status !== 200) {
       signOut();
-    } else {
-      setUser(response.data);
     }
+
+    setUser(response.data);
   }, [signOut]);
 
   return (

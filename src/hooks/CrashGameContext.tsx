@@ -8,6 +8,7 @@ import React, {
 import api from "../services/api";
 import { ICrash } from "../types/ICrash";
 import { IDailyResult } from "../types/IDailyResult";
+import { useAuth } from "./AuthContext";
 import { useLoading } from "./LoadingContext";
 
 interface CrashGameContextData {
@@ -30,20 +31,29 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   const [crash, setCrash] = useState<ICrash[] | null>(null);
   const [daily, setDaily] = useState<IDailyResult>({ win: 0, loss: 0 });
   const { setLoadingVisible } = useLoading();
+  const { signOut } = useAuth();
 
   const getDailyWinAndLoss = useCallback(async (): Promise<void> => {
     setLoadingVisible(true);
     const response = await api.get("/signals/daily?game=crash");
 
+    if (response.status !== 200) {
+      signOut();
+    }
+
     setDaily(response.data);
-  }, [setLoadingVisible]);
+  }, [setLoadingVisible, signOut]);
 
   const getSignalsHistory = useCallback(async (): Promise<void> => {
     const response = await api.get("/signals/history?game=crash");
 
+    if (response.status !== 200) {
+      signOut();
+    }
+
     setCrash(response.data);
     setLoadingVisible(false);
-  }, [setLoadingVisible]);
+  }, [setLoadingVisible, signOut]);
 
   const updateCrashData = useCallback(async () => {
     Promise.all([await getDailyWinAndLoss(), await getSignalsHistory()]);
