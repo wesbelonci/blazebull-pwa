@@ -62,11 +62,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getUserData = useCallback(async () => {
-    const response = await api.get("/user");
-    setUser(response.data);
-  }, []);
-
   const signIn = useCallback(
     async ({ email, password }: SignInCredentials) => {
       const response = await api.post("/authentication", {
@@ -100,6 +95,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     delete api.defaults.headers.common["Authorization"];
   }, []);
+
+  const getUserData = useCallback(async () => {
+    const response = await api.get("/user");
+
+    if (response.status === 401) {
+      signOut();
+    } else {
+      setUser(response.data);
+    }
+  }, [signOut]);
 
   return (
     <AuthContext.Provider value={{ user, signIn, signOut, isAuthenticated }}>

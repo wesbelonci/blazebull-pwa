@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useLoading } from "../../hooks/LoadingContext";
 import { Layout } from "../../layouts";
 import {
   Container,
@@ -23,15 +21,6 @@ import { useCrashGame } from "../../hooks/CrashGameContext";
 function HomePage() {
   const navigate = useNavigate();
   const { daily } = useCrashGame();
-  const { setLoadingVisible } = useLoading();
-
-  // useEffect(() => {
-  //   setLoadingVisible(true);
-
-  //   setTimeout(() => {
-  //     setLoadingVisible(false);
-  //   }, 2000);
-  // }, [setLoadingVisible]);
 
   return (
     <Layout>
