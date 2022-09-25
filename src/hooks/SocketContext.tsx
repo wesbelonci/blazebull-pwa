@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { socket } from "../services/socket";
 import { ISocketMessage } from "../types/ISocketMessage";
+import { useAuth } from "./AuthContext";
 import { useCrashGame } from "./CrashGameContext";
 
 interface SocketContextData {
@@ -23,8 +24,8 @@ export const SocketContext = createContext<SocketContextData>(
 
 export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [message, setMessage] = useState<ISocketMessage | null>(null);
-
   const { updateCrashData } = useCrashGame();
+  const { isAuthenticated } = useAuth();
 
   const webSocket = useCallback(() => {
     socket.on("message", (msg: ISocketMessage) => {
@@ -34,16 +35,14 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
         updateCrashData();
       }
     });
-
-    // socket.close();
   }, [updateCrashData]);
 
   useEffect(() => {
-    if (message === null) {
+    if (message === null && isAuthenticated) {
       webSocket();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket, message]);
+  }, [socket, message, isAuthenticated]);
 
   return (
     <SocketContext.Provider value={{ message }}>

@@ -56,11 +56,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const isAuthenticated = !!user;
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (isAuthenticated) {
       getUserData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isAuthenticated]);
 
   const signIn = useCallback(
     async ({ email, password }: SignInCredentials) => {
