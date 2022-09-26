@@ -66,6 +66,13 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [daily, crash, isAuthenticated, isLoading]);
 
+  useEffect(() => {
+    window.addEventListener("focus", () => {
+      updateCrashData();
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <CrashGameContext.Provider value={{ crash, daily, updateCrashData }}>
       {children}
