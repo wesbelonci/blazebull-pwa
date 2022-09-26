@@ -20,9 +20,14 @@ const CardCrash = () => {
   useEffect(() => {
     if (message && message.game === "crash") {
       window.scrollTo(0, 0);
+
       setMessages((oldValue) => [...oldValue, message]);
 
       if (message.type === "loss" || message.type === "win") {
+        removeCard();
+      }
+
+      if (message.type === "analyzing") {
         removeCard();
       }
     }
