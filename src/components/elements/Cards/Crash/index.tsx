@@ -12,6 +12,18 @@ const CardCrash = () => {
   const { message } = useSocket();
 
   const removeCard = useCallback(() => {
+    // const checkAnalyzing = messages.find(message => message.type === 'analyzing');
+
+    // if (messages.length === 1 && checkAnalyzing) {
+    //     setTimeout(() => {
+    //       setMessages([] as IWebSocketCrash[]);
+    //     }, 10000);
+    // } else {
+    //   setTimeout(() => {
+    //     setMessages([] as IWebSocketCrash[]);
+    //   }, 10000);
+    // }
+
     setTimeout(() => {
       setMessages([] as IWebSocketCrash[]);
     }, 10000);
@@ -23,11 +35,11 @@ const CardCrash = () => {
 
       setMessages((oldValue) => [...oldValue, message]);
 
-      if (message.type === "loss" || message.type === "win") {
-        removeCard();
-      }
-
-      if (message.type === "analyzing") {
+      if (
+        message.type === "loss" ||
+        message.type === "win" ||
+        message.type === "analyzing"
+      ) {
         removeCard();
       }
     }
