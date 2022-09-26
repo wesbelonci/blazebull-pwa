@@ -56,29 +56,31 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   }, [setLoadingVisible, signOut]);
 
   const updateCrashData = useCallback(async () => {
-    if (daily.win === 0 && crash === null && isAuthenticated && isLoading) {
-      Promise.all([await getDailyWinAndLoss(), await getSignalsHistory()]);
-    }
-  }, [
-    crash,
-    daily.win,
-    getDailyWinAndLoss,
-    getSignalsHistory,
-    isAuthenticated,
-    isLoading,
-  ]);
+    Promise.all([await getDailyWinAndLoss(), await getSignalsHistory()]);
+  }, [getDailyWinAndLoss, getSignalsHistory]);
 
   useEffect(() => {
-    updateCrashData();
+    if (
+      daily.win === 0 &&
+      crash === null &&
+      isAuthenticated &&
+      isLoading === false
+    ) {
+      updateCrashData();
+
+      window.addEventListener("focus", () => {
+        updateCrashData();
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [daily, crash, isAuthenticated, isLoading]);
 
-  useEffect(() => {
-    window.addEventListener("focus", () => {
-      updateCrashData();
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("focus", () => {
+  //     updateCrashData();
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <CrashGameContext.Provider value={{ crash, daily, updateCrashData }}>
