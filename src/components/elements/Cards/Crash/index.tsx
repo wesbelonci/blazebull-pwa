@@ -76,12 +76,11 @@ const CardCrash = () => {
               {item.type === "analyzing" && (
                 <>
                   <div className="flex flex-row">
-                    <Text className="text-white">Possível entrada em:</Text>
-                    <Text className="font-bold">{item.target}x</Text>
-                  </div>
-                  <div className="flex flex-row">
-                    <Text className="text-white">Saida em:</Text>
-                    <Text className="font-bold">{item.target}x</Text>
+                    <Text className="text-white">Fique atento, </Text>
+                    <Text className="font-bold">
+                      nossa inteligência artificial está analisando uma possível
+                      entrada.
+                    </Text>
                   </div>
                 </>
               )}
