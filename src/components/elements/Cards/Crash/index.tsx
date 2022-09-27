@@ -31,6 +31,7 @@ const CardCrash = () => {
 
   useEffect(() => {
     if (message && message.game === "crash") {
+      console.log(message);
       window.scrollTo(0, 0);
 
       setMessages((oldValue) => [...oldValue, message]);
@@ -76,11 +77,14 @@ const CardCrash = () => {
               {item.type === "analyzing" && (
                 <>
                   <div className="flex flex-row">
-                    <Text className="text-white">Fique atento, </Text>
-                    <Text className="font-bold">
+                    <Text className="text-white">
+                      Fique atento, nossa inteligência artificial está
+                      analisando uma possível entrada.
+                    </Text>
+                    {/* <Text className="font-bold">
                       nossa inteligência artificial está analisando uma possível
                       entrada.
-                    </Text>
+                    </Text> */}
                   </div>
                 </>
               )}
