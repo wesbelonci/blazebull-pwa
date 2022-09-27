@@ -12,22 +12,22 @@ const CardCrash = () => {
   const { message } = useSocket();
 
   const removeCard = useCallback(() => {
-    // const checkAnalyzing = messages.find(message => message.type === 'analyzing');
+    const checkAnalyzing = messages.find(
+      (message) => message.type === "analyzing"
+    );
 
-    // if (messages.length === 1 && checkAnalyzing) {
-    //     setTimeout(() => {
-    //       setMessages([] as IWebSocketCrash[]);
-    //     }, 10000);
-    // } else {
-    //   setTimeout(() => {
-    //     setMessages([] as IWebSocketCrash[]);
-    //   }, 10000);
-    // }
-
-    setTimeout(() => {
-      setMessages([] as IWebSocketCrash[]);
-    }, 10000);
-  }, []);
+    if (messages.length === 1 && checkAnalyzing) {
+      setTimeout(() => {
+        setMessages((oldValues) => {
+          return oldValues.filter((value) => value.type !== "analyzing");
+        });
+      }, 10000);
+    } else {
+      setTimeout(() => {
+        setMessages([] as IWebSocketCrash[]);
+      }, 10000);
+    }
+  }, [messages]);
 
   useEffect(() => {
     if (message && message.game === "crash") {
