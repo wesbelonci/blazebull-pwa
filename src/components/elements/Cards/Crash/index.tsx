@@ -21,7 +21,7 @@ const CardCrash = () => {
         setMessages((oldValues) => {
           return oldValues.filter((value) => value.type !== "analyzing");
         });
-      }, 10000);
+      }, 15000);
     } else {
       setTimeout(() => {
         setMessages([] as IWebSocketCrash[]);
