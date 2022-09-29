@@ -12,7 +12,7 @@ import { useAuth } from "./AuthContext";
 import { useLoading } from "./LoadingContext";
 
 interface CrashGameContextData {
-  crash: ICrash[] | null;
+  entries: ICrash[] | null;
   daily: IDailyResult;
   updateCrashData(): void;
 }
@@ -28,7 +28,7 @@ export const CrashGameContext = createContext<CrashGameContextData>(
 export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   children,
 }) => {
-  const [crash, setCrash] = useState<ICrash[] | null>(null);
+  const [entries, setEntries] = useState<ICrash[] | null>(null);
   const [daily, setDaily] = useState<IDailyResult>({ win: 0, loss: 0 });
   const { isLoading } = useLoading();
   const { signOut, isAuthenticated } = useAuth();
@@ -43,24 +43,24 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
     setDaily(response.data);
   }, [signOut]);
 
-  const getSignalsHistory = useCallback(async (): Promise<void> => {
+  const getSignalsEntries = useCallback(async (): Promise<void> => {
     const response = await api.get("/signals/history?game=crash");
 
     if (response.status !== 200) {
       signOut();
     }
 
-    setCrash(response.data);
+    setEntries(response.data);
   }, [signOut]);
 
   const updateCrashData = useCallback(async () => {
-    Promise.all([await getDailyWinAndLoss(), await getSignalsHistory()]);
-  }, [getDailyWinAndLoss, getSignalsHistory]);
+    Promise.all([await getDailyWinAndLoss(), await getSignalsEntries()]);
+  }, [getDailyWinAndLoss, getSignalsEntries]);
 
   useEffect(() => {
     if (
       daily.win === 0 &&
-      crash === null &&
+      entries === null &&
       isAuthenticated &&
       isLoading === false
     ) {
@@ -71,10 +71,10 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [daily, crash, isAuthenticated, isLoading]);
+  }, [daily, entries, isAuthenticated, isLoading]);
 
   return (
-    <CrashGameContext.Provider value={{ crash, daily, updateCrashData }}>
+    <CrashGameContext.Provider value={{ entries, daily, updateCrashData }}>
       {children}
     </CrashGameContext.Provider>
   );

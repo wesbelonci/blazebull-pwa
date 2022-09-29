@@ -1,35 +1,12 @@
 import { useEffect, useRef } from "react";
 import { RoomEntries } from "../../components/modules/Entries";
+import { GameHistory } from "../../components/modules/GameHistory";
 import { useLoading } from "../../hooks/LoadingContext";
 import { Layout } from "../../layouts";
-import { Container, Content, Blaze, Iframe } from "./styles";
+import { Container, Content, Blaze, Iframe, Divider } from "./styles";
 
 function RoomCrash() {
   const divRef = useRef<HTMLIFrameElement>(null);
-  // const [count, setCount] = useState(0);
-  // const { setLoadingVisible } = useLoading();
-
-  // useEffect(() => {
-  //   console.log(iframe);
-  //   setCount((oldValue) => oldValue + 1);
-  // }, [iframe, count]);
-
-  // useEffect(() => {
-  //   let counter = count;
-  //   const iframe = divRef.current;
-
-  //   const interval = setInterval(() => {
-  //     // console.log(typeof iframe);
-  //     // const teste = localStorage.getItem("ACCESS_TOKEN");
-
-  //     // console.log(teste);
-  //     console.log(iframe?.contentWindow?.localStorage);
-  //     setCount((count) => count + 1);
-  //     counter++;
-  //   }, 3000);
-
-  //   return () => clearInterval(interval);
-  // }, [count]);
 
   const { setLoadingVisible } = useLoading();
 
@@ -45,7 +22,7 @@ function RoomCrash() {
     <Layout>
       <Container>
         <Content>
-          <RoomEntries room="crash" result={{ win: 98, loss: 2 }} />
+          <RoomEntries room="crash" />
           <Blaze id="blazeFrame" onWheel={() => console.log("teste")}>
             <Iframe
               ref={divRef}
@@ -55,7 +32,8 @@ function RoomCrash() {
               frameBorder="0"
             />
           </Blaze>
-          <div style={{ height: 800 }} className="block"></div>
+          <Divider />
+          <GameHistory room="crash" />
         </Content>
       </Container>
     </Layout>

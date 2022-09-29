@@ -8,7 +8,7 @@ export const Container = styled("div")<{ show?: boolean }>(
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    position: "absolute",
+    position: "fixed",
     height: window.innerHeight,
     flexDirection: "column",
     overflow: "hidden",

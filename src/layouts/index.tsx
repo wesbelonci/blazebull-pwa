@@ -5,11 +5,11 @@ import { Header } from "./header";
 import { Sidebar } from "./sidebar";
 import { Loading } from "../components/elements/Loading";
 import { Container, App } from "./styles";
-//import { useLoading } from "../hooks/LoadingContext";
+// import { useLoading } from "../hooks/LoadingContext";
 
 const Layout: React.FC<PropsWithChildren<any>> = ({ children }) => {
   const [sidebarActive, setSidebarActive] = useState<boolean>(false);
-  //const { isLoading } = useLoading();
+  // const { isLoading } = useLoading();
 
   const handleActiveSidebarHeader = useCallback(() => {
     setSidebarActive(!sidebarActive);
@@ -17,6 +17,7 @@ const Layout: React.FC<PropsWithChildren<any>> = ({ children }) => {
 
   return (
     <AnimatedTransictionPage>
+      <Loading />
       <Container>
         <App>
           <Header setActiveSidebar={handleActiveSidebarHeader} />
@@ -27,7 +28,6 @@ const Layout: React.FC<PropsWithChildren<any>> = ({ children }) => {
           <Content>{children}</Content>
         </App>
       </Container>
-      <Loading />
     </AnimatedTransictionPage>
   );
 };

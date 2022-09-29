@@ -14,17 +14,17 @@ import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 import { CardCrash } from "../../elements/Cards/Crash";
 import { useCrashGame } from "../../../hooks/CrashGameContext";
 
-interface EntryDataProps {
-  win: number;
-  loss: number;
-}
+// interface EntryDataProps {
+//   win: number;
+//   loss: number;
+// }
 
 interface EntriesProps {
   room: "crash" | "double";
-  result: EntryDataProps;
+  // result: EntryDataProps;
 }
 
-const RoomEntries: React.FC<EntriesProps> = ({ room, result }) => {
+const RoomEntries: React.FC<EntriesProps> = ({ room }) => {
   const { daily } = useCrashGame();
   return (
     <Container>

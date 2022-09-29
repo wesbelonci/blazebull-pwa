@@ -74,3 +74,12 @@ export const Iframe = styled("iframe")(({ theme }) => ({
   //touchAction: "none",
   position: "relative",
 }));
+
+export const Divider = styled("div")(({ theme }) => ({
+  width: "100%",
+  height: 0.5,
+  backgroundColor: theme.palette["separator"].main,
+  marginTop: "40px",
+  marginBottom: "30px",
+  opacity: 0.6,
+}));
