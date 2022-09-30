@@ -8,16 +8,12 @@ import {
   RoomStatsWin,
   Badge,
   DividerStats,
-  CardContainer,
+  // CardContainer,
 } from "./styles";
 import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 import { CardCrash } from "../../elements/Cards/Crash";
+import { CardDouble } from "../../elements/Cards/Double";
 import { useCrashGame } from "../../../hooks/CrashGameContext";
-
-// interface EntryDataProps {
-//   win: number;
-//   loss: number;
-// }
 
 interface EntriesProps {
   room: "crash" | "double";
@@ -55,11 +51,7 @@ const RoomEntries: React.FC<EntriesProps> = ({ room }) => {
           </RoomStatsLoss>
         </div>
       </Header>
-      {room === "crash" ? (
-        <CardCrash />
-      ) : (
-        <CardContainer>{/* <CardCrash /> */}</CardContainer>
-      )}
+      {room === "crash" ? <CardCrash /> : <CardDouble />}
     </Container>
   );
 };

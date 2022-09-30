@@ -2,14 +2,10 @@ import React from "react";
 import { Container, Header, Title, Table, Entry } from "./styles";
 // import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 // import { CardCrash } from "../../elements/Cards/Crash";
-import { useCrashGame } from "../../../hooks/CrashGameContext";
-import { ICrash } from "../../../types/ICrash";
+import { useCrashGame } from "../../../../hooks/CrashGameContext";
+import { ICrash } from "../../../../types/ICrash";
 
-interface EntriesProps {
-  room: "crash" | "double";
-}
-
-const GameHistory: React.FC<EntriesProps> = ({ room }) => {
+const CrashEntries: React.FC = () => {
   const { entries } = useCrashGame();
   return (
     <Container>
@@ -60,4 +56,4 @@ const GameHistory: React.FC<EntriesProps> = ({ room }) => {
   );
 };
 
-export { GameHistory };
+export { CrashEntries };

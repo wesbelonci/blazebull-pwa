@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { RoomEntries } from "../../components/modules/Entries";
-import { GameHistory } from "../../components/modules/GameHistory";
+import { CrashEntries } from "../../components/modules/GameEntries/Crash";
 import { useLoading } from "../../hooks/LoadingContext";
 import { Layout } from "../../layouts";
 import { Container, Content, Blaze, Iframe, Divider } from "./styles";
@@ -33,7 +33,7 @@ function RoomCrash() {
             />
           </Blaze>
           <Divider />
-          <GameHistory room="crash" />
+          <CrashEntries />
         </Content>
       </Container>
     </Layout>
