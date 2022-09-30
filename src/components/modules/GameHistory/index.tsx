@@ -54,18 +54,6 @@ const GameHistory: React.FC<EntriesProps> = ({ room }) => {
               </td>
             </Entry>
           ))}
-          {/* <tr>
-            <td className="px-6 py-2 whitespace-nowrap">January</td>
-            <td className="px-6 py-2 whitespace-nowrap">$100</td>
-            <td className="px-6 py-2 whitespace-nowrap">$100</td>
-            <td className="px-6 py-2 whitespace-nowrap">$100</td>
-          </tr>
-          <tr>
-            <td className="px-6 py-2 whitespace-nowrap">January</td>
-            <td className="px-6 py-2 whitespace-nowrap">$100</td>
-            <td className="px-6 py-2 whitespace-nowrap">$100</td>
-            <td className="px-6 py-2 whitespace-nowrap">$100</td>
-          </tr> */}
         </tbody>
       </Table>
     </Container>

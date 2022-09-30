@@ -154,7 +154,8 @@ const CardCrash = () => {
             />
           </div>
           <span className="text-white text-sm -mt-14">
-            Nossos robos estão analisando as entradas!
+            Aguarde! Nossa inteligência artificial está analisando as próximas
+            entradas!
           </span>
         </div>
       )}
