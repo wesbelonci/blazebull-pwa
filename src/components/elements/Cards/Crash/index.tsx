@@ -145,18 +145,20 @@ const CardCrash = () => {
           ))}
         </>
       ) : (
-        <div className="flex justify-center flex-col items-center w-full h-full">
-          <div className="block h-full">
-            <img
-              className="object-contain w-24 h-auto"
-              src="/assets/objects/robot.gif"
-              alt="Robo Analisando!"
-            />
+        <div className="flex justify-center items-center w-full h-full">
+          <div className="flex w-8/12 flex-col h-full items-center">
+            <div className="block h-full">
+              <img
+                className="object-contain w-24 h-auto"
+                src="/assets/objects/robot.gif"
+                alt="Robo Analisando!"
+              />
+            </div>
+            <span className="text-white text-sm -mt-14 text-center">
+              Aguarde! Nossa inteligência artificial está analisando as próximas
+              entradas!
+            </span>
           </div>
-          <span className="text-white text-sm -mt-14">
-            Aguarde! Nossa inteligência artificial está analisando as próximas
-            entradas!
-          </span>
         </div>
       )}
     </Container>
