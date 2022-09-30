@@ -11,7 +11,7 @@ export const Container = styled("div")(({ theme }) => ({
   flexDirection: "column",
   width: "100%",
   //height: "auto",
-  height: 140,
+  height: 150,
   marginTop: 10,
   position: "relative",
   //paddingLeft: theme.spacing(0.5),

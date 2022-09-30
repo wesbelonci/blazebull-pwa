@@ -12,7 +12,7 @@ export const Container = styled("div")<{ show?: boolean }>(
     height: window.innerHeight,
     flexDirection: "column",
     overflow: "hidden",
-    zIndex: 999,
+    zIndex: 500,
     top: 0,
     left: 0,
   })
