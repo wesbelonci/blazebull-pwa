@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
 import { Container, Content, Title, Text } from "./styles";
 import { motion } from "framer-motion";
-import { useSocket } from "../../../../hooks/SocketContext";
-import { IWebSocketCrash } from "../../../../types/ISocketGameCrash";
+import { useSocketDouble } from "../../../../hooks/SocketDoubleContext";
+import { ISocketGameDouble } from "../../../../types/ISocketGameDouble";
 
 const CardDouble = () => {
-  const [messages, setMessages] = useState<IWebSocketCrash[]>(
-    [] as IWebSocketCrash[]
+  const [messages, setMessages] = useState<ISocketGameDouble[]>(
+    [] as ISocketGameDouble[]
   );
 
-  const { message } = useSocket();
+  const { message } = useSocketDouble();
 
   const removeCard = useCallback(() => {
     const checkAnalyzing = messages.find(
@@ -24,28 +24,28 @@ const CardDouble = () => {
       }, 15000);
     } else {
       setTimeout(() => {
-        setMessages([] as IWebSocketCrash[]);
+        setMessages([] as ISocketGameDouble[]);
       }, 10000);
     }
   }, [messages]);
 
-  // useEffect(() => {
-  //   if (message && message.game === "crash") {
-  //     console.log(message);
-  //     window.scrollTo(0, 0);
+  useEffect(() => {
+    if (message && message.game === "double") {
+      console.log(message);
+      window.scrollTo(0, 0);
 
-  //     setMessages((oldValue) => [...oldValue, message]);
+      setMessages((oldValue) => [...oldValue, message]);
 
-  //     if (
-  //       message.type === "loss" ||
-  //       message.type === "win" ||
-  //       message.type === "analyzing"
-  //     ) {
-  //       removeCard();
-  //     }
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [message]);
+      if (
+        message.type === "loss" ||
+        message.type === "win" ||
+        message.type === "analyzing"
+      ) {
+        removeCard();
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [message]);
 
   return (
     <Container>

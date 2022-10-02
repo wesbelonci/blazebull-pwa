@@ -17,10 +17,12 @@ import {
 import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useCrashGame } from "../../hooks/CrashGameContext";
+import { useDoubleGame } from "../../hooks/DoubleGameContext";
 
 function HomePage() {
   const navigate = useNavigate();
-  const { daily } = useCrashGame();
+  const { daily: dataCrash } = useCrashGame();
+  const { daily: dataDouble } = useDoubleGame();
 
   return (
     <Layout>
@@ -38,7 +40,7 @@ function HomePage() {
                     <span>Win</span>
                     <FiArrowUp size={15} />
                     <Badge type="win" className="badge">
-                      {daily.win}
+                      {dataCrash.win}
                     </Badge>
                   </RoomStatsWin>
                   <DividerStats>
@@ -46,7 +48,7 @@ function HomePage() {
                   </DividerStats>
                   <RoomStatsLoss>
                     <Badge type="loss" className="badge">
-                      {daily.loss}
+                      {dataCrash.loss}
                     </Badge>
                     <FiArrowDown size={15} />
                     <span>Loss</span>
@@ -62,10 +64,10 @@ function HomePage() {
                   <span>Taxa de acertos:</span>
                   <span className="text-lime-green">
                     <strong className="text-lime-green font-bold">
-                      {daily.win === 0
+                      {dataCrash.win === 0
                         ? 0
                         : Number(
-                            ((daily.loss / daily.win) * 100 - 100) * -1
+                            ((dataCrash.loss / dataCrash.win) * 100 - 100) * -1
                           ).toFixed(2)}
                       %
                     </strong>
@@ -83,7 +85,7 @@ function HomePage() {
                     <span>Win</span>
                     <FiArrowUp size={15} />
                     <Badge type="win" className="badge">
-                      98
+                      {dataDouble.win}
                     </Badge>
                   </RoomStatsWin>
                   <DividerStats>
@@ -91,7 +93,7 @@ function HomePage() {
                   </DividerStats>
                   <RoomStatsLoss>
                     <Badge type="loss" className="badge">
-                      2
+                      {dataDouble.loss}
                     </Badge>
                     <FiArrowDown size={15} />
                     <span>Loss</span>
@@ -106,7 +108,15 @@ function HomePage() {
                 <Rate className="">
                   <span>Taxa de acertos:</span>
                   <span className="text-lime-green">
-                    <strong className="text-lime-green font-bold">98%</strong>
+                    <strong className="text-lime-green font-bold">
+                      {dataDouble.win === 0
+                        ? 0
+                        : Number(
+                            ((dataDouble.loss / dataDouble.win) * 100 - 100) *
+                              -1
+                          ).toFixed(2)}
+                      %
+                    </strong>
                   </span>
                 </Rate>
               </RoomStats>

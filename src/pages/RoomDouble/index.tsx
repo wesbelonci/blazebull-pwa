@@ -2,11 +2,13 @@ import { useEffect, useRef } from "react";
 import { RoomEntries } from "../../components/modules/Entries";
 import { DoubleEntries } from "../../components/modules/GameEntries/Double";
 import { useLoading } from "../../hooks/LoadingContext";
+// import { useSocketDouble } from "../../hooks/SocketDoubleContext";
 import { Layout } from "../../layouts";
 import { Container, Content, Blaze, Iframe, Divider } from "./styles";
 
 function RoomDouble() {
   const divRef = useRef<HTMLIFrameElement>(null);
+  // const {message} = useSocketDouble()
 
   const { setLoadingVisible } = useLoading();
 
@@ -17,6 +19,8 @@ function RoomDouble() {
       setLoadingVisible(false);
     }, 2000);
   }, [setLoadingVisible]);
+
+  // console.log()
 
   return (
     <Layout>

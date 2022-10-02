@@ -1,15 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
 import { Container, Content, Title, Text } from "./styles";
 import { motion } from "framer-motion";
-import { useSocket } from "../../../../hooks/SocketContext";
-import { IWebSocketCrash } from "../../../../types/ISocketGameCrash";
+import { useSocketCrash } from "../../../../hooks/SocketCrashContext";
+import { ISocketGameCrash } from "../../../../types/ISocketGameCrash";
 
 const CardCrash = () => {
-  const [messages, setMessages] = useState<IWebSocketCrash[]>(
-    [] as IWebSocketCrash[]
+  const [messages, setMessages] = useState<ISocketGameCrash[]>(
+    [] as ISocketGameCrash[]
   );
 
-  const { message } = useSocket();
+  const { message } = useSocketCrash();
 
   const removeCard = useCallback(() => {
     const checkAnalyzing = messages.find(
@@ -24,7 +24,7 @@ const CardCrash = () => {
       }, 15000);
     } else {
       setTimeout(() => {
-        setMessages([] as IWebSocketCrash[]);
+        setMessages([] as ISocketGameCrash[]);
       }, 10000);
     }
   }, [messages]);

@@ -6,35 +6,35 @@ import React, {
   useEffect,
 } from "react";
 import api from "../services/api";
-import { ICrash } from "../types/ICrash";
 import { IDailyResult } from "../types/IDailyResult";
+import { IDouble } from "../types/IDouble";
 import { useAuth } from "./AuthContext";
 import { useLoading } from "./LoadingContext";
 
-interface CrashGameContextData {
-  entries: ICrash[] | null;
+interface DoubleGameContextData {
+  entries: IDouble[] | null;
   daily: IDailyResult;
-  updateCrashData(): void;
+  updateDoubleData(): void;
 }
 
-interface AuthProviderProps {
+interface SocketProviderProps {
   children: JSX.Element;
 }
 
-export const CrashGameContext = createContext<CrashGameContextData>(
-  {} as CrashGameContextData
+export const DoubleGameContext = createContext<DoubleGameContextData>(
+  {} as DoubleGameContextData
 );
 
-export const CrashGameProvider: React.FC<AuthProviderProps> = ({
+export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
   children,
 }) => {
-  const [entries, setEntries] = useState<ICrash[] | null>(null);
+  const [entries, setEntries] = useState<IDouble[] | null>(null);
   const [daily, setDaily] = useState<IDailyResult>({ win: 0, loss: 0 });
   const { isLoading } = useLoading();
   const { signOut, isAuthenticated } = useAuth();
 
   const getDailyWinAndLoss = useCallback(async (): Promise<void> => {
-    const response = await api.get("/signals/daily?game=crash");
+    const response = await api.get("/signals/daily?game=double");
 
     if (response.status !== 200) {
       signOut();
@@ -44,7 +44,7 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   }, [signOut]);
 
   const getSignalsEntries = useCallback(async (): Promise<void> => {
-    const response = await api.get("/signals/history?game=crash");
+    const response = await api.get("/signals/history?game=double");
 
     if (response.status !== 200) {
       signOut();
@@ -53,7 +53,7 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
     setEntries(response.data);
   }, [signOut]);
 
-  const updateCrashData = useCallback(async () => {
+  const updateDoubleData = useCallback(async () => {
     Promise.all([await getDailyWinAndLoss(), await getSignalsEntries()]);
   }, [getDailyWinAndLoss, getSignalsEntries]);
 
@@ -64,27 +64,27 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
       isAuthenticated &&
       isLoading === false
     ) {
-      updateCrashData();
+      updateDoubleData();
 
       // window.addEventListener("focus", () => {
-      //   updateCrashData();
+      //   updateDoubleData();
       // });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [daily, entries, isAuthenticated, isLoading]);
 
   return (
-    <CrashGameContext.Provider value={{ entries, daily, updateCrashData }}>
+    <DoubleGameContext.Provider value={{ entries, daily, updateDoubleData }}>
       {children}
-    </CrashGameContext.Provider>
+    </DoubleGameContext.Provider>
   );
 };
 
-export function useCrashGame(): CrashGameContextData {
-  const context = useContext(CrashGameContext);
+export function useDoubleGame(): DoubleGameContextData {
+  const context = useContext(DoubleGameContext);
 
   if (!context) {
-    throw new Error("useCrashGame must be used within a CrashGameProvider");
+    throw new Error("useDoubleGame must be used within a CrashDoubleProvider");
   }
 
   return context;

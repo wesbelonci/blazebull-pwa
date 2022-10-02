@@ -1,7 +1,8 @@
-type ISocketGameCrash = {
+type ISocketGameDouble = {
   id: string;
   type: "analyzing" | "entry" | "win" | "loss" | "gale";
-  crash_point?: number;
+  roll?: number;
+  color?: any;
   last_result?: number;
   target?: number;
   result: any;
@@ -9,4 +10,4 @@ type ISocketGameCrash = {
   hour?: string;
 };
 
-export type { ISocketGameCrash };
+export type { ISocketGameDouble };

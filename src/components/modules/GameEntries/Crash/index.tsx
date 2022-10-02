@@ -7,6 +7,7 @@ import { ICrash } from "../../../../types/ICrash";
 
 const CrashEntries: React.FC = () => {
   const { entries } = useCrashGame();
+
   return (
     <Container>
       <Header>

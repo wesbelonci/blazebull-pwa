@@ -9,40 +9,37 @@ import { socket } from "../services/socket";
 import { ISocketMessage } from "../types/ISocketMessage";
 import { useAuth } from "./AuthContext";
 import { useCrashGame } from "./CrashGameContext";
-import { useDoubleGame } from "./DoubleGameContext";
 
-interface SocketContextData {
+interface SocketCrashContextData {
   message: ISocketMessage | null;
 }
 
-interface AuthProviderProps {
+interface SocketProviderProps {
   children: JSX.Element;
 }
 
-export const SocketContext = createContext<SocketContextData>(
-  {} as SocketContextData
+export const SocketCrashContext = createContext<SocketCrashContextData>(
+  {} as SocketCrashContextData
 );
 
-export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const SocketCrashProvider: React.FC<SocketProviderProps> = ({
+  children,
+}) => {
   const [message, setMessage] = useState<ISocketMessage | null>(null);
   const { updateCrashData } = useCrashGame();
-  const { updateDoubleData } = useDoubleGame();
   const { isAuthenticated } = useAuth();
 
   const webSocket = useCallback(() => {
     socket.on("message", (msg: ISocketMessage) => {
       setMessage(msg);
-
-      console.log(msg);
-      if (msg.type === "loss" || msg.type === "win") {
-        if (msg.game === "crash") {
+      if (msg.game === "crash") {
+        console.log(msg);
+        if (msg.type === "loss" || msg.type === "win") {
           updateCrashData();
-        } else {
-          updateDoubleData();
         }
       }
     });
-  }, [updateCrashData, updateDoubleData]);
+  }, [updateCrashData]);
 
   useEffect(() => {
     if (message === null && isAuthenticated) {
@@ -52,17 +49,17 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, [socket, message, isAuthenticated]);
 
   return (
-    <SocketContext.Provider value={{ message }}>
+    <SocketCrashContext.Provider value={{ message }}>
       {children}
-    </SocketContext.Provider>
+    </SocketCrashContext.Provider>
   );
 };
 
-export function useSocket(): SocketContextData {
-  const context = useContext(SocketContext);
+export function useSocketCrash(): SocketCrashContextData {
+  const context = useContext(SocketCrashContext);
 
   if (!context) {
-    throw new Error("useSocket must be used within a SocketProvider");
+    throw new Error("useSocketCrash must be used within a SocketCrashProvider");
   }
 
   return context;
