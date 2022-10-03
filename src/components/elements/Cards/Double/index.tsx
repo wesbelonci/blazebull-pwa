@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Container, Content, Title, Text } from "./styles";
 import { motion } from "framer-motion";
-import { useSocketDouble } from "../../../../hooks/SocketDoubleContext";
+import { useSocket } from "../../../../hooks/SocketContext";
 import { ISocketGameDouble } from "../../../../types/ISocketGameDouble";
 
 const CardDouble = () => {
@@ -9,7 +9,7 @@ const CardDouble = () => {
     [] as ISocketGameDouble[]
   );
 
-  const { message } = useSocketDouble();
+  const { message } = useSocket();
 
   const removeCard = useCallback(() => {
     const checkAnalyzing = messages.find(

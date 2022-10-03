@@ -32,12 +32,12 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const webSocket = useCallback(() => {
     socket.on("message", (msg: ISocketMessage) => {
       setMessage(msg);
-
       console.log(msg);
       if (msg.type === "loss" || msg.type === "win") {
         if (msg.game === "crash") {
           updateCrashData();
-        } else {
+        }
+        if (msg.game === "double") {
           updateDoubleData();
         }
       }

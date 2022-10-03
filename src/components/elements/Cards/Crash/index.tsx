@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Container, Content, Title, Text } from "./styles";
 import { motion } from "framer-motion";
-import { useSocketCrash } from "../../../../hooks/SocketCrashContext";
+import { useSocket } from "../../../../hooks/SocketContext";
 import { ISocketGameCrash } from "../../../../types/ISocketGameCrash";
 
 const CardCrash = () => {
@@ -9,7 +9,7 @@ const CardCrash = () => {
     [] as ISocketGameCrash[]
   );
 
-  const { message } = useSocketCrash();
+  const { message } = useSocket();
 
   const removeCard = useCallback(() => {
     const checkAnalyzing = messages.find(
@@ -30,8 +30,8 @@ const CardCrash = () => {
   }, [messages]);
 
   useEffect(() => {
+    console.log(message, "message");
     if (message && message.game === "crash") {
-      console.log(message);
       window.scrollTo(0, 0);
 
       setMessages((oldValue) => [...oldValue, message]);
