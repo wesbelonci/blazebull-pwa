@@ -1,7 +1,7 @@
 import { styled } from "@mui/system";
 
 type EntryTypeProps = {
-  type: "analyzing" | "entry" | "win" | "loss" | "gale";
+  type?: "analyzing" | "entry" | "win" | "loss" | "gale";
 };
 
 export const Container = styled("div")(({ theme }) => ({
@@ -86,7 +86,10 @@ export const Title = styled("div")<EntryTypeProps>(({ theme, type }) => ({
 }));
 
 export const HelpTitle = styled("div")<EntryTypeProps>(({ theme, type }) => ({
-  fontSize: 8,
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  fontSize: 10,
   fontWeight: 700,
   color:
     type === "win"
@@ -98,11 +101,28 @@ export const HelpTitle = styled("div")<EntryTypeProps>(({ theme, type }) => ({
       : type === "gale"
       ? theme.palette["bronze"].main
       : theme.palette["gold"].main,
+
+  svg: {
+    marginRight: 6,
+  },
 }));
 
-export const Text = styled("div")<{ color?: "red" | "white" }>(({ theme }) => ({
+type TextProps = {
+  color?: "red" | "black" | "white";
+};
+
+export const Text = styled("div")<TextProps>(({ theme, color }) => ({
   fontSize: 16,
   //fontWeight: 700,
-  color: theme.palette["white"].main,
+  // color: theme.palette["white"].main,
   marginRight: 4,
+
+  color:
+    color === "red"
+      ? theme.palette["red"].main
+      : color === "black"
+      ? theme.palette["black"].main
+      : color === "white"
+      ? theme.palette["white"].main
+      : theme.palette["white"].main,
 }));

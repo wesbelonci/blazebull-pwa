@@ -2,10 +2,10 @@ type ISocketGameDouble = {
   id: string;
   type: "analyzing" | "entry" | "win" | "loss" | "gale";
   roll?: number;
-  color?: any;
+  color?: "red" | "black" | "white";
   last_result?: number;
   target?: number;
-  result?: any;
+  result?: "red" | "black" | "white";
   amount?: number;
   hour?: string;
 };

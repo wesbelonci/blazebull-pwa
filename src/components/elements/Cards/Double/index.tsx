@@ -3,35 +3,32 @@ import { Container, Content, Title, Text, HelpTitle } from "./styles";
 import { motion } from "framer-motion";
 import { useSocket } from "../../../../hooks/SocketContext";
 import { ISocketGameDouble } from "../../../../types/ISocketGameDouble";
+import { FiAlertTriangle } from "react-icons/fi";
 
 const CardDouble = () => {
-  const [messages, setMessages] = useState<ISocketGameDouble[]>([
-    {
-      id: "fsdop[fokdfsd",
-      type: "analyzing",
-      result: "",
-    },
-  ]);
+  const [messages, setMessages] = useState<ISocketGameDouble[]>(
+    [] as ISocketGameDouble[]
+  );
 
   const { message } = useSocket();
 
-  // const removeCard = useCallback(() => {
-  //   const checkAnalyzing = messages.find(
-  //     (message) => message.type === "analyzing"
-  //   );
+  const removeCard = useCallback(() => {
+    const checkAnalyzing = messages.find(
+      (message) => message.type === "analyzing"
+    );
 
-  //   if (messages.length === 1 && checkAnalyzing) {
-  //     setTimeout(() => {
-  //       setMessages((oldValues) => {
-  //         return oldValues.filter((value) => value.type !== "analyzing");
-  //       });
-  //     }, 15000);
-  //   } else {
-  //     setTimeout(() => {
-  //       setMessages([] as ISocketGameDouble[]);
-  //     }, 10000);
-  //   }
-  // }, [messages]);
+    if (messages.length === 1 && checkAnalyzing) {
+      setTimeout(() => {
+        setMessages((oldValues) => {
+          return oldValues.filter((value) => value.type !== "analyzing");
+        });
+      }, 15000);
+    } else {
+      setTimeout(() => {
+        setMessages([] as ISocketGameDouble[]);
+      }, 10000);
+    }
+  }, [messages]);
 
   useEffect(() => {
     if (message && message.game === "double") {
@@ -45,7 +42,7 @@ const CardDouble = () => {
         message.type === "win" ||
         message.type === "analyzing"
       ) {
-        // removeCard();
+        removeCard();
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -86,7 +83,12 @@ const CardDouble = () => {
                     <Title type={item.type}>Loss!!!!</Title>
                   )}
 
-                  <HelpTitle type={item.type}>Aguarde confirmação</HelpTitle>
+                  {item.type === "analyzing" && (
+                    <HelpTitle type={item.type}>
+                      <FiAlertTriangle size={15} />
+                      Aguarde confirmação
+                    </HelpTitle>
+                  )}
                 </div>
                 <div className="flex w-full h-full flex-col mt-2">
                   {item.type === "analyzing" && (
@@ -96,22 +98,43 @@ const CardDouble = () => {
                           Fique atento, nossa inteligência artificial está
                           analisando uma possível entrada.
                         </Text>
-                        {/* <Text className="font-bold">
-                      nossa inteligência artificial está analisando uma possível
-                      entrada.
-                    </Text> */}
                       </div>
                     </>
                   )}
                   {item.type === "entry" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Entrada após:</Text>
-                        <Text className="font-bold">{item.last_result}x</Text>
+                        <Text className="text-white">Apostar na cor: </Text>
+                        <Text color={item.color} className="font-bold">
+                          {item.color === "red"
+                            ? "Vermelho"
+                            : item.color === "black"
+                            ? "Preto"
+                            : "Branco"}
+                        </Text>
+                        {item.color === "red" ? (
+                          <img src="/assets/objects/double-red.svg" alt="Red" />
+                        ) : item.color === "black" ? (
+                          <img
+                            src="/assets/objects/double-black.svg"
+                            alt="Black"
+                          />
+                        ) : (
+                          <img
+                            src="/assets/objects/double-white.svg"
+                            alt="White"
+                          />
+                        )}
                       </div>
                       <div className="flex flex-row">
-                        <Text className="text-white">Saida em:</Text>
-                        <Text className="font-bold">{item.target}x</Text>
+                        <Text className="text-white">Menor valor no: </Text>
+                        <Text color="white" className="font-bold">
+                          Banco
+                        </Text>
+                        <img
+                          src="/assets/objects/double-white.svg"
+                          alt="White"
+                        />
                       </div>
                     </>
                   )}
@@ -119,37 +142,100 @@ const CardDouble = () => {
                   {item.type === "gale" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Entre com:</Text>
-                        <Text className="font-bold">R$ {item.amount}</Text>
+                        <Text className="text-white">Apostar na cor: </Text>
+                        <Text color={item.color} className="font-bold">
+                          {item.color === "red"
+                            ? "Vermelho"
+                            : item.color === "black"
+                            ? "Preto"
+                            : "Branco"}
+                        </Text>
+                        {item.color === "red" ? (
+                          <img src="/assets/objects/double-red.svg" alt="Red" />
+                        ) : item.color === "black" ? (
+                          <img
+                            src="/assets/objects/double-black.svg"
+                            alt="Black"
+                          />
+                        ) : (
+                          <img
+                            src="/assets/objects/double-white.svg"
+                            alt="White"
+                          />
+                        )}
                       </div>
                       <div className="flex flex-row">
-                        <Text className="text-white">Saida em:</Text>
-                        <Text className="font-bold">{item.target}x</Text>
+                        <Text className="text-white">Menor valor no: </Text>
+                        <Text color="white" className="font-bold">
+                          Banco
+                        </Text>
+                        <img
+                          src="/assets/objects/double-white.svg"
+                          alt="White"
+                        />
                       </div>
                     </>
                   )}
                   {item.type === "win" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Entrada:</Text>
-                        <Text className="font-bold">{item.target}x</Text>
+                        <Text className="text-white">Cor apostada: </Text>
+                        <Text color={item.result} className="font-bold">
+                          {item.result === "red"
+                            ? "Vermelho"
+                            : item.result === "black"
+                            ? "Preto"
+                            : "Branco"}
+                        </Text>
+                        {item.result === "red" ? (
+                          <img src="/assets/objects/double-red.svg" alt="Red" />
+                        ) : item.result === "black" ? (
+                          <img
+                            src="/assets/objects/double-black.svg"
+                            alt="Black"
+                          />
+                        ) : (
+                          <img
+                            src="/assets/objects/double-white.svg"
+                            alt="White"
+                          />
+                        )}
                       </div>
-                      <div className="flex flex-row">
+                      {/* <div className="flex flex-row">
                         <Text className="text-white">Crash em:</Text>
                         <Text className="font-bold">{item.result}x</Text>
-                      </div>
+                      </div> */}
                     </>
                   )}
                   {item.type === "loss" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Entrada:</Text>
-                        <Text className="font-bold">{item.target}x</Text>
+                        <Text className="text-white">Cor apostada: </Text>
+                        <Text color={item.result} className="font-bold">
+                          {item.result === "red"
+                            ? "Vermelho"
+                            : item.result === "black"
+                            ? "Preto"
+                            : "Branco"}
+                        </Text>
+                        {item.result === "red" ? (
+                          <img src="/assets/objects/double-red.svg" alt="Red" />
+                        ) : item.result === "black" ? (
+                          <img
+                            src="/assets/objects/double-black.svg"
+                            alt="Black"
+                          />
+                        ) : (
+                          <img
+                            src="/assets/objects/double-white.svg"
+                            alt="White"
+                          />
+                        )}
                       </div>
-                      <div className="flex flex-row">
+                      {/* <div className="flex flex-row">
                         <Text className="text-white">Crash em:</Text>
                         <Text className="font-bold">{item.result}x</Text>
-                      </div>
+                      </div> */}
                     </>
                   )}
                 </div>
