@@ -10,9 +10,7 @@ import { RoomDouble } from "../pages/RoomDouble";
 import { Classroom } from "../pages/Classroom";
 import { Settings } from "../pages/Settings";
 import { useAuth } from "../hooks/AuthContext";
-import { getLocale } from "../language";
-
-const suportedLanguages = ["en", "pt", "es"];
+import { getLocale, suportedLanguages } from "../language";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();

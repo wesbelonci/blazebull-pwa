@@ -15,16 +15,17 @@ import {
   Live,
 } from "./styles";
 import { FiArrowUp, FiArrowDown } from "react-icons/fi";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCrashGame } from "../../hooks/CrashGameContext";
 import { useDoubleGame } from "../../hooks/DoubleGameContext";
+import { useLocale } from "../../hooks/LocaleContext";
 // import { FormattedMessage, useIntl } from "react-intl";
 
 function HomePage() {
   const navigate = useNavigate();
-  const { lang } = useParams();
   const { daily: dataCrash } = useCrashGame();
   const { daily: dataDouble } = useDoubleGame();
+  const { locale } = useLocale();
 
   return (
     <Layout>
@@ -32,7 +33,7 @@ function HomePage() {
         <Content>
           <Rooms>
             <span>Salas de sinais</span>
-            <Crash onClick={() => navigate(`/${lang}/room-crash`)}>
+            <Crash onClick={() => navigate(`/${locale}/room-crash`)}>
               <Live>
                 <span>Ao vivo</span>
               </Live>
@@ -77,7 +78,7 @@ function HomePage() {
                 </Rate>
               </RoomStats>
             </Crash>
-            <Double onClick={() => navigate(`/${lang}/room-double`)}>
+            <Double onClick={() => navigate(`/${locale}/room-double`)}>
               <Live>
                 <span>Ao vivo</span>
               </Live>

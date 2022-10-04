@@ -2,10 +2,10 @@ import { Container, Button, Content, NeedHelp } from "./styles";
 import { Link } from "react-router-dom";
 import { AnimatedTransictionPage } from "../../components/modules/AnimatedTransictonPage";
 import { FormattedMessage } from "react-intl";
-import { useParams } from "react-router-dom";
+import { useLocale } from "../../hooks/LocaleContext";
 
 function InitialAccessPage() {
-  const { lang } = useParams();
+  const { locale } = useLocale();
 
   return (
     <AnimatedTransictionPage>
@@ -20,7 +20,7 @@ function InitialAccessPage() {
               </strong>
             </span>
           </NeedHelp>
-          <Link to={`/${lang}/authentication`}>
+          <Link to={`/${locale}/authentication`}>
             <Button variant="contained">
               <div className="flex w-full h-full justify-center items-center">
                 <span className="font-bold text-lg">

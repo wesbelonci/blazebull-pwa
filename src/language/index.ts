@@ -1,13 +1,15 @@
 const suportedLanguages = ["en", "pt", "es"];
 
 function getLocale() {
-  const locale = window.location.href.split("/")[3];
+  const url = window.location.href;
+
+  const locale = url.split("/")[3] ? url.split("/")[3] : navigator.language;
 
   const checkSuportedLanguage = suportedLanguages.find(
     (language) => language === locale
   );
 
-  let language = "es";
+  let language = "en";
 
   if (!checkSuportedLanguage) {
     switch (locale) {
@@ -34,6 +36,10 @@ function getLocale() {
       default:
         language = "en";
     }
+
+    console.log(language);
+
+    // localStorage.setItem("@blazebull:locale", language);
 
     return language;
   } else {

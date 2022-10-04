@@ -16,7 +16,8 @@ import {
 } from "./styles";
 import { FiChevronLeft, FiLogOut } from "react-icons/fi";
 import { useAuth } from "../../hooks/AuthContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useLocale } from "../../hooks/LocaleContext";
 
 type SidebarProps = {
   active: boolean;
@@ -25,7 +26,7 @@ type SidebarProps = {
 
 const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
   const { signOut, user } = useAuth();
-  const { lang } = useParams();
+  const { locale } = useLocale();
   const navigate = useNavigate();
 
   return (
@@ -79,25 +80,25 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
       </BetsInfo>
       <Nav className="sidebar-nav">
         <NavList>
-          <NavItem onClick={() => navigate(`/${lang}/home`)}>
+          <NavItem onClick={() => navigate(`/${locale}/home`)}>
             <Icon>
               <img src="/assets/objects/home.svg" alt="Home" />
             </Icon>
             <span>Home</span>
           </NavItem>
-          <NavItem onClick={() => navigate(`/${lang}/classroom`)}>
+          <NavItem onClick={() => navigate(`/${locale}/classroom`)}>
             <Icon>
               <img src="/assets/objects/curso.svg" alt="Curso" />
             </Icon>
             <span>Curso</span>
           </NavItem>
-          <NavItem onClick={() => navigate(`/${lang}/room-crash`)}>
+          <NavItem onClick={() => navigate(`/${locale}/room-crash`)}>
             <Icon>
               <img src="/assets/objects/crash.svg" alt="Crash" />
             </Icon>
             <span>Crash</span>
           </NavItem>
-          <NavItem onClick={() => navigate(`/${lang}/room-double`)}>
+          <NavItem onClick={() => navigate(`/${locale}/room-double`)}>
             <Icon>
               <img src="/assets/objects/double.svg" alt="Double" />
             </Icon>
@@ -121,7 +122,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
             </Icon>
             <span>Gerenciador de Banca</span>
           </NavItem>
-          <NavItem onClick={() => navigate(`/${lang}/settings`)}>
+          <NavItem onClick={() => navigate(`/${locale}/settings`)}>
             <Icon>
               <img src="/assets/objects/config.svg" alt="Configuraçoes" />
             </Icon>

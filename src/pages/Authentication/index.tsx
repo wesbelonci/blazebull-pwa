@@ -22,7 +22,8 @@ import * as yup from "yup";
 import { useToast } from "../../hooks/ToastContext";
 import { useAuth } from "../../hooks/AuthContext";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useLocale } from "../../hooks/LocaleContext";
 
 const schema = yup
   .object({
@@ -39,7 +40,7 @@ function AuthenticationPage() {
   const { addToast } = useToast();
   const { signIn } = useAuth();
   const { formatMessage: f } = useIntl();
-  const { lang } = useParams();
+  const { locale } = useLocale();
   const navigate = useNavigate();
 
   const {
@@ -72,7 +73,7 @@ function AuthenticationPage() {
     async (data: any) => {
       try {
         await signIn(data);
-        navigate(`/${lang}/home`);
+        navigate(`/${locale}/home`);
       } catch (err) {
         addToast({
           title: "Invalid E-mail or password",
@@ -80,7 +81,7 @@ function AuthenticationPage() {
         });
       }
     },
-    [addToast, lang, navigate, signIn]
+    [addToast, locale, navigate, signIn]
   );
 
   return (

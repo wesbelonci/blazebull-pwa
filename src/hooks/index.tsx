@@ -8,23 +8,26 @@ import { SocketProvider } from "./SocketContext";
 // import { SocketDoubleProvider } from "./SocketDoubleContext";
 import { CrashGameProvider } from "./CrashGameContext";
 import { DoubleGameProvider } from "./DoubleGameContext";
+import { LocaleProvider } from "./LocaleContext";
 
 interface AppProviderProps {
   children: any;
 }
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => (
-  <AuthProvider>
-    <ToastProvider>
-      <LoadingProvider>
-        <CrashGameProvider>
-          <DoubleGameProvider>
-            <SocketProvider>{children}</SocketProvider>
-          </DoubleGameProvider>
-        </CrashGameProvider>
-      </LoadingProvider>
-    </ToastProvider>
-  </AuthProvider>
+  <LocaleProvider>
+    <AuthProvider>
+      <ToastProvider>
+        <LoadingProvider>
+          <CrashGameProvider>
+            <DoubleGameProvider>
+              <SocketProvider>{children}</SocketProvider>
+            </DoubleGameProvider>
+          </CrashGameProvider>
+        </LoadingProvider>
+      </ToastProvider>
+    </AuthProvider>
+  </LocaleProvider>
 );
 
 export default AppProvider;
