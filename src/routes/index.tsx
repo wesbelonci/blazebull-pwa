@@ -8,14 +8,17 @@ import { RoomCrash } from "../pages/RoomCrash";
 import { RoomDouble } from "../pages/RoomDouble";
 import { Classroom } from "../pages/Classroom";
 import { Settings } from "../pages/Settings";
+import { useAuth } from "../hooks/AuthContext";
 
 const App = () => {
+  const { isAuthenticated } = useAuth();
   const location = useLocation();
 
   return (
     <AnimatePresence>
       <Routes location={location} key={location.pathname}>
-        <Route index element={<InitialAccessPage />} />
+        {isAuthenticated && <Route index element={<HomePage />} />}
+        {!isAuthenticated && <Route index element={<InitialAccessPage />} />}
         <Route element={<ProtectedRoute />}>
           <Route path="home" element={<HomePage />} />
           <Route path="room-crash" element={<RoomCrash />} />

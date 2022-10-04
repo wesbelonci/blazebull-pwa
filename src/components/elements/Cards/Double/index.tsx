@@ -1,33 +1,37 @@
 import { useState, useEffect, useCallback } from "react";
-import { Container, Content, Title, Text } from "./styles";
+import { Container, Content, Title, Text, HelpTitle } from "./styles";
 import { motion } from "framer-motion";
 import { useSocket } from "../../../../hooks/SocketContext";
 import { ISocketGameDouble } from "../../../../types/ISocketGameDouble";
 
 const CardDouble = () => {
-  const [messages, setMessages] = useState<ISocketGameDouble[]>(
-    [] as ISocketGameDouble[]
-  );
+  const [messages, setMessages] = useState<ISocketGameDouble[]>([
+    {
+      id: "fsdop[fokdfsd",
+      type: "analyzing",
+      result: "",
+    },
+  ]);
 
   const { message } = useSocket();
 
-  const removeCard = useCallback(() => {
-    const checkAnalyzing = messages.find(
-      (message) => message.type === "analyzing"
-    );
+  // const removeCard = useCallback(() => {
+  //   const checkAnalyzing = messages.find(
+  //     (message) => message.type === "analyzing"
+  //   );
 
-    if (messages.length === 1 && checkAnalyzing) {
-      setTimeout(() => {
-        setMessages((oldValues) => {
-          return oldValues.filter((value) => value.type !== "analyzing");
-        });
-      }, 15000);
-    } else {
-      setTimeout(() => {
-        setMessages([] as ISocketGameDouble[]);
-      }, 10000);
-    }
-  }, [messages]);
+  //   if (messages.length === 1 && checkAnalyzing) {
+  //     setTimeout(() => {
+  //       setMessages((oldValues) => {
+  //         return oldValues.filter((value) => value.type !== "analyzing");
+  //       });
+  //     }, 15000);
+  //   } else {
+  //     setTimeout(() => {
+  //       setMessages([] as ISocketGameDouble[]);
+  //     }, 10000);
+  //   }
+  // }, [messages]);
 
   useEffect(() => {
     if (message && message.game === "double") {
@@ -41,7 +45,7 @@ const CardDouble = () => {
         message.type === "win" ||
         message.type === "analyzing"
       ) {
-        removeCard();
+        // removeCard();
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,14 +70,23 @@ const CardDouble = () => {
                 position={messages.length - index}
               >
                 <div className="flex w-full h-5 items-center justify-between">
-                  <Title type={item.type}>
-                    {item.type === "analyzing" && "Possível entrada"}
-                    {item.type === "entry" && "Entrada confirmada!"}
-                    {item.type === "gale" && "Faça Martingale!"}
-                    {item.type === "win" && "Wiiiiiinnnnnnn!!!!"}
-                    {item.type === "loss" && "Loss!!!!"}
-                  </Title>
-                  <span className="text-white text-sm">{item.hour}</span>
+                  {item.type === "analyzing" && (
+                    <Title type={item.type}>Possível entrada</Title>
+                  )}
+                  {item.type === "entry" && (
+                    <Title type={item.type}>Entrada confirmada!</Title>
+                  )}
+                  {item.type === "gale" && (
+                    <Title type={item.type}>Faça Martingale!</Title>
+                  )}
+                  {item.type === "win" && (
+                    <Title type={item.type}>Wiiiiiinnnnnnn!!!!</Title>
+                  )}
+                  {item.type === "loss" && (
+                    <Title type={item.type}>Loss!!!!</Title>
+                  )}
+
+                  <HelpTitle type={item.type}>Aguarde confirmação</HelpTitle>
                 </div>
                 <div className="flex w-full h-full flex-col mt-2">
                   {item.type === "analyzing" && (

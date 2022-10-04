@@ -85,6 +85,21 @@ export const Title = styled("div")<EntryTypeProps>(({ theme, type }) => ({
       : theme.palette["gold"].main,
 }));
 
+export const HelpTitle = styled("div")<EntryTypeProps>(({ theme, type }) => ({
+  fontSize: 8,
+  fontWeight: 700,
+  color:
+    type === "win"
+      ? theme.palette["lime-green"].main
+      : type === "loss"
+      ? theme.palette["red"].main
+      : type === "entry"
+      ? theme.palette["lightish-blue"].main
+      : type === "gale"
+      ? theme.palette["bronze"].main
+      : theme.palette["gold"].main,
+}));
+
 export const Text = styled("div")<{ color?: "red" | "white" }>(({ theme }) => ({
   fontSize: 16,
   //fontWeight: 700,

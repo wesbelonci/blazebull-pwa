@@ -5,7 +5,7 @@ type ISocketGameDouble = {
   color?: any;
   last_result?: number;
   target?: number;
-  result: any;
+  result?: any;
   amount?: number;
   hour?: string;
 };
