@@ -1,0 +1,14 @@
+{
+  "sign-in": [{ "type": 0, "value": "Sign In" }],
+  "sign-out": [{ "type": 0, "value": "Sign Out" }],
+  "sign-up": [{ "type": 0, "value": "Sign Up" }],
+
+  "need-help": [{ "type": 0, "value": "Need Help?" }],
+  "click-here": [{ "type": 0, "value": "Click here" }],
+
+  "email": [{ "type": 0, "value": "E-mail" }],
+  "password": [{ "type": 0, "value": "Password" }],
+
+  "keep-me-connected": [{ "type": 0, "value": "keep me connected" }],
+  "forgot-password": [{ "type": 0, "value": "forgot password?" }]
+}

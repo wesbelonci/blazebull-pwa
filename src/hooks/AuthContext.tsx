@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from "react";
 import api from "../services/api";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate, useParams } from "react-router-dom";
 
 interface SignInCredentials {
   email: string;
@@ -36,7 +36,8 @@ export const AuthContext = createContext<AuthContextData>(
 );
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  // const { lang } = useParams();
 
   const [user, setUser] = useState<UserProps | null>(() => {
     const token = localStorage.getItem("@blazebull:token");
@@ -62,30 +63,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
-  const signIn = useCallback(
-    async ({ email, password }: SignInCredentials) => {
-      const response = await api.post("/authentication", {
-        email,
-        password,
-      });
+  const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
+    const response = await api.post("/authentication", {
+      email,
+      password,
+    });
 
-      if (response.status !== 200) {
-        throw new Error("Invalid E-mail or password");
-      }
+    if (response.status !== 200) {
+      throw new Error("Invalid E-mail or password");
+    }
 
-      const { token, user } = response.data;
+    const { token, user } = response.data;
 
-      localStorage.setItem("@blazebull:token", token);
-      localStorage.setItem("@blazebull:user", JSON.stringify(user));
+    localStorage.setItem("@blazebull:token", token);
+    localStorage.setItem("@blazebull:user", JSON.stringify(user));
 
-      api.defaults.headers.common = { Authorization: `bearer ${token}` };
+    api.defaults.headers.common = { Authorization: `bearer ${token}` };
 
-      setUser(user);
+    setUser(user);
 
-      navigate("/home");
-    },
-    [navigate]
-  );
+    // console.log(lang);
+    // navigate(`/${lang}/home`);
+  }, []);
 
   const signOut = useCallback(() => {
     setUser(null);

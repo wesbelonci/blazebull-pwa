@@ -21,6 +21,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useToast } from "../../hooks/ToastContext";
 import { useAuth } from "../../hooks/AuthContext";
+import { FormattedMessage, useIntl } from "react-intl";
+import { useNavigate, useParams } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -36,6 +38,10 @@ function AuthenticationPage() {
   const [checked, setChecked] = React.useState(true);
   const { addToast } = useToast();
   const { signIn } = useAuth();
+  const { formatMessage: f } = useIntl();
+  const { lang } = useParams();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -66,6 +72,7 @@ function AuthenticationPage() {
     async (data: any) => {
       try {
         await signIn(data);
+        navigate(`/${lang}/home`);
       } catch (err) {
         addToast({
           title: "Invalid E-mail or password",
@@ -73,7 +80,7 @@ function AuthenticationPage() {
         });
       }
     },
-    [addToast, signIn]
+    [addToast, lang, navigate, signIn]
   );
 
   return (
@@ -86,20 +93,26 @@ function AuthenticationPage() {
           <FormBox id="hook-form" onSubmit={handleSubmit(onSubmit)}>
             <InputBox error={!!errors.email}>
               <FiUser size={30} />
-              <input type="text" placeholder="E-mail" {...register("email")} />
+              <input
+                type="text"
+                placeholder={f({ id: "email" })}
+                {...register("email")}
+              />
             </InputBox>
             <Divider />
             <InputBox error={!!errors.password}>
               <FiLock size={30} />
               <input
                 type="password"
-                placeholder="Senha"
+                placeholder={f({ id: "password" })}
                 {...register("password")}
               />
             </InputBox>
           </FormBox>
           <ForgotPassword>
-            <span className="font-bold text-md">Esqueceu a senha?</span>
+            <span className="font-bold text-md">
+              <FormattedMessage id="forgot-password" />
+            </span>
           </ForgotPassword>
           <KeepConnected>
             <FormControlLabel
@@ -110,7 +123,7 @@ function AuthenticationPage() {
                   name="gilad"
                 />
               }
-              label="me manter conectado"
+              label={f({ id: "keep-me-connected" })}
             />
           </KeepConnected>
           <Button
@@ -120,15 +133,17 @@ function AuthenticationPage() {
             form="hook-form"
           >
             <div className="flex w-full h-full justify-center items-center">
-              <span className="font-semibold text-lg">Entrar</span>
+              <span className="font-semibold text-lg">
+                <FormattedMessage id="sign-in" />
+              </span>
             </div>
           </Button>
 
           <NeedHelp>
             <span className="text-white font-normal">
-              Precisa de ajuda?{" "}
+              <FormattedMessage id="need-help" />{" "}
               <a href="#" className="text-red underline cursor-pointer">
-                Clique aqui
+                <FormattedMessage id="click-here" />
               </a>
             </span>
           </NeedHelp>

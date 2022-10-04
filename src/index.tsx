@@ -9,23 +9,55 @@ import "../src/styles/index.css";
 import AppProvider from "./hooks";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { defaultTheme } from "./styles/MaterialUi";
+import { IntlProvider } from "react-intl";
+import { getLocale } from "./language";
+
+type IntlProviderProps = React.ComponentProps<typeof IntlProvider>;
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-root.render(
-  <React.StrictMode>
-    <ThemeProvider theme={defaultTheme}>
-      <Router>
-        <AppProvider>
-          <Routes />
-        </AppProvider>
-      </Router>
-      <CssBaseline />
-    </ThemeProvider>
-  </React.StrictMode>
-);
+function loadLocaleData(locale: string) {
+  switch (locale) {
+    case "en":
+      return import("./language/en.json");
+    case "es":
+      return import("./language/es.json");
+    case "pt":
+      return import("./language/pt-br.json");
+    default:
+      return import("./language/en.json");
+  }
+}
+
+export async function bootstrapApplication(locale: string) {
+  const languages = await loadLocaleData(locale);
+
+  const messages =
+    languages.default as unknown as IntlProviderProps["messages"];
+
+  return (
+    <React.StrictMode>
+      <IntlProvider locale={locale} defaultLocale="en" messages={messages}>
+        <ThemeProvider theme={defaultTheme}>
+          <Router>
+            <AppProvider>
+              <Routes />
+            </AppProvider>
+          </Router>
+          <CssBaseline />
+        </ThemeProvider>
+      </IntlProvider>
+    </React.StrictMode>
+  );
+}
+
+const locale = getLocale();
+
+bootstrapApplication(locale).then((app) => {
+  root.render(app);
+});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

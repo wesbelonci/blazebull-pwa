@@ -10,10 +10,10 @@ const Header: React.FC<HeaderProps> = ({ setActiveSidebar }) => {
     <Container>
       <Navigation>
         <Logo>
-          <img src="./assets/images/logo-white.svg" alt="Logo BazeBulls" />
+          <img src="../assets/images/logo-white.svg" alt="Logo BazeBulls" />
         </Logo>
         <Hamburguer onClick={setActiveSidebar}>
-          <img src="./assets/objects/hamburguer.svg" alt="Hamburguer" />
+          <img src="../assets/objects/hamburguer.svg" alt="Hamburguer" />
         </Hamburguer>
       </Navigation>
     </Container>

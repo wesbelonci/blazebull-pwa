@@ -1,9 +1,12 @@
 import { Container, Button, Content, NeedHelp } from "./styles";
 import { Link } from "react-router-dom";
 import { AnimatedTransictionPage } from "../../components/modules/AnimatedTransictonPage";
-// import { FiArrowRight } from "react-icons/fi";
+import { FormattedMessage } from "react-intl";
+import { useParams } from "react-router-dom";
 
 function InitialAccessPage() {
+  const { lang } = useParams();
+
   return (
     <AnimatedTransictionPage>
       <Container>
@@ -11,14 +14,18 @@ function InitialAccessPage() {
           <div className="flex flex-wrap flex-col md:flex-row"></div>
           <NeedHelp>
             <span className="text-white font-normal text-sm">
-              Precisa de ajuda?{" "}
-              <strong className="text-red underline">Clique aqui</strong>
+              <FormattedMessage id="need-help" />{" "}
+              <strong className="text-red underline">
+                <FormattedMessage id="click-here" />
+              </strong>
             </span>
           </NeedHelp>
-          <Link to="/authentication">
+          <Link to={`/${lang}/authentication`}>
             <Button variant="contained">
               <div className="flex w-full h-full justify-center items-center">
-                <span className="font-bold text-lg">Entrar</span>
+                <span className="font-bold text-lg">
+                  <FormattedMessage id="sign-in" />
+                </span>
               </div>
             </Button>
           </Link>

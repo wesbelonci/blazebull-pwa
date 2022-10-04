@@ -1,0 +1,11 @@
+{
+  "sign-in": [{ "type": 0, "value": "Entrar" }],
+  "sign-out": [{ "type": 0, "value": "Sair" }],
+  "sign-up": [{ "type": 0, "value": "Inscreva-se" }],
+  "need-help": [{ "type": 0, "value": "Precisa de Ajuda?" }],
+  "click-here": [{ "type": 0, "value": "Clique aqui" }],
+  "email": [{ "type": 0, "value": "E-mail" }],
+  "password": [{ "type": 0, "value": "Senha" }],
+  "keep-me-connected": [{ "type": 0, "value": "me manter conectado" }],
+  "forgot-password": [{ "type": 0, "value": "Esqueceu a senha?" }]
+}
