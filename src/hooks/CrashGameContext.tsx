@@ -30,13 +30,13 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
 }) => {
   const [entries, setEntries] = useState<ICrash[] | null>(null);
   const [daily, setDaily] = useState<IDailyResult>({ win: 0, loss: 0 });
-  const { isLoading } = useLoading();
+  const { isLoading, setLoadingVisible } = useLoading();
   const { signOut, isAuthenticated } = useAuth();
 
   const getDailyWinAndLoss = useCallback(async (): Promise<void> => {
     const response = await api.get("/signals/daily?game=crash");
 
-    if (response.status !== 200) {
+    if (!response.data) {
       signOut();
     }
 
@@ -46,7 +46,7 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   const getSignalsEntries = useCallback(async (): Promise<void> => {
     const response = await api.get("/signals/history?game=crash");
 
-    if (response.status !== 200) {
+    if (!response.data) {
       signOut();
     }
 
@@ -54,8 +54,10 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   }, [signOut]);
 
   const updateCrashData = useCallback(async () => {
+    setLoadingVisible(true);
     Promise.all([await getDailyWinAndLoss(), await getSignalsEntries()]);
-  }, [getDailyWinAndLoss, getSignalsEntries]);
+    setLoadingVisible(false);
+  }, [getDailyWinAndLoss, getSignalsEntries, setLoadingVisible]);
 
   useEffect(() => {
     if (

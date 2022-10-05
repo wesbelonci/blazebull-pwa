@@ -8,6 +8,7 @@ const CardCrash = () => {
   const [messages, setMessages] = useState<ISocketGameCrash[]>(
     [] as ISocketGameCrash[]
   );
+  const audio = "http://localhost:3000/sounds/alert.mp3";
 
   const { message } = useSocket();
 
@@ -30,9 +31,12 @@ const CardCrash = () => {
   }, [messages]);
 
   useEffect(() => {
-    console.log(message, "message");
     if (message && message.game === "crash") {
       window.scrollTo(0, 0);
+
+      const alert = new Audio(audio);
+
+      alert.play();
 
       setMessages((oldValue) => [...oldValue, message]);
 

@@ -33,7 +33,6 @@ export const SocketCrashProvider: React.FC<SocketProviderProps> = ({
     socket.on("message", (msg: ISocketMessage) => {
       setMessage(msg);
       if (msg.game === "crash") {
-        console.log(msg);
         if (msg.type === "loss" || msg.type === "win") {
           updateCrashData();
         }

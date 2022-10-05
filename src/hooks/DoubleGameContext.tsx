@@ -36,7 +36,7 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
   const getDailyWinAndLoss = useCallback(async (): Promise<void> => {
     const response = await api.get("/signals/daily?game=double");
 
-    if (response.status !== 200) {
+    if (!response.data) {
       signOut();
     }
 
@@ -46,7 +46,7 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
   const getSignalsEntries = useCallback(async (): Promise<void> => {
     const response = await api.get("/signals/history?game=double");
 
-    if (response.status !== 200) {
+    if (!response.data) {
       signOut();
     }
 

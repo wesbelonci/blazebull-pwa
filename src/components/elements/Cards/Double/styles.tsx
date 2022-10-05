@@ -64,7 +64,7 @@ export const Content = styled("div")<ContentProps>(
     right: 0,
     bottom: 0,
     zIndex:
-      position === 1 ? 40 : position === 2 ? 30 : position === 3 ? 20 : 10,
+      position === 1 ? 100 : position === 2 ? 150 : position === 3 ? 200 : 250,
     boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.4)",
     transition: "all 200ms ease-out",
   })
@@ -91,6 +91,7 @@ export const HelpTitle = styled("div")<EntryTypeProps>(({ theme, type }) => ({
   alignItems: "center",
   fontSize: 10,
   fontWeight: 700,
+
   color:
     type === "win"
       ? theme.palette["lime-green"].main
@@ -115,6 +116,7 @@ export const Text = styled("div")<TextProps>(({ theme, color }) => ({
   fontSize: 16,
   //fontWeight: 700,
   // color: theme.palette["white"].main,
+  zIndex: 99,
   marginRight: 4,
 
   color:

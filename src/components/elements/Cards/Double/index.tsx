@@ -9,39 +9,35 @@ const CardDouble = () => {
   const [messages, setMessages] = useState<ISocketGameDouble[]>(
     [] as ISocketGameDouble[]
   );
+  const audio = "http://localhost:3000/sounds/alert.mp3";
 
   const { message } = useSocket();
 
   const removeCard = useCallback(() => {
-    const checkAnalyzing = messages.find(
-      (message) => message.type === "analyzing"
-    );
-
-    if (messages.length === 1 && checkAnalyzing) {
-      setTimeout(() => {
-        setMessages((oldValues) => {
-          return oldValues.filter((value) => value.type !== "analyzing");
-        });
-      }, 15000);
-    } else {
-      setTimeout(() => {
-        setMessages([] as ISocketGameDouble[]);
-      }, 10000);
-    }
-  }, [messages]);
+    setTimeout(() => {
+      setMessages([] as ISocketGameDouble[]);
+    }, 15000);
+  }, []);
 
   useEffect(() => {
     if (message && message.game === "double") {
-      console.log(message);
       window.scrollTo(0, 0);
+
+      const checkAnalyzing = messages.find(
+        (message) => message.type === "analyzing"
+      );
+
+      if (checkAnalyzing) {
+        setMessages([] as ISocketGameDouble[]);
+      }
+
+      const alert = new Audio(audio);
+
+      alert.play();
 
       setMessages((oldValue) => [...oldValue, message]);
 
-      if (
-        message.type === "loss" ||
-        message.type === "win" ||
-        message.type === "analyzing"
-      ) {
+      if (message.type === "loss" || message.type === "win") {
         removeCard();
       }
     }
@@ -92,37 +88,34 @@ const CardDouble = () => {
                 </div>
                 <div className="flex w-full h-full flex-col mt-2">
                   {item.type === "analyzing" && (
-                    <>
-                      <div className="flex flex-row">
-                        <Text className="text-white">
-                          Fique atento, nossa inteligência artificial está
-                          analisando uma possível entrada.
-                        </Text>
-                      </div>
-                    </>
+                    <div
+                      className={`flex w-full flex-col ${
+                        messages.length > 1 ? "whitespace-nowrap" : "flex-wrap"
+                      }`}
+                    >
+                      <Text className="text-white">
+                        Fique atento, nossa inteligência artificial está
+                        analisando uma possível entrada.
+                      </Text>
+                    </div>
                   )}
                   {item.type === "entry" && (
                     <>
                       <div className="flex flex-row">
                         <Text className="text-white">Apostar na cor: </Text>
-                        <Text color={item.color} className="font-bold">
-                          {item.color === "red"
+                        <Text color={item.target} className="font-bold">
+                          {item.target === "red"
                             ? "Vermelho"
-                            : item.color === "black"
+                            : item.target === "black"
                             ? "Preto"
                             : "Branco"}
                         </Text>
-                        {item.color === "red" ? (
+                        {item.target === "red" ? (
                           <img src="/assets/objects/double-red.svg" alt="Red" />
-                        ) : item.color === "black" ? (
+                        ) : (
                           <img
                             src="/assets/objects/double-black.svg"
                             alt="Black"
-                          />
-                        ) : (
-                          <img
-                            src="/assets/objects/double-white.svg"
-                            alt="White"
                           />
                         )}
                       </div>
@@ -143,24 +136,15 @@ const CardDouble = () => {
                     <>
                       <div className="flex flex-row">
                         <Text className="text-white">Apostar na cor: </Text>
-                        <Text color={item.color} className="font-bold">
-                          {item.color === "red"
-                            ? "Vermelho"
-                            : item.color === "black"
-                            ? "Preto"
-                            : "Branco"}
+                        <Text color={item.target} className="font-bold">
+                          {item.target === "red" ? "Vermelho" : "Preto"}
                         </Text>
-                        {item.color === "red" ? (
+                        {item.target === "red" ? (
                           <img src="/assets/objects/double-red.svg" alt="Red" />
-                        ) : item.color === "black" ? (
+                        ) : (
                           <img
                             src="/assets/objects/double-black.svg"
                             alt="Black"
-                          />
-                        ) : (
-                          <img
-                            src="/assets/objects/double-white.svg"
-                            alt="White"
                           />
                         )}
                       </div>
@@ -201,20 +185,16 @@ const CardDouble = () => {
                           />
                         )}
                       </div>
-                      {/* <div className="flex flex-row">
-                        <Text className="text-white">Crash em:</Text>
-                        <Text className="font-bold">{item.result}x</Text>
-                      </div> */}
                     </>
                   )}
                   {item.type === "loss" && (
                     <>
                       <div className="flex flex-row">
                         <Text className="text-white">Cor apostada: </Text>
-                        <Text color={item.result} className="font-bold">
-                          {item.result === "red"
+                        <Text color={item.target} className="font-bold">
+                          {item.target === "red"
                             ? "Vermelho"
-                            : item.result === "black"
+                            : item.target === "black"
                             ? "Preto"
                             : "Branco"}
                         </Text>
@@ -232,10 +212,6 @@ const CardDouble = () => {
                           />
                         )}
                       </div>
-                      {/* <div className="flex flex-row">
-                        <Text className="text-white">Crash em:</Text>
-                        <Text className="font-bold">{item.result}x</Text>
-                      </div> */}
                     </>
                   )}
                 </div>

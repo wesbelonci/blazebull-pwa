@@ -8,7 +8,7 @@ import React, {
 import { socket } from "../services/socket";
 import { ISocketMessage } from "../types/ISocketMessage";
 import { useAuth } from "./AuthContext";
-// import { useCrashGame } from "./CrashGameContext";
+import { useCrashGame } from "./CrashGameContext";
 
 interface SocketDoubleContextData {
   message: ISocketMessage | null;
@@ -26,7 +26,7 @@ export const SocketDoubleProvider: React.FC<SocketProviderProps> = ({
   children,
 }) => {
   const [message, setMessage] = useState<ISocketMessage | null>(null);
-  // const { updateCrashData } = useCrashGame();
+  const { updateCrashData } = useCrashGame();
   const { isAuthenticated } = useAuth();
 
   const webSocket = useCallback(() => {
@@ -35,11 +35,11 @@ export const SocketDoubleProvider: React.FC<SocketProviderProps> = ({
 
       if (msg.game === "double") {
         if (msg.type === "loss" || msg.type === "win") {
-          console.log(msg);
+          updateCrashData();
         }
       }
     });
-  }, []);
+  }, [updateCrashData]);
 
   useEffect(() => {
     if (message === null && isAuthenticated) {

@@ -81,9 +81,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     api.defaults.headers.common = { Authorization: `bearer ${token}` };
 
     setUser(user);
-
-    // console.log(lang);
-    // navigate(`/${lang}/home`);
   }, []);
 
   const signOut = useCallback(() => {

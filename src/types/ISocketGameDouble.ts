@@ -4,7 +4,7 @@ type ISocketGameDouble = {
   roll?: number;
   color?: "red" | "black" | "white";
   last_result?: number;
-  target?: number;
+  target?: "red" | "black" | "white";
   result?: "red" | "black" | "white";
   amount?: number;
   hour?: string;
