@@ -9,7 +9,7 @@ const CardDouble = () => {
   const [messages, setMessages] = useState<ISocketGameDouble[]>(
     [] as ISocketGameDouble[]
   );
-  const audio = "http://localhost:3000/sounds/alert.mp3";
+  const audio = "https://blazebull-pwa.vercel.app/sounds/alert.mp3";
 
   const { message } = useSocket();
 

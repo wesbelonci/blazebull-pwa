@@ -8,7 +8,7 @@ const CardCrash = () => {
   const [messages, setMessages] = useState<ISocketGameCrash[]>(
     [] as ISocketGameCrash[]
   );
-  const audio = "http://localhost:3000/sounds/alert.mp3";
+  const audio = "https://blazebull-pwa.vercel.app/sounds/alert.mp3";
 
   const { message } = useSocket();
 
