@@ -10,9 +10,9 @@ import { useLocale } from "../../../../hooks/LocaleContext";
 import { FormattedMessage, useIntl } from "react-intl";
 
 const CardDouble = () => {
-  const [messages, setMessages] = useState<ISocketGameDouble[]>(
-    [] as ISocketGameDouble[]
-  );
+  const [messages, setMessages] = useState<ISocketGameDouble[]>([
+    { type: "analyzing" },
+  ] as ISocketGameDouble[]);
   const [gale, setGale] = useState<number>(1);
   const { message } = useSocket();
   const { isLoading } = useLoading();
@@ -116,7 +116,7 @@ const CardDouble = () => {
                   {item.type === "analyzing" && (
                     <HelpTitle type={item.type}>
                       <FiAlertTriangle size={15} />
-                      <FormattedMessage id="wait-for-confirmation-bot" />
+                      <FormattedMessage id="wait-for-confirmation" />
                     </HelpTitle>
                   )}
                 </div>
@@ -128,7 +128,7 @@ const CardDouble = () => {
                       }`}
                     >
                       <Text className="text-white">
-                        <FormattedMessage id="wait-for-the-robot" />
+                        <FormattedMessage id="wait-for-confirmation-bot" />
                       </Text>
                     </div>
                   )}

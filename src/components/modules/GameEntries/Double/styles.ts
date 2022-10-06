@@ -39,6 +39,7 @@ export const Table = styled("table")(({ theme }) => ({
 export const Entry = styled("tr")<{ type: "win" | "loss" }>(
   ({ theme, type }) => ({
     // display: "block",
+    // display: "flex",
     height: "100%",
     width: "100%",
     fontSize: 14,

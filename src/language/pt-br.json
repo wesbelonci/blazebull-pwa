@@ -32,7 +32,7 @@
       "value": "Aguarde! Nossa inteligência artificial está analisando as próximas entradas!"
     }
   ],
-  "wait-for-the-robot": [
+  "wait-for-confirmation-bot": [
     {
       "type": 0,
       "value": "Fique atento, nossa inteligência artificial está analisando uma possível entrada."

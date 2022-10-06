@@ -26,7 +26,7 @@ const DoubleEntries: React.FC = () => {
             <th className="py-3 text-center text-xs font-medium text-white tracking-wider">
               <FormattedMessage id="entry" />
             </th>
-            <th className="py-3 text-center text-xs font-medium text-white tracking-wider">
+            <th className="py-3 px-6 text-center text-xs font-medium text-white tracking-wider">
               <FormattedMessage id="roll" />
             </th>
           </tr>
@@ -45,7 +45,8 @@ const DoubleEntries: React.FC = () => {
               >
                 {double.win_loss}
               </td>
-              <td className="flex flex-row px-6 py-2 whitespace-nowrap text-white">
+
+              <td className="flex flex-row px-6 py-2 whitespace-nowrap text-white justify-center">
                 {double.double_game_bet === "black" && (
                   <img
                     src="/assets/objects/double-black.svg"
@@ -60,16 +61,31 @@ const DoubleEntries: React.FC = () => {
                 </div>
                 <img src="/assets/objects/double-white.svg" alt="White Color" />
               </td>
-              <td className="px-6 py-2 whitespace-nowrap text-white">
-                {double.round.color === "black" && (
-                  <img
-                    src="/assets/objects/double-black.svg"
-                    alt="Black Color"
-                  />
-                )}
-                {double.round.color === "red" && (
-                  <img src="/assets/objects/double-red.svg" alt="Red Color" />
-                )}
+
+              <td className="py-2 px-6 whitespace-nowrap text-white text-center mx-auto">
+                <div className="block">
+                  {double.round.color === "black" && (
+                    <img
+                      src="/assets/objects/double-black.svg"
+                      alt="Black Color"
+                      width={21}
+                    />
+                  )}
+                  {double.round.color === "red" && (
+                    <img
+                      src="/assets/objects/double-red.svg"
+                      alt="Red Color"
+                      width={21}
+                    />
+                  )}
+                  {double.round.color === "white" && (
+                    <img
+                      src="/assets/objects/double-white.svg"
+                      alt="White Color"
+                      width={21}
+                    />
+                  )}
+                </div>
               </td>
             </Entry>
           ))}
