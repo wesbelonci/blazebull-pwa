@@ -5,11 +5,12 @@ export const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette["background-dark"].main,
   alignItems: "center",
   width: "100%",
-  height: window.innerHeight - 70,
+  // height: window.innerHeight,
   flexDirection: "column",
   overflow: "hidden",
-  overflowY: "hidden",
+  overflowY: "auto",
   position: "relative",
+  marginBottom: 40,
 }));
 
 export const Content = styled("div")(({ theme }) => ({
