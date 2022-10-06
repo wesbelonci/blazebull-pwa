@@ -12,7 +12,7 @@ export const Container = styled("div")<{ show?: boolean }>(
     height: window.innerHeight,
     flexDirection: "column",
     overflow: "hidden",
-    zIndex: 500,
+    zIndex: 200,
     top: 0,
     left: 0,
   })
@@ -29,6 +29,7 @@ export const Content = styled("div")(({ theme }) => ({
   flexDirection: "column",
   overflow: "hidden",
   position: "relative",
+  zIndex: 200,
 
   "&::before": {
     content: '""',
@@ -49,6 +50,7 @@ export const Content = styled("div")(({ theme }) => ({
     right: 0,
     bottom: 0,
     margin: "0 auto",
+    zIndex: 200,
     // zIndex: -9,
   },
 }));

@@ -34,23 +34,21 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   const { signOut, isAuthenticated } = useAuth();
 
   const getDailyWinAndLoss = useCallback(async (): Promise<void> => {
-    const response = await api.get("/signals/daily?game=crash");
-
-    if (!response.data) {
+    try {
+      const response = await api.get("/signals/daily?game=crash");
+      setDaily(response.data);
+    } catch (err) {
       signOut();
     }
-
-    setDaily(response.data);
   }, [signOut]);
 
   const getSignalsEntries = useCallback(async (): Promise<void> => {
-    const response = await api.get("/signals/history?game=crash");
-
-    if (!response.data) {
+    try {
+      const response = await api.get("/signals/history?game=crash");
+      setEntries(response.data);
+    } catch (err) {
       signOut();
     }
-
-    setEntries(response.data);
   }, [signOut]);
 
   const updateCrashData = useCallback(async () => {

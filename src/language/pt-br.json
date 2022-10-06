@@ -7,5 +7,50 @@
   "email": [{ "type": 0, "value": "E-mail" }],
   "password": [{ "type": 0, "value": "Senha" }],
   "keep-me-connected": [{ "type": 0, "value": "me manter conectado" }],
-  "forgot-password": [{ "type": 0, "value": "Esqueceu a senha?" }]
+  "forgot-password": [{ "type": 0, "value": "Esqueceu a senha?" }],
+  "currency": [{ "type": 0, "value": "R$ " }],
+  "total-bankroll": [{ "type": 0, "value": "Banca Total: " }],
+  "save": [{ "type": 0, "value": "Salvar" }],
+  "is-required": [{ "type": 0, "value": "é obrigatório!" }],
+  "value": [{ "type": 0, "value": "valor" }],
+  "bet": [{ "type": 0, "value": "Apostar" }],
+  "white": [{ "type": 0, "value": "Branco" }],
+  "red": [{ "type": 0, "value": "Vermelho" }],
+  "black": [{ "type": 0, "value": "Preto" }],
+
+  "possible-entry": [{ "type": 0, "value": "Possível entrada!" }],
+  "confirmed-entry": [{ "type": 0, "value": "Entrada confirmada!" }],
+  "make-martingale": [{ "type": 0, "value": "Faça Martingale!" }],
+  "make-martingale-again": [
+    { "type": 0, "value": "Faça Martingale Novamente!" }
+  ],
+  "loss": [{ "type": 0, "value": "Loss!!!!" }],
+  "win": [{ "type": 0, "value": "Wiiiiiinnnnnnn!!!!" }],
+  "wait-for-signal": [
+    {
+      "type": 0,
+      "value": "Aguarde! Nossa inteligência artificial está analisando as próximas entradas!"
+    }
+  ],
+  "wait-for-the-robot": [
+    {
+      "type": 0,
+      "value": "Fique atento, nossa inteligência artificial está analisando uma possível entrada."
+    }
+  ],
+  "color-bet": [{ "type": 0, "value": "Cor Apostada" }],
+  "todays-results": [{ "type": 0, "value": "Resultados de hoje" }],
+  "result": [{ "type": 0, "value": "Resultado" }],
+  "entries": [{ "type": 0, "value": "Entradas" }],
+  "entry": [{ "type": 0, "value": "Entrada" }],
+  "roll": [{ "type": 0, "value": "Giro" }],
+  "wait-for-confirmation": [{ "type": 0, "value": "Aguarde a confirmação!" }],
+  "live": [{ "type": 0, "value": "Ao vivo" }],
+
+  "win-loss-manager": [{ "type": 0, "value": "Gerenciador de Win e Loss" }],
+  "bank-of-the-day": [{ "type": 0, "value": "Banca do dia" }],
+  "stop-when-profit": [{ "type": 0, "value": "Parar quando ganhar" }],
+  "stop-when-lose": [{ "type": 0, "value": "Parar quando perder" }],
+  "entries-recommendation": [{ "type": 0, "value": "Recomendação de entrada" }],
+  "from-the-bank": [{ "type": 0, "value": "da banca" }]
 }

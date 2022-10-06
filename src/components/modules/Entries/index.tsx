@@ -14,6 +14,7 @@ import { CardCrash } from "../../elements/Cards/Crash";
 import { CardDouble } from "../../elements/Cards/Double";
 import { useCrashGame } from "../../../hooks/CrashGameContext";
 import { useDoubleGame } from "../../../hooks/DoubleGameContext";
+import { FormattedMessage } from "react-intl";
 
 interface EntriesProps {
   room: "crash" | "double";
@@ -27,9 +28,13 @@ const RoomEntries: React.FC<EntriesProps> = ({ room }) => {
     <Container>
       <Header>
         <div className="flex w-auto flex-row items-center">
-          <Title>Entradas</Title>
+          <Title>
+            <FormattedMessage id="entries" />
+          </Title>
           <Live>
-            <span>Ao Vivo</span>
+            <span>
+              <FormattedMessage id="live" />
+            </span>
           </Live>
         </div>
         <div className="flex w-50 flex-row">

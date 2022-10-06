@@ -4,14 +4,23 @@ import { motion } from "framer-motion";
 import { useSocket } from "../../../../hooks/SocketContext";
 import { ISocketGameDouble } from "../../../../types/ISocketGameDouble";
 import { FiAlertTriangle } from "react-icons/fi";
+import { useLoading } from "../../../../hooks/LoadingContext";
+import { useBank } from "../../../../hooks/BankContext";
+import { useLocale } from "../../../../hooks/LocaleContext";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const CardDouble = () => {
   const [messages, setMessages] = useState<ISocketGameDouble[]>(
     [] as ISocketGameDouble[]
   );
-  const audio = "https://blazebull-pwa.vercel.app/sounds/alert.mp3";
-
+  const [gale, setGale] = useState<number>(1);
   const { message } = useSocket();
+  const { isLoading } = useLoading();
+  const { bank } = useBank();
+  const { locale } = useLocale();
+  const { formatMessage: f } = useIntl();
+
+  const audio = "https://blazebull-pwa.vercel.app/sounds/alert.mp3";
 
   const removeCard = useCallback(() => {
     setTimeout(() => {
@@ -20,7 +29,7 @@ const CardDouble = () => {
   }, []);
 
   useEffect(() => {
-    if (message && message.game === "double") {
+    if (message && message.game === "double" && !isLoading) {
       window.scrollTo(0, 0);
 
       const checkAnalyzing = messages.find(
@@ -35,10 +44,19 @@ const CardDouble = () => {
 
       alert.play();
 
+      const checkExistGale = messages.find(
+        (message) => message.type === "gale"
+      );
+
+      if (checkExistGale && message.type === "gale") {
+        setGale(1);
+      }
+
       setMessages((oldValue) => [...oldValue, message]);
 
       if (message.type === "loss" || message.type === "win") {
         removeCard();
+        setGale(0);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,25 +82,41 @@ const CardDouble = () => {
               >
                 <div className="flex w-full h-5 items-center justify-between">
                   {item.type === "analyzing" && (
-                    <Title type={item.type}>Possível entrada</Title>
+                    <Title type={item.type}>
+                      <FormattedMessage id="possible-entry" />
+                    </Title>
                   )}
                   {item.type === "entry" && (
-                    <Title type={item.type}>Entrada confirmada!</Title>
+                    <Title type={item.type}>
+                      <FormattedMessage id="confirmed-entry" />
+                    </Title>
                   )}
-                  {item.type === "gale" && (
-                    <Title type={item.type}>Faça Martingale!</Title>
+                  {item.type === "gale" && gale === 0 && (
+                    <Title type={item.type}>
+                      <FormattedMessage id="make-martingale" />
+                    </Title>
+                  )}
+                  {item.type === "gale" && gale === 1 && (
+                    <Title type={item.type}>
+                      <FormattedMessage id="make-martingale-again" />
+                    </Title>
                   )}
                   {item.type === "win" && (
-                    <Title type={item.type}>Wiiiiiinnnnnnn!!!!</Title>
+                    <Title type={item.type}>
+                      <FormattedMessage id="win" />
+                    </Title>
                   )}
                   {item.type === "loss" && (
-                    <Title type={item.type}>Loss!!!!</Title>
+                    <Title type={item.type}>
+                      <FormattedMessage id="loss" />
+                    </Title>
                   )}
 
+                  {/* @@@@@@@@@@@@@@@@@@ ANALYZING @@@@@@@@@@@@@@@@@@@@*/}
                   {item.type === "analyzing" && (
                     <HelpTitle type={item.type}>
                       <FiAlertTriangle size={15} />
-                      Aguarde confirmação
+                      <FormattedMessage id="wait-for-confirmation-bot" />
                     </HelpTitle>
                   )}
                 </div>
@@ -94,21 +128,21 @@ const CardDouble = () => {
                       }`}
                     >
                       <Text className="text-white">
-                        Fique atento, nossa inteligência artificial está
-                        analisando uma possível entrada.
+                        <FormattedMessage id="wait-for-the-robot" />
                       </Text>
                     </div>
                   )}
+
+                  {/* @@@@@@@@@@@@@@@@@@ ENTRY @@@@@@@@@@@@@@@@@@@@*/}
                   {item.type === "entry" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Apostar na cor: </Text>
                         <Text color={item.target} className="font-bold">
                           {item.target === "red"
-                            ? "Vermelho"
+                            ? f({ id: "red" })
                             : item.target === "black"
-                            ? "Preto"
-                            : "Branco"}
+                            ? f({ id: "black" })
+                            : f({ id: "white" })}
                         </Text>
                         {item.target === "red" ? (
                           <img src="/assets/objects/double-red.svg" alt="Red" />
@@ -118,26 +152,56 @@ const CardDouble = () => {
                             alt="Black"
                           />
                         )}
+                        <Text className="text-white ml-4">
+                          <FormattedMessage id="bet" />:{" "}
+                          <FormattedMessage id="currency" />{" "}
+                          {bank?.total
+                            ? new Intl.NumberFormat(
+                                locale === "en"
+                                  ? "en-US"
+                                  : locale === "pt"
+                                  ? "pt-BR"
+                                  : "es-ES"
+                              ).format(bank.total * 0.01)
+                            : "0"}
+                        </Text>
                       </div>
                       <div className="flex flex-row">
-                        <Text className="text-white">Menor valor no: </Text>
                         <Text color="white" className="font-bold">
-                          Banco
+                          <FormattedMessage id="white" />
                         </Text>
                         <img
                           src="/assets/objects/double-white.svg"
                           alt="White"
                         />
+
+                        <Text className="text-white ml-4">
+                          <FormattedMessage id="bet" />:{" "}
+                          <FormattedMessage id="currency" />{" "}
+                          {bank?.total
+                            ? new Intl.NumberFormat(
+                                locale === "en"
+                                  ? "en-US"
+                                  : locale === "pt"
+                                  ? "pt-BR"
+                                  : "es-ES"
+                              ).format(bank.total * 0.003)
+                            : "0"}
+                        </Text>
                       </div>
                     </>
                   )}
 
+                  {/* @@@@@@@@@@@@@@@@@@ GALE @@@@@@@@@@@@@@@@@@@@*/}
                   {item.type === "gale" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Apostar na cor: </Text>
                         <Text color={item.target} className="font-bold">
-                          {item.target === "red" ? "Vermelho" : "Preto"}
+                          {item.target === "red"
+                            ? f({ id: "red" })
+                            : item.target === "black"
+                            ? f({ id: "black" })
+                            : f({ id: "white" })}
                         </Text>
                         {item.target === "red" ? (
                           <img src="/assets/objects/double-red.svg" alt="Red" />
@@ -147,29 +211,67 @@ const CardDouble = () => {
                             alt="Black"
                           />
                         )}
+                        <Text className="text-white ml-4">
+                          <FormattedMessage id="bet" />:{" "}
+                          <FormattedMessage id="currency" />{" "}
+                          {bank?.total
+                            ? new Intl.NumberFormat(
+                                locale === "en"
+                                  ? "en-US"
+                                  : locale === "pt"
+                                  ? "pt-BR"
+                                  : "es-ES"
+                              ).format(
+                                gale === 0
+                                  ? bank.total * 0.01 * 2
+                                  : bank.total * 0.01 * 4
+                              )
+                            : "0"}
+                        </Text>
                       </div>
                       <div className="flex flex-row">
-                        <Text className="text-white">Menor valor no: </Text>
                         <Text color="white" className="font-bold">
-                          Banco
+                          <FormattedMessage id="white" />
                         </Text>
                         <img
                           src="/assets/objects/double-white.svg"
                           alt="White"
                         />
+
+                        <Text className="text-white ml-4">
+                          <FormattedMessage id="bet" />:{" "}
+                          <FormattedMessage id="currency" />{" "}
+                          {bank?.total
+                            ? new Intl.NumberFormat(
+                                locale === "en"
+                                  ? "en-US"
+                                  : locale === "pt"
+                                  ? "pt-BR"
+                                  : "es-ES"
+                              ).format(
+                                gale === 0
+                                  ? bank.total * 0.003 * 2
+                                  : bank.total * 0.003 * 4
+                              )
+                            : "0"}
+                        </Text>
                       </div>
                     </>
                   )}
+
+                  {/* @@@@@@@@@@@@@@@@@@ WIN @@@@@@@@@@@@@@@@@@@@*/}
                   {item.type === "win" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Cor apostada: </Text>
+                        <Text className="text-white">
+                          <FormattedMessage id="color-bet" />:{" "}
+                        </Text>
                         <Text color={item.result} className="font-bold">
                           {item.result === "red"
-                            ? "Vermelho"
+                            ? f({ id: "red" })
                             : item.result === "black"
-                            ? "Preto"
-                            : "Branco"}
+                            ? f({ id: "black" })
+                            : f({ id: "white" })}
                         </Text>
                         {item.result === "red" ? (
                           <img src="/assets/objects/double-red.svg" alt="Red" />
@@ -187,16 +289,20 @@ const CardDouble = () => {
                       </div>
                     </>
                   )}
+
+                  {/* @@@@@@@@@@@@@@@@@@ LOSS @@@@@@@@@@@@@@@@@@@@*/}
                   {item.type === "loss" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Cor apostada: </Text>
+                        <Text className="text-white">
+                          <FormattedMessage id="color-bet" />:{" "}
+                        </Text>
                         <Text color={item.target} className="font-bold">
                           {item.target === "red"
-                            ? "Vermelho"
+                            ? f({ id: "red" })
                             : item.target === "black"
-                            ? "Preto"
-                            : "Branco"}
+                            ? f({ id: "black" })
+                            : f({ id: "white" })}
                         </Text>
                         {item.result === "red" ? (
                           <img src="/assets/objects/double-red.svg" alt="Red" />
@@ -230,8 +336,7 @@ const CardDouble = () => {
               />
             </div>
             <span className="text-white text-sm -mt-14 text-center">
-              Aguarde! Nossa inteligência artificial está analisando as próximas
-              entradas!
+              <FormattedMessage id="wait-for-signal" />
             </span>
           </div>
         </div>

@@ -11,6 +11,7 @@ import { Classroom } from "../pages/Classroom";
 import { Settings } from "../pages/Settings";
 import { useAuth } from "../hooks/AuthContext";
 import { getLocale, suportedLanguages } from "../language";
+import { BankManagerPage } from "../pages/BankManager";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -38,6 +39,7 @@ const App: React.FC = () => {
             <Route path="room-crash" element={<RoomCrash />} />
             <Route path="room-double" element={<RoomDouble />} />
             <Route path="classroom" element={<Classroom />} />
+            <Route path="bank-manager" element={<BankManagerPage />} />
             <Route path="settings" element={<Settings />} />
           </Route>
           <Route path="authentication" element={<AuthenticationPage />} />

@@ -11,6 +11,7 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { defaultTheme } from "./styles/MaterialUi";
 import { IntlProvider } from "react-intl";
 import { getLocale } from "./language";
+import "./styles/font/sf-pro-rounded.ttf";
 
 type IntlProviderProps = React.ComponentProps<typeof IntlProvider>;
 

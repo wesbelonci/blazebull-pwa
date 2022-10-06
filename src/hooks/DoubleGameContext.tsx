@@ -34,23 +34,21 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
   const { signOut, isAuthenticated } = useAuth();
 
   const getDailyWinAndLoss = useCallback(async (): Promise<void> => {
-    const response = await api.get("/signals/daily?game=double");
-
-    if (!response.data) {
+    try {
+      const response = await api.get("/signals/daily?game=double");
+      setDaily(response.data);
+    } catch (err) {
       signOut();
     }
-
-    setDaily(response.data);
   }, [signOut]);
 
   const getSignalsEntries = useCallback(async (): Promise<void> => {
-    const response = await api.get("/signals/history?game=double");
-
-    if (!response.data) {
+    try {
+      const response = await api.get("/signals/history?game=double");
+      setEntries(response.data);
+    } catch (err) {
       signOut();
     }
-
-    setEntries(response.data);
   }, [signOut]);
 
   const updateDoubleData = useCallback(async () => {

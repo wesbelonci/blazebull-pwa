@@ -5,6 +5,7 @@ import { useLoading } from "../../hooks/LoadingContext";
 import { Layout } from "../../layouts";
 import { useWakeLock } from "react-screen-wake-lock";
 import { Container, Content, Blaze, Iframe, Divider } from "./styles";
+// import { FormattedMessage } from "react-intl";
 
 function RoomDouble() {
   const divRef = useRef<HTMLIFrameElement>(null);

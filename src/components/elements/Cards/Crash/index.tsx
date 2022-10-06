@@ -3,6 +3,7 @@ import { Container, Content, Title, Text } from "./styles";
 import { motion } from "framer-motion";
 import { useSocket } from "../../../../hooks/SocketContext";
 import { ISocketGameCrash } from "../../../../types/ISocketGameCrash";
+import { useLoading } from "../../../../hooks/LoadingContext";
 
 const CardCrash = () => {
   const [messages, setMessages] = useState<ISocketGameCrash[]>(
@@ -11,6 +12,7 @@ const CardCrash = () => {
   const audio = "https://blazebull-pwa.vercel.app/sounds/alert.mp3";
 
   const { message } = useSocket();
+  const { isLoading } = useLoading();
 
   const removeCard = useCallback(() => {
     const checkAnalyzing = messages.find(
@@ -31,7 +33,7 @@ const CardCrash = () => {
   }, [messages]);
 
   useEffect(() => {
-    if (message && message.game === "crash") {
+    if (message && message.game === "crash" && !isLoading) {
       window.scrollTo(0, 0);
 
       const alert = new Audio(audio);
@@ -87,10 +89,6 @@ const CardCrash = () => {
                           Fique atento, nossa inteligência artificial está
                           analisando uma possível entrada.
                         </Text>
-                        {/* <Text className="font-bold">
-                      nossa inteligência artificial está analisando uma possível
-                      entrada.
-                    </Text> */}
                       </div>
                     </>
                   )}

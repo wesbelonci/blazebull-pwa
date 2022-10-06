@@ -84,8 +84,15 @@
     --separator-three: #515963;
 }
 
+@font-face {
+  font-family: "SFFProRounded";
+  src: local("GoldmanBold"),
+    url("../styles/font/sf-pro-rounded.ttf") format("truetype");
+}
+
 
 * {
+  font-family: "SFFProRounded";
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;

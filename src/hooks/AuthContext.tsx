@@ -36,9 +36,6 @@ export const AuthContext = createContext<AuthContextData>(
 );
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  // const navigate = useNavigate();
-  // const { lang } = useParams();
-
   const [user, setUser] = useState<UserProps | null>(() => {
     const token = localStorage.getItem("@blazebull:token");
     const user = localStorage.getItem("@blazebull:user");
@@ -64,23 +61,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, [isAuthenticated]);
 
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
-    const response = await api.post("/authentication", {
-      email,
-      password,
-    });
+    try {
+      const response = await api.post("/authentication", {
+        email,
+        password,
+      });
+      const { token, user } = response.data;
 
-    if (response.status !== 200) {
+      localStorage.setItem("@blazebull:token", token);
+      localStorage.setItem("@blazebull:user", JSON.stringify(user));
+
+      api.defaults.headers.common = { Authorization: `bearer ${token}` };
+
+      setUser(user);
+    } catch (err) {
       throw new Error("Invalid E-mail or password");
     }
-
-    const { token, user } = response.data;
-
-    localStorage.setItem("@blazebull:token", token);
-    localStorage.setItem("@blazebull:user", JSON.stringify(user));
-
-    api.defaults.headers.common = { Authorization: `bearer ${token}` };
-
-    setUser(user);
   }, []);
 
   const signOut = useCallback(() => {
@@ -93,13 +89,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const getUserData = useCallback(async () => {
-    const response = await api.get("/user");
-
-    if (response.status !== 200) {
+    try {
+      const response = await api.get("/user");
+      setUser(response.data);
+    } catch (err) {
       signOut();
     }
-
-    setUser(response.data);
   }, [signOut]);
 
   return (

@@ -10,6 +10,7 @@ import { ISocketMessage } from "../types/ISocketMessage";
 import { useAuth } from "./AuthContext";
 import { useCrashGame } from "./CrashGameContext";
 import { useDoubleGame } from "./DoubleGameContext";
+import { useLoading } from "./LoadingContext";
 
 interface SocketContextData {
   message: ISocketMessage | null;
@@ -27,21 +28,24 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [message, setMessage] = useState<ISocketMessage | null>(null);
   const { updateCrashData } = useCrashGame();
   const { updateDoubleData } = useDoubleGame();
+  const { isLoading } = useLoading();
   const { isAuthenticated } = useAuth();
 
   const webSocket = useCallback(() => {
     socket.on("message", (msg: ISocketMessage) => {
-      setMessage(msg);
-      if (msg.type === "loss" || msg.type === "win") {
-        if (msg.game === "crash") {
-          updateCrashData();
-        }
-        if (msg.game === "double") {
-          updateDoubleData();
+      if (!isLoading) {
+        setMessage(msg);
+        if (msg.type === "loss" || msg.type === "win") {
+          if (msg.game === "crash") {
+            updateCrashData();
+          }
+          if (msg.game === "double") {
+            updateDoubleData();
+          }
         }
       }
     });
-  }, [updateCrashData, updateDoubleData]);
+  }, [isLoading, updateCrashData, updateDoubleData]);
 
   useEffect(() => {
     if (message === null && isAuthenticated) {

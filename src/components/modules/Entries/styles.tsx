@@ -129,4 +129,5 @@ export const CardContainer = styled("div")(({ theme }) => ({
   display: "block",
   width: "100%",
   height: "auto",
+  zIndex: 90,
 }));

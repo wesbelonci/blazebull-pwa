@@ -64,7 +64,7 @@ export const Content = styled("div")<ContentProps>(
     right: 0,
     bottom: 0,
     zIndex:
-      position === 1 ? 100 : position === 2 ? 150 : position === 3 ? 200 : 250,
+      position === 1 ? 40 : position === 2 ? 30 : position === 3 ? 20 : 10,
     boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.4)",
     transition: "all 200ms ease-out",
   })

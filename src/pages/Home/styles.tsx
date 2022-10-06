@@ -5,7 +5,7 @@ export const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette["background-dark"].main,
   alignItems: "center",
   width: "100%",
-  height: window.innerHeight,
+  height: window.innerHeight - 70,
   flexDirection: "column",
   overflow: "hidden",
   overflowY: "hidden",
