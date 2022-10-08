@@ -25,10 +25,6 @@ export const AlertProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (alert) {
       alert.muted = false;
       alert.play();
-
-      setTimeout(() => {
-        alert.muted = false;
-      }, 2000);
     }
   }, [alert]);
 
