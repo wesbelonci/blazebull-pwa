@@ -8,14 +8,17 @@ import React, {
 import api from "../services/api";
 import { ICrash } from "../types/ICrash";
 import { IDailyResult } from "../types/IDailyResult";
+import { ISocketGameCrash } from "../types/ISocketGameCrash";
 import { useAuth } from "./AuthContext";
 import { useLoading } from "./LoadingContext";
 
 interface CrashGameContextData {
   entries: ICrash[] | null;
   daily: IDailyResult;
+  messages: ISocketGameCrash[];
   updateCrashData(): void;
-  updateCrashDataWithLoading(): void
+  updateCrashDataWithLoading(): void;
+  listeningMessagesSocket(message: ISocketGameCrash): void;
 }
 
 interface AuthProviderProps {
@@ -29,6 +32,9 @@ export const CrashGameContext = createContext<CrashGameContextData>(
 export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   children,
 }) => {
+  const [messages, setMessages] = useState<ISocketGameCrash[]>(
+    [] as ISocketGameCrash[]
+  );
   const [entries, setEntries] = useState<ICrash[] | null>(null);
   const [daily, setDaily] = useState<IDailyResult>({ win: 0, loss: 0 });
   const { isLoading, setLoadingVisible } = useLoading();
@@ -53,13 +59,61 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   }, [signOut]);
 
   const updateCrashData = useCallback(async () => {
-    Promise.all([setLoadingVisible(true), await getDailyWinAndLoss(), await getSignalsEntries(), setLoadingVisible(false)]);
-    
-  }, [getDailyWinAndLoss, getSignalsEntries, setLoadingVisible]);
-
-  const updateCrashDataWithLoading = useCallback(async () => {
     Promise.all([await getDailyWinAndLoss(), await getSignalsEntries()]);
   }, [getDailyWinAndLoss, getSignalsEntries]);
+
+  const updateCrashDataWithLoading = useCallback(async () => {
+    Promise.all([
+      setLoadingVisible(true),
+      await getDailyWinAndLoss(),
+      await getSignalsEntries(),
+      setLoadingVisible(false),
+    ]);
+  }, [getDailyWinAndLoss, getSignalsEntries, setLoadingVisible]);
+
+  const removeCard = useCallback(() => {
+    setTimeout(() => {
+      setMessages([] as ISocketGameCrash[]);
+    }, 10000);
+  }, []);
+
+  const listeningMessagesSocket = useCallback(
+    (message: ISocketGameCrash) => {
+      if (message.type === "cancel-analyzing") {
+        setMessages([] as ISocketGameCrash[]);
+      }
+
+      const checkExistMessage = messages.find((item) => item.id === message.id);
+
+      if (!checkExistMessage && message.type !== "cancel-analyzing") {
+        window.scrollTo(0, 0);
+
+        const checkExistGale = messages.find(
+          (message) => message.type === "gale"
+        );
+
+        if (!checkExistGale && message.type === "gale") {
+          message.martingale_sequence = 1;
+        }
+
+        if (
+          checkExistGale &&
+          checkExistGale.martingale_sequence === 1 &&
+          message.type === "gale"
+        ) {
+          message.martingale_sequence = 2;
+        }
+
+        setMessages((oldValue) => [...oldValue, message]);
+
+        if (message.type === "loss" || message.type === "win") {
+          removeCard();
+          updateCrashData();
+        }
+      }
+    },
+    [messages, removeCard, updateCrashData]
+  );
 
   useEffect(() => {
     if (
@@ -78,7 +132,16 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   }, [daily, entries, isAuthenticated, isLoading]);
 
   return (
-    <CrashGameContext.Provider value={{ entries, daily, updateCrashData, updateCrashDataWithLoading }}>
+    <CrashGameContext.Provider
+      value={{
+        entries,
+        daily,
+        updateCrashData,
+        updateCrashDataWithLoading,
+        listeningMessagesSocket,
+        messages,
+      }}
+    >
       {children}
     </CrashGameContext.Provider>
   );

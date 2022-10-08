@@ -1,65 +1,26 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { Container, Content, Title, Text, HelpTitle } from "./styles";
 import { motion } from "framer-motion";
-import { useSocket } from "../../../../hooks/SocketContext";
-import { ISocketGameCrash } from "../../../../types/ISocketGameCrash";
+// import { useSocket } from "../../../../hooks/SocketContext";
+// import { ISocketGameCrash } from "../../../../types/ISocketGameCrash";
 import { FiAlertTriangle } from "react-icons/fi";
 import { FormattedMessage } from "react-intl";
-// import { useBank } from "../../../../hooks/BankContext";
-// import { useLocale } from "../../../../hooks/LocaleContext";
+import { useBank } from "../../../../hooks/BankContext";
+import { useLocale } from "../../../../hooks/LocaleContext";
+import { useCrashGame } from "../../../../hooks/CrashGameContext";
 
 const CardCrash = () => {
-  const [messages, setMessages] = useState<ISocketGameCrash[]>(
-    [] as ISocketGameCrash[]
-  );
-  const { message } = useSocket();
-  // const { formatMessage: f } = useIntl();
-  // const { bank } = useBank();
-  // const { locale } = useLocale();
-
-  const removeCard = useCallback(() => {
-    setTimeout(() => {
-      setMessages([] as ISocketGameCrash[]);
-    }, 10000);
-  }, []);
+  const { messages } = useCrashGame();
+  const { bank } = useBank();
+  const { locale } = useLocale();
 
   useEffect(() => {
-    if (message && message.game === "crash") {
-      const data = message as ISocketGameCrash;
-
-      if (data.type === "cancel-analyzing") {
-        setMessages([] as ISocketGameCrash[]);
-      } else {
-        window.scrollTo(0, 0);
-
-        const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
-        alert.play();
-
-        const checkExistGale = messages.find(
-          (message) => message.type === "gale"
-        );
-
-        if (!checkExistGale && data.type === "gale") {
-          data.martingale_sequence = 1;
-        }
-
-        if (
-          checkExistGale &&
-          checkExistGale.martingale_sequence === 1 &&
-          data.type === "gale"
-        ) {
-          data.martingale_sequence = 2;
-        }
-
-        setMessages((oldValue) => [...oldValue, data]);
-
-        if (data.type === "loss" || data.type === "win") {
-          removeCard();
-        }
-      }
+    if (messages.length > 0) {
+      const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
+      alert.play();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [message]);
+  }, [messages]);
 
   return (
     <Container>
@@ -140,6 +101,18 @@ const CardCrash = () => {
                           <FormattedMessage id="entry-after" />:{" "}
                         </Text>
                         <Text className="font-bold">{item.last_result}x</Text>
+                        <Text className="px-2">
+                          <FormattedMessage id="currency" />{" "}
+                          {bank?.total
+                            ? new Intl.NumberFormat(
+                                locale === "en"
+                                  ? "en-US"
+                                  : locale === "pt"
+                                  ? "pt-BR"
+                                  : "es-ES"
+                              ).format(bank.total * 0.003)
+                            : "0"}
+                        </Text>
                       </div>
                       <div className="flex flex-row">
                         <Text className="text-white">
@@ -156,7 +129,23 @@ const CardCrash = () => {
                         <Text className="text-white">
                           <FormattedMessage id="enter-with" />:{" "}
                         </Text>
-                        <Text className="font-bold">R$ {item.amount}</Text>
+                        <Text className="font-bold">
+                          <FormattedMessage id="currency" />{" "}
+                          {bank?.total
+                            ? new Intl.NumberFormat(
+                                locale === "en"
+                                  ? "en-US"
+                                  : locale === "pt"
+                                  ? "pt-BR"
+                                  : "es-ES"
+                              ).format(
+                                messages[messages.length - 1]
+                                  .martingale_sequence === 1
+                                  ? bank.total * 0.01 * 2
+                                  : bank.total * 0.01 * 4
+                              )
+                            : "0"}
+                        </Text>
                       </div>
                       <div className="flex flex-row">
                         <Text className="text-white">

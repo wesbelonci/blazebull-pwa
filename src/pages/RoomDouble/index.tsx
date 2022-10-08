@@ -1,29 +1,30 @@
 import { useEffect, useRef, useCallback } from "react";
 import { RoomEntries } from "../../components/modules/Entries";
 import { DoubleEntries } from "../../components/modules/GameEntries/Double";
-// import { useLoading } from "../../hooks/LoadingContext";
 import { Layout } from "../../layouts";
 import { useWakeLock } from "react-screen-wake-lock";
 import { Container, Content, Blaze, Iframe, Divider } from "./styles";
-// import { FormattedMessage } from "react-intl";
 
 function RoomDouble() {
   const divRef = useRef<HTMLIFrameElement>(null);
-  const { released, request, release } = useWakeLock();
-
+  const { isSupported, released, request, release } = useWakeLock();
 
   const lockScreen = useCallback(() => {
-    if (released === false) {
-      release();
-    } else {
-      request();
+    if (isSupported) {
+      if (released === false) {
+        release();
+      } else {
+        request();
+      }
     }
-  }, [release, released, request]);
+  }, [release, isSupported, request, released]);
 
   useEffect(() => {
-    lockScreen();
+    if (!released) {
+      lockScreen();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [released]);
 
   return (
     <Layout>

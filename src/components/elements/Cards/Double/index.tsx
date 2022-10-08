@@ -1,85 +1,25 @@
-import { useState, useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import { Container, Content, Title, Text, HelpTitle } from "./styles";
 import { motion } from "framer-motion";
-import { useSocket } from "../../../../hooks/SocketContext";
-import { ISocketGameDouble } from "../../../../types/ISocketGameDouble";
 import { FiAlertTriangle } from "react-icons/fi";
 import { useBank } from "../../../../hooks/BankContext";
 import { useLocale } from "../../../../hooks/LocaleContext";
 import { FormattedMessage, useIntl } from "react-intl";
+import { useDoubleGame } from "../../../../hooks/DoubleGameContext";
 
 const CardDouble = () => {
-  const [messages, setMessages] = useState<ISocketGameDouble[]>(
-    [] as ISocketGameDouble[]
-  );
-  const [timerCardAnalyzing, setTimerCardAnalyzing] = useState(0);
-  const { message } = useSocket();
+  const { messages } = useDoubleGame();
   const { bank } = useBank();
   const { locale } = useLocale();
   const { formatMessage: f } = useIntl();
 
-  const removeCard = useCallback(() => {
-    setTimeout(() => {
-      setMessages([] as ISocketGameDouble[]);
-    }, 15000);
-  }, []);
-
   useEffect(() => {
-    if (message && message.game === "double") {
-      const data = message as ISocketGameDouble;
-
-      if (data.type === "cancel-analyzing") {
-        setMessages([] as ISocketGameDouble[]);
-      } else {
-        window.scrollTo(0, 0);
-
-        const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
-        alert.play();
-
-        const checkExistGale = messages.find(
-          (message) => message.type === "gale"
-        );
-
-        if (!checkExistGale && data.type === "gale") {
-          data.martingale_sequence = 1;
-        }
-
-        if (
-          checkExistGale &&
-          checkExistGale.martingale_sequence === 1 &&
-          data.type === "gale"
-        ) {
-          data.martingale_sequence = 2;
-        }
-
-        setMessages((oldValue) => [...oldValue, data]);
-
-        if (data.type === "loss" || data.type === "win") {
-          removeCard();
-        }
-      }
+    if (messages.length > 0) {
+      const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
+      alert.play();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [message]);
-
-  useEffect(() => {
-    const checkAnalyzing = messages.find(
-      (message) => message.type === "analyzing"
-    );
-
-    if (checkAnalyzing && messages.length === 1) {
-      if (timerCardAnalyzing < 30) {
-        setTimeout(() => {
-          setTimerCardAnalyzing(timerCardAnalyzing + 1);
-        }, 1000);
-      }
-
-      if (timerCardAnalyzing === 30) {
-        setTimerCardAnalyzing(0);
-        setMessages([] as ISocketGameDouble[]);
-      }
-    }
-  }, [messages, timerCardAnalyzing]);
+  }, [messages]);
 
   return (
     <Container>

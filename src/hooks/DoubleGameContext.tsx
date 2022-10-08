@@ -8,14 +8,17 @@ import React, {
 import api from "../services/api";
 import { IDailyResult } from "../types/IDailyResult";
 import { IDouble } from "../types/IDouble";
+import { ISocketGameDouble } from "../types/ISocketGameDouble";
 import { useAuth } from "./AuthContext";
 import { useLoading } from "./LoadingContext";
 
 interface DoubleGameContextData {
   entries: IDouble[] | null;
   daily: IDailyResult;
+  messages: ISocketGameDouble[];
   updateDoubleData(): void;
-  updateCrashDataWithLoading(): void
+  updateCrashDataWithLoading(): void;
+  listeningMessagesSocket(message: ISocketGameDouble): void;
 }
 
 interface SocketProviderProps {
@@ -29,6 +32,9 @@ export const DoubleGameContext = createContext<DoubleGameContextData>(
 export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
   children,
 }) => {
+  const [messages, setMessages] = useState<ISocketGameDouble[]>(
+    [] as ISocketGameDouble[]
+  );
   const [entries, setEntries] = useState<IDouble[] | null>(null);
   const [daily, setDaily] = useState<IDailyResult>({ win: 0, loss: 0 });
   const { isLoading, setLoadingVisible } = useLoading();
@@ -54,12 +60,56 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
 
   const updateDoubleData = useCallback(async () => {
     Promise.all([await getDailyWinAndLoss(), await getSignalsEntries()]);
-    
   }, [getDailyWinAndLoss, getSignalsEntries]);
 
   const updateCrashDataWithLoading = useCallback(async () => {
-    Promise.all([setLoadingVisible(true), await getDailyWinAndLoss(), await getSignalsEntries(), setLoadingVisible(false)]);
+    Promise.all([
+      setLoadingVisible(true),
+      await getDailyWinAndLoss(),
+      await getSignalsEntries(),
+      setLoadingVisible(false),
+    ]);
   }, [getDailyWinAndLoss, getSignalsEntries, setLoadingVisible]);
+
+  const removeCard = useCallback(() => {
+    setTimeout(() => {
+      setMessages([] as ISocketGameDouble[]);
+    }, 15000);
+  }, []);
+
+  const listeningMessagesSocket = useCallback(
+    (message: ISocketGameDouble) => {
+      if (message.type === "cancel-analyzing") {
+        setMessages([] as ISocketGameDouble[]);
+      } else {
+        window.scrollTo(0, 0);
+
+        const checkExistGale = messages.find(
+          (message) => message.type === "gale"
+        );
+
+        if (!checkExistGale && message.type === "gale") {
+          message.martingale_sequence = 1;
+        }
+
+        if (
+          checkExistGale &&
+          checkExistGale.martingale_sequence === 1 &&
+          message.type === "gale"
+        ) {
+          message.martingale_sequence = 2;
+        }
+
+        setMessages((oldValue) => [...oldValue, message]);
+
+        if (message.type === "loss" || message.type === "win") {
+          removeCard();
+          updateDoubleData();
+        }
+      }
+    },
+    [messages, removeCard, updateDoubleData]
+  );
 
   useEffect(() => {
     if (
@@ -78,7 +128,16 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
   }, [daily, entries, isAuthenticated, isLoading]);
 
   return (
-    <DoubleGameContext.Provider value={{ entries, daily, updateDoubleData, updateCrashDataWithLoading }}>
+    <DoubleGameContext.Provider
+      value={{
+        entries,
+        daily,
+        updateDoubleData,
+        updateCrashDataWithLoading,
+        listeningMessagesSocket,
+        messages,
+      }}
+    >
       {children}
     </DoubleGameContext.Provider>
   );

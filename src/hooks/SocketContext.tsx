@@ -2,7 +2,6 @@ import React, {
   createContext,
   useContext,
   useCallback,
-  useState,
   useEffect,
 } from "react";
 import { socket } from "../services/socket";
@@ -13,7 +12,7 @@ import { useDoubleGame } from "./DoubleGameContext";
 import { useLoading } from "./LoadingContext";
 
 interface SocketContextData {
-  message: ISocketMessage | null;
+  // message: ISocketMessage | null;
 }
 
 interface AuthProviderProps {
@@ -25,40 +24,37 @@ export const SocketContext = createContext<SocketContextData>(
 );
 
 export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [message, setMessage] = useState<ISocketMessage | null>(null);
-  const { updateCrashData } = useCrashGame();
-  const { updateDoubleData } = useDoubleGame();
+  const { listeningMessagesSocket: listeningCrash } = useCrashGame();
+  const { listeningMessagesSocket: listeningDouble } = useDoubleGame();
   const { isLoading } = useLoading();
   const { isAuthenticated } = useAuth();
 
   const webSocket = useCallback(() => {
-    socket.on("message", (msg: ISocketMessage) => {
-      if (!isLoading) {
-        setMessage(msg);
-        if (msg.type === "loss" || msg.type === "win") {
-          if (msg.game === "crash") {
-            updateCrashData();
-          }
-          if (msg.game === "double") {
-            updateDoubleData();
-          }
+    if (socket.connected) {
+      socket.on("message", (msg: ISocketMessage) => {
+        if (msg.game === "crash") {
+          // console.log("crash", msg);
+          listeningCrash(msg);
         }
-      }
-    });
-  }, [isLoading, updateCrashData, updateDoubleData]);
 
-  useEffect(() => {
-    if (message === null && isAuthenticated) {
-      webSocket();
+        if (msg.game === "double") {
+          // console.log("double", msg);
+          listeningDouble(msg);
+        }
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket, message, isAuthenticated]);
+  }, [isLoading, socket.connected]);
 
-  return (
-    <SocketContext.Provider value={{ message }}>
-      {children}
-    </SocketContext.Provider>
-  );
+  useEffect(() => {
+    if (isAuthenticated) {
+      webSocket();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, socket.connected]);
+
+  return <SocketContext.Provider value={{}}>{children}</SocketContext.Provider>;
 };
 
 export function useSocket(): SocketContextData {
