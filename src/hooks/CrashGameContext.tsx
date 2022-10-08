@@ -52,7 +52,9 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   const getSignalsEntries = useCallback(async (): Promise<void> => {
     try {
       const response = await api.get("/signals/history?game=crash");
-      setEntries(response.data);
+
+      const data = response.data as ICrash[];
+      setEntries(data.filter((item) => item?.win_loss !== undefined));
     } catch (err) {
       signOut();
     }

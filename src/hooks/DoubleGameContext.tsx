@@ -52,7 +52,9 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
   const getSignalsEntries = useCallback(async (): Promise<void> => {
     try {
       const response = await api.get("/signals/history?game=double");
-      setEntries(response.data);
+
+      const data = response.data as IDouble[];
+      setEntries(data.filter((item) => item?.win_loss !== undefined));
     } catch (err) {
       signOut();
     }
