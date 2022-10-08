@@ -63,14 +63,14 @@ const CardDouble = () => {
 
 
     if (checkAnalyzing && messages.length === 1) {
-      if(timerCardAnalyzing < 32) {
+      if(timerCardAnalyzing < 30) {
 
         setTimeout(() => {
           setTimerCardAnalyzing(timerCardAnalyzing+1)
         }, 1000)
       } 
 
-      if(timerCardAnalyzing === 32) {
+      if(timerCardAnalyzing === 30) {
         setTimerCardAnalyzing(0)
         setMessages([] as ISocketGameDouble[])
       }
