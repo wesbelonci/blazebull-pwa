@@ -11,6 +11,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 
 const CardDouble = () => {
   const [messages, setMessages] = useState<ISocketGameDouble[]>([] as ISocketGameDouble[]);
+  const [timerCardAnalyzing, setTimerCardAnalyzing] = useState(0);
   const [gale, setGale] = useState<number>(1);
   const { message } = useSocket();
   const { isLoading } = useLoading();
@@ -30,15 +31,9 @@ const CardDouble = () => {
     if (message && message.game === "double" && !isLoading) {
       window.scrollTo(0, 0);
 
-      const checkAnalyzing = messages.find(
-        (message) => message.type === "analyzing"
-      );
-
-      if (checkAnalyzing) {
-        setMessages([] as ISocketGameDouble[]);
-      }
-
       const alert = new Audio(audio);
+
+      alert.muted = true;
 
       alert.play();
 
@@ -58,7 +53,32 @@ const CardDouble = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [message]);
+  }, [message, isLoading]);
+
+
+  useEffect(() => {
+    console.log(timerCardAnalyzing, messages.length)
+    const checkAnalyzing = messages.find(
+      (message) => message.type === "analyzing"
+    );
+
+
+    if (checkAnalyzing && messages.length === 1) {
+      if(timerCardAnalyzing < 25) {
+
+        setTimeout(() => {
+          setTimerCardAnalyzing(timerCardAnalyzing+1)
+        }, 1000)
+      } 
+
+      if(timerCardAnalyzing === 25) {
+        setTimerCardAnalyzing(0)
+        setMessages([] as ISocketGameDouble[])
+      }
+    }
+
+
+  },[messages, timerCardAnalyzing])
 
   return (
     <Container>
