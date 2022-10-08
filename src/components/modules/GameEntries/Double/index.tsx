@@ -1,9 +1,6 @@
 import React from "react";
 import { Container, Header, Title, Table, Entry } from "./styles";
-// import { FiArrowUp, FiArrowDown } from "react-icons/fi";
-// import { CardCrash } from "../../elements/Cards/Crash";
 import { useDoubleGame } from "../../../../hooks/DoubleGameContext";
-// import { ICrash } from "../../../../types/ICrash";
 import { IDouble } from "../../../../types/IDouble";
 import { FormattedMessage } from "react-intl";
 

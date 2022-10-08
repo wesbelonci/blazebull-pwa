@@ -13,7 +13,15 @@
   "save": [{ "type": 0, "value": "Salvar" }],
   "is-required": [{ "type": 0, "value": "é obrigatório!" }],
   "value": [{ "type": 0, "value": "valor" }],
+
   "bet": [{ "type": 0, "value": "Apostar" }],
+  "entry-after": [{ "type": 0, "value": "Entrar Após" }],
+
+  "exit-in": [{ "type": 0, "value": "Saida em" }],
+  "enter-with": [{ "type": 0, "value": "Entre com" }],
+  "crash-in": [{ "type": 0, "value": "Crash em" }],
+  "exit": [{ "type": 0, "value": "Saída" }],
+
   "white": [{ "type": 0, "value": "Branco" }],
   "red": [{ "type": 0, "value": "Vermelho" }],
   "black": [{ "type": 0, "value": "Preto" }],

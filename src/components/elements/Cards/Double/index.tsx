@@ -4,21 +4,19 @@ import { motion } from "framer-motion";
 import { useSocket } from "../../../../hooks/SocketContext";
 import { ISocketGameDouble } from "../../../../types/ISocketGameDouble";
 import { FiAlertTriangle } from "react-icons/fi";
-import { useLoading } from "../../../../hooks/LoadingContext";
 import { useBank } from "../../../../hooks/BankContext";
 import { useLocale } from "../../../../hooks/LocaleContext";
 import { FormattedMessage, useIntl } from "react-intl";
 
 const CardDouble = () => {
-  const [messages, setMessages] = useState<ISocketGameDouble[]>([] as ISocketGameDouble[]);
+  const [messages, setMessages] = useState<ISocketGameDouble[]>(
+    [] as ISocketGameDouble[]
+  );
   const [timerCardAnalyzing, setTimerCardAnalyzing] = useState(0);
   const { message } = useSocket();
-  const { isLoading } = useLoading();
   const { bank } = useBank();
   const { locale } = useLocale();
   const { formatMessage: f } = useIntl();
-
-  const audio = "https://blazebull-pwa.vercel.app/sounds/alert.mp3";
 
   const removeCard = useCallback(() => {
     setTimeout(() => {
@@ -27,12 +25,12 @@ const CardDouble = () => {
   }, []);
 
   useEffect(() => {
-    if (message && message.game === "double" && !isLoading) {
+    if (message && message.game === "double") {
       const data = message as ISocketGameDouble;
 
       window.scrollTo(0, 0);
 
-      const alert = new Audio(audio);
+      const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
 
       // alert.muted = true;
 
@@ -42,11 +40,15 @@ const CardDouble = () => {
         (message) => message.type === "gale"
       );
 
-      if(!checkExistGale && data.type === 'gale') {
+      if (!checkExistGale && data.type === "gale") {
         data.martingale_sequence = 1;
       }
 
-      if(checkExistGale && checkExistGale.martingale_sequence === 1 && data.type === 'gale') {
+      if (
+        checkExistGale &&
+        checkExistGale.martingale_sequence === 1 &&
+        data.type === "gale"
+      ) {
         data.martingale_sequence = 2;
       }
 
@@ -57,31 +59,26 @@ const CardDouble = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [message, isLoading]);
-
+  }, [message]);
 
   useEffect(() => {
     const checkAnalyzing = messages.find(
       (message) => message.type === "analyzing"
     );
 
-
     if (checkAnalyzing && messages.length === 1) {
-      if(timerCardAnalyzing < 30) {
-
+      if (timerCardAnalyzing < 30) {
         setTimeout(() => {
-          setTimerCardAnalyzing(timerCardAnalyzing+1)
-        }, 1000)
-      } 
+          setTimerCardAnalyzing(timerCardAnalyzing + 1);
+        }, 1000);
+      }
 
-      if(timerCardAnalyzing === 30) {
-        setTimerCardAnalyzing(0)
-        setMessages([] as ISocketGameDouble[])
+      if (timerCardAnalyzing === 30) {
+        setTimerCardAnalyzing(0);
+        setMessages([] as ISocketGameDouble[]);
       }
     }
-
-
-  },[messages, timerCardAnalyzing])
+  }, [messages, timerCardAnalyzing]);
 
   return (
     <Container>
@@ -113,25 +110,16 @@ const CardDouble = () => {
                     </Title>
                   )}
 
-                  {item.type === 'gale' && (
-                     <Title type={item.type}>
-                     {item.martingale_sequence === 1 ? (
-                      <FormattedMessage id="make-martingale" />
-                     ): (
-                      <FormattedMessage id="make-martingale-again" />
-                     )}
-                   </Title>
-                  )}
-                  {/* {item.type === "gale" && gale === 0 && (
+                  {item.type === "gale" && (
                     <Title type={item.type}>
-                      <FormattedMessage id="make-martingale" />
+                      {item.martingale_sequence === 1 ? (
+                        <FormattedMessage id="make-martingale" />
+                      ) : (
+                        <FormattedMessage id="make-martingale-again" />
+                      )}
                     </Title>
                   )}
-                  {item.type === "gale" && gale === 1 && (
-                    <Title type={item.type}>
-                      <FormattedMessage id="make-martingale-again" />
-                    </Title>
-                  )} */}
+
                   {item.type === "win" && (
                     <Title type={item.type}>
                       <FormattedMessage id="win" />
@@ -253,7 +241,8 @@ const CardDouble = () => {
                                   ? "pt-BR"
                                   : "es-ES"
                               ).format(
-                                messages[messages.length - 1 ].martingale_sequence === 1
+                                messages[messages.length - 1]
+                                  .martingale_sequence === 1
                                   ? bank.total * 0.01 * 2
                                   : bank.total * 0.01 * 4
                               )
@@ -280,7 +269,8 @@ const CardDouble = () => {
                                   ? "pt-BR"
                                   : "es-ES"
                               ).format(
-                                messages[messages.length - 1].martingale_sequence === 2
+                                messages[messages.length - 1]
+                                  .martingale_sequence === 2
                                   ? bank.total * 0.003 * 2
                                   : bank.total * 0.003 * 4
                               )

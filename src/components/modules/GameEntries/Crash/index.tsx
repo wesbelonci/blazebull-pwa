@@ -1,9 +1,8 @@
 import React from "react";
-import { Container, Header, Title, Table, Entry } from "./styles";
-// import { FiArrowUp, FiArrowDown } from "react-icons/fi";
-// import { CardCrash } from "../../elements/Cards/Crash";
+import { Container, Header, Table, Entry, Title } from "./styles";
 import { useCrashGame } from "../../../../hooks/CrashGameContext";
 import { ICrash } from "../../../../types/ICrash";
+import { FormattedMessage } from "react-intl";
 
 const CrashEntries: React.FC = () => {
   const { entries } = useCrashGame();
@@ -11,16 +10,18 @@ const CrashEntries: React.FC = () => {
   return (
     <Container>
       <Header>
-        <Title>Resultados de Hoje</Title>
+        <Title>
+          <FormattedMessage id="todays-results" />
+        </Title>
       </Header>
       <Table className="min-w-full table-auto">
         <thead>
           <tr>
             <th className="py-3 text-center text-xs font-medium text-white tracking-wider">
-              Resultado
+              <FormattedMessage id="result" />
             </th>
             <th className="py-3 text-center text-xs font-medium text-white tracking-wider">
-              Saida
+              <FormattedMessage id="exit" />
             </th>
             <th className="py-3 text-center text-xs font-medium text-white tracking-wider">
               Crash
@@ -41,8 +42,6 @@ const CrashEntries: React.FC = () => {
               >
                 {crash.win_loss}
               </td>
-              {/* <td className="px-6 py-2 whitespace-nowrap text-white">
-              </td> */}
               <td className="px-6 py-2 whitespace-nowrap text-white">
                 {crash.crash_game_bet.toFixed(2)}x
               </td>

@@ -13,7 +13,15 @@
   "save": [{ "type": 0, "value": "Save" }],
   "is-required": [{ "type": 0, "value": "is Required" }],
   "value": [{ "type": 0, "value": "value" }],
+
   "bet": [{ "type": 0, "value": "Bet" }],
+  "entry-after": [{ "type": 0, "value": "Entry after" }],
+  "exit-in": [{ "type": 0, "value": "Exit in" }],
+  "enter-with": [{ "type": 0, "value": "Enter With" }],
+  "crash-in": [{ "type": 0, "value": "Crash in" }],
+
+  "exit": [{ "type": 0, "value": "Exit" }],
+
   "white": [{ "type": 0, "value": "White" }],
   "red": [{ "type": 0, "value": "Red" }],
   "black": [{ "type": 0, "value": "Black" }],

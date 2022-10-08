@@ -1,18 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
-import { Container, Content, Title, Text } from "./styles";
+import { Container, Content, Title, Text, HelpTitle } from "./styles";
 import { motion } from "framer-motion";
 import { useSocket } from "../../../../hooks/SocketContext";
 import { ISocketGameCrash } from "../../../../types/ISocketGameCrash";
-import { useLoading } from "../../../../hooks/LoadingContext";
+import { FiAlertTriangle } from "react-icons/fi";
+import { FormattedMessage } from "react-intl";
+// import { useBank } from "../../../../hooks/BankContext";
+// import { useLocale } from "../../../../hooks/LocaleContext";
 
 const CardCrash = () => {
   const [messages, setMessages] = useState<ISocketGameCrash[]>(
     [] as ISocketGameCrash[]
   );
-  const audio = "https://blazebull-pwa.vercel.app/sounds/alert.mp3";
-
   const { message } = useSocket();
-  const { isLoading } = useLoading();
+  // const { formatMessage: f } = useIntl();
+  // const { bank } = useBank();
+  // const { locale } = useLocale();
 
   const removeCard = useCallback(() => {
     const checkAnalyzing = messages.find(
@@ -33,21 +36,36 @@ const CardCrash = () => {
   }, [messages]);
 
   useEffect(() => {
-    if (message && message.game === "crash" && !isLoading) {
+    if (message && message.game === "crash") {
+      const data = message as ISocketGameCrash;
       window.scrollTo(0, 0);
 
-      const alert = new Audio(audio);
-      // alert.muted = true;
-
+      const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
       alert.play();
 
-      setMessages((oldValue) => [...oldValue, message]);
+      if (data.type === "cancel-analyzing") {
+        setMessages([] as ISocketGameCrash[]);
+      }
+
+      const checkExistGale = messages.find(
+        (message) => message.type === "gale"
+      );
+
+      if (!checkExistGale && data.type === "gale") {
+        data.martingale_sequence = 1;
+      }
 
       if (
-        message.type === "loss" ||
-        message.type === "win" ||
-        message.type === "analyzing"
+        checkExistGale &&
+        checkExistGale.martingale_sequence === 1 &&
+        data.type === "gale"
       ) {
+        data.martingale_sequence = 2;
+      }
+
+      setMessages((oldValue) => [...oldValue, data]);
+
+      if (data.type === "loss" || data.type === "win") {
         removeCard();
       }
     }
@@ -73,34 +91,71 @@ const CardCrash = () => {
                 position={messages.length - index}
               >
                 <div className="flex w-full h-5 items-center justify-between">
-                  <Title type={item.type}>
-                    {item.type === "analyzing" && "Possível entrada"}
-                    {item.type === "entry" && "Entrada confirmada!"}
-                    {item.type === "gale" && "Faça Martingale!"}
-                    {item.type === "win" && "Wiiiiiinnnnnnn!!!!"}
-                    {item.type === "loss" && "Loss!!!!"}
-                  </Title>
-                  <span className="text-white text-sm">{item.hour}</span>
+                  {item.type === "analyzing" && (
+                    <Title type={item.type}>
+                      <FormattedMessage id="possible-entry" />
+                    </Title>
+                  )}
+                  {item.type === "entry" && (
+                    <Title type={item.type}>
+                      <FormattedMessage id="confirmed-entry" />
+                    </Title>
+                  )}
+
+                  {item.type === "gale" && (
+                    <Title type={item.type}>
+                      {item.martingale_sequence === 1 ? (
+                        <FormattedMessage id="make-martingale" />
+                      ) : (
+                        <FormattedMessage id="make-martingale-again" />
+                      )}
+                    </Title>
+                  )}
+                  {item.type === "win" && (
+                    <Title type={item.type}>
+                      <FormattedMessage id="win" />
+                    </Title>
+                  )}
+                  {item.type === "loss" && (
+                    <Title type={item.type}>
+                      <FormattedMessage id="loss" />
+                    </Title>
+                  )}
+
+                  {/* @@@@@@@@@@@@@@@@@@ ANALYZING @@@@@@@@@@@@@@@@@@@@*/}
+                  {item.type === "analyzing" && (
+                    <HelpTitle type={item.type}>
+                      <FiAlertTriangle size={15} />
+                      <FormattedMessage id="wait-for-confirmation" />
+                    </HelpTitle>
+                  )}
                 </div>
                 <div className="flex w-full h-full flex-col mt-2">
                   {item.type === "analyzing" && (
-                    <>
-                      <div className="flex flex-row">
-                        <Text className="text-white">
-                          Fique atento, nossa inteligência artificial está
-                          analisando uma possível entrada.
-                        </Text>
-                      </div>
-                    </>
+                    <div
+                      className={`flex w-full flex-col ${
+                        messages.length > 1 ? "whitespace-nowrap" : "flex-wrap"
+                      }`}
+                    >
+                      <Text className="text-white">
+                        <FormattedMessage id="wait-for-confirmation-bot" />
+                      </Text>
+                    </div>
                   )}
+
+                  {/* @@@@@@@@@@@@@@@@@@ ENTRY @@@@@@@@@@@@@@@@@@@@*/}
                   {item.type === "entry" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Entrada após:</Text>
+                        <Text className="text-white">
+                          <FormattedMessage id="entry-after" />:{" "}
+                        </Text>
                         <Text className="font-bold">{item.last_result}x</Text>
                       </div>
                       <div className="flex flex-row">
-                        <Text className="text-white">Saida em:</Text>
+                        <Text className="text-white">
+                          <FormattedMessage id="exit-in" />:{" "}
+                        </Text>
                         <Text className="font-bold">{item.target}x</Text>
                       </div>
                     </>
@@ -109,11 +164,15 @@ const CardCrash = () => {
                   {item.type === "gale" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Entre com:</Text>
+                        <Text className="text-white">
+                          <FormattedMessage id="enter-with" />:{" "}
+                        </Text>
                         <Text className="font-bold">R$ {item.amount}</Text>
                       </div>
                       <div className="flex flex-row">
-                        <Text className="text-white">Saida em:</Text>
+                        <Text className="text-white">
+                          <FormattedMessage id="exit-in" />:{" "}
+                        </Text>
                         <Text className="font-bold">{item.target}x</Text>
                       </div>
                     </>
@@ -121,11 +180,15 @@ const CardCrash = () => {
                   {item.type === "win" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Entrada:</Text>
+                        <Text className="text-white">
+                          <FormattedMessage id="entry" />:{" "}
+                        </Text>
                         <Text className="font-bold">{item.target}x</Text>
                       </div>
                       <div className="flex flex-row">
-                        <Text className="text-white">Crash em:</Text>
+                        <Text className="text-white">
+                          <FormattedMessage id="crash-in" />:{" "}
+                        </Text>
                         <Text className="font-bold">{item.result}x</Text>
                       </div>
                     </>
@@ -133,11 +196,15 @@ const CardCrash = () => {
                   {item.type === "loss" && (
                     <>
                       <div className="flex flex-row">
-                        <Text className="text-white">Entrada:</Text>
+                        <Text className="text-white">
+                          <FormattedMessage id="entry" />:{" "}
+                        </Text>
                         <Text className="font-bold">{item.target}x</Text>
                       </div>
                       <div className="flex flex-row">
-                        <Text className="text-white">Crash em:</Text>
+                        <Text className="text-white">
+                          <FormattedMessage id="crash-in" />:{" "}
+                        </Text>
                         <Text className="font-bold">{item.result}x</Text>
                       </div>
                     </>
@@ -158,8 +225,7 @@ const CardCrash = () => {
               />
             </div>
             <span className="text-white text-sm -mt-14 text-center">
-              Aguarde! Nossa inteligência artificial está analisando as próximas
-              entradas!
+              <FormattedMessage id="wait-for-signal" />
             </span>
           </div>
         </div>
