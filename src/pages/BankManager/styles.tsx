@@ -61,14 +61,15 @@ export const BankEditButton = styled("button")(({ theme }) => ({
 }));
 
 export const Modal = styled("div")<{ show: boolean }>(({ theme, show }) => ({
-  display: "flex",
+  display: show ? 'flex' : 'none',
   backgroundColor: "rgba(0,0,0, 0.9)",
-  position: "fixed",
+  position: 'fixed',
   maxWidth: "428px",
-  width: "100%",
+  width: '100%',
   top: 0,
   left: 0,
   right: 0,
+  opacity: show ? 1: 0,
   margin: "0 auto",
   height: window.innerHeight,
   zIndex: show ? "99" : "-99",
