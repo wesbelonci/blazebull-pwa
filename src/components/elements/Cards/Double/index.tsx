@@ -6,17 +6,18 @@ import { useBank } from "../../../../hooks/BankContext";
 import { useLocale } from "../../../../hooks/LocaleContext";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useDoubleGame } from "../../../../hooks/DoubleGameContext";
+import { useAlert } from "../../../../hooks/AlertContext";
 
 const CardDouble = () => {
   const { messages } = useDoubleGame();
   const { bank } = useBank();
   const { locale } = useLocale();
+  const { playAudio } = useAlert();
   const { formatMessage: f } = useIntl();
 
   useEffect(() => {
     if (messages.length > 0) {
-      const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
-      alert.play();
+      playAudio();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);

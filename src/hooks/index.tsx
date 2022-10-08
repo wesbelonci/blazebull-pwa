@@ -8,6 +8,7 @@ import { CrashGameProvider } from "./CrashGameContext";
 import { DoubleGameProvider } from "./DoubleGameContext";
 import { LocaleProvider } from "./LocaleContext";
 import { BankProvider } from "./BankContext";
+import { AlertProvider } from "./AlertContext";
 
 interface AppProviderProps {
   children: any;
@@ -21,7 +22,9 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => (
           <CrashGameProvider>
             <DoubleGameProvider>
               <SocketProvider>
-                <BankProvider>{children}</BankProvider>
+                <BankProvider>
+                  <AlertProvider>{children}</AlertProvider>
+                </BankProvider>
               </SocketProvider>
             </DoubleGameProvider>
           </CrashGameProvider>

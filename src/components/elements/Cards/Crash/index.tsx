@@ -1,23 +1,22 @@
 import { useEffect } from "react";
 import { Container, Content, Title, Text, HelpTitle } from "./styles";
 import { motion } from "framer-motion";
-// import { useSocket } from "../../../../hooks/SocketContext";
-// import { ISocketGameCrash } from "../../../../types/ISocketGameCrash";
 import { FiAlertTriangle } from "react-icons/fi";
 import { FormattedMessage } from "react-intl";
 import { useBank } from "../../../../hooks/BankContext";
 import { useLocale } from "../../../../hooks/LocaleContext";
 import { useCrashGame } from "../../../../hooks/CrashGameContext";
+import { useAlert } from "../../../../hooks/AlertContext";
 
 const CardCrash = () => {
   const { messages } = useCrashGame();
   const { bank } = useBank();
   const { locale } = useLocale();
+  const { playAudio } = useAlert();
 
   useEffect(() => {
     if (messages.length > 0) {
-      const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
-      alert.play();
+      playAudio();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messages]);
