@@ -37,6 +37,7 @@ const CardCrash = () => {
       window.scrollTo(0, 0);
 
       const alert = new Audio(audio);
+      alert.muted = true;
 
       alert.play();
 
