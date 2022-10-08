@@ -108,7 +108,17 @@ const CardDouble = () => {
                       <FormattedMessage id="confirmed-entry" />
                     </Title>
                   )}
-                  {item.type === "gale" && gale === 0 && (
+
+                  {item.type === 'gale' && (
+                     <Title type={item.type}>
+                     {gale === 0 ? (
+                      <FormattedMessage id="make-martingale" />
+                     ): (
+                      <FormattedMessage id="make-martingale-again" />
+                     )}
+                   </Title>
+                  )}
+                  {/* {item.type === "gale" && gale === 0 && (
                     <Title type={item.type}>
                       <FormattedMessage id="make-martingale" />
                     </Title>
@@ -117,7 +127,7 @@ const CardDouble = () => {
                     <Title type={item.type}>
                       <FormattedMessage id="make-martingale-again" />
                     </Title>
-                  )}
+                  )} */}
                   {item.type === "win" && (
                     <Title type={item.type}>
                       <FormattedMessage id="win" />
