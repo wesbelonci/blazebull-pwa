@@ -7,6 +7,7 @@ type ISocketGameDouble = {
   target?: "red" | "black" | "white";
   result?: "red" | "black" | "white";
   amount?: number;
+  martingale_sequence?: number;
   hour?: string;
 };
 

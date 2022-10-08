@@ -12,7 +12,6 @@ import { FormattedMessage, useIntl } from "react-intl";
 const CardDouble = () => {
   const [messages, setMessages] = useState<ISocketGameDouble[]>([] as ISocketGameDouble[]);
   const [timerCardAnalyzing, setTimerCardAnalyzing] = useState(0);
-  const [gale, setGale] = useState<number>(1);
   const { message } = useSocket();
   const { isLoading } = useLoading();
   const { bank } = useBank();
@@ -29,6 +28,8 @@ const CardDouble = () => {
 
   useEffect(() => {
     if (message && message.game === "double" && !isLoading) {
+      const data = message as ISocketGameDouble;
+
       window.scrollTo(0, 0);
 
       const alert = new Audio(audio);
@@ -41,15 +42,18 @@ const CardDouble = () => {
         (message) => message.type === "gale"
       );
 
-      if (checkExistGale && message.type === "gale") {
-        setGale(1);
+      if(!checkExistGale && data.type === 'gale') {
+        data.martingale_sequence = 1;
       }
 
-      setMessages((oldValue) => [...oldValue, message]);
+      if(checkExistGale && checkExistGale.martingale_sequence === 1 && data.type === 'gale') {
+        data.martingale_sequence = 2;
+      }
 
-      if (message.type === "loss" || message.type === "win") {
+      setMessages((oldValue) => [...oldValue, data]);
+
+      if (data.type === "loss" || data.type === "win") {
         removeCard();
-        setGale(0);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -111,7 +115,7 @@ const CardDouble = () => {
 
                   {item.type === 'gale' && (
                      <Title type={item.type}>
-                     {gale === 0 ? (
+                     {item.martingale_sequence === 1 ? (
                       <FormattedMessage id="make-martingale" />
                      ): (
                       <FormattedMessage id="make-martingale-again" />
@@ -249,7 +253,7 @@ const CardDouble = () => {
                                   ? "pt-BR"
                                   : "es-ES"
                               ).format(
-                                gale === 0
+                                messages[messages.length - 1 ].martingale_sequence === 1
                                   ? bank.total * 0.01 * 2
                                   : bank.total * 0.01 * 4
                               )
@@ -276,7 +280,7 @@ const CardDouble = () => {
                                   ? "pt-BR"
                                   : "es-ES"
                               ).format(
-                                gale === 0
+                                messages[messages.length - 1].martingale_sequence === 2
                                   ? bank.total * 0.003 * 2
                                   : bank.total * 0.003 * 4
                               )
