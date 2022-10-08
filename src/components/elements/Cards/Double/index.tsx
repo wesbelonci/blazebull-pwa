@@ -33,7 +33,7 @@ const CardDouble = () => {
 
       const alert = new Audio(audio);
 
-      alert.muted = true;
+      // alert.muted = true;
 
       alert.play();
 
@@ -57,7 +57,6 @@ const CardDouble = () => {
 
 
   useEffect(() => {
-    console.log(timerCardAnalyzing, messages.length)
     const checkAnalyzing = messages.find(
       (message) => message.type === "analyzing"
     );
