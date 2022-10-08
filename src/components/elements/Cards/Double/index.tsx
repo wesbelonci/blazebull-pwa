@@ -10,9 +10,7 @@ import { useLocale } from "../../../../hooks/LocaleContext";
 import { FormattedMessage, useIntl } from "react-intl";
 
 const CardDouble = () => {
-  const [messages, setMessages] = useState<ISocketGameDouble[]>([
-    { type: "analyzing" },
-  ] as ISocketGameDouble[]);
+  const [messages, setMessages] = useState<ISocketGameDouble[]>([] as ISocketGameDouble[]);
   const [gale, setGale] = useState<number>(1);
   const { message } = useSocket();
   const { isLoading } = useLoading();

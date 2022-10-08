@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { RoomEntries } from "../../components/modules/Entries";
 import { CrashEntries } from "../../components/modules/GameEntries/Crash";
-import { useLoading } from "../../hooks/LoadingContext";
+// import { useLoading } from "../../hooks/LoadingContext";
 import { Layout } from "../../layouts";
 import { useWakeLock } from "react-screen-wake-lock";
 import { Container, Content, Blaze, Iframe, Divider } from "./styles";
@@ -10,7 +10,6 @@ function RoomCrash() {
   const divRef = useRef<HTMLIFrameElement>(null);
   const { released, request, release } = useWakeLock();
 
-  const { setLoadingVisible } = useLoading();
 
   const lockScreen = useCallback(() => {
     if (released === false) {
@@ -21,13 +20,7 @@ function RoomCrash() {
   }, [release, released, request]);
 
   useEffect(() => {
-    setLoadingVisible(true);
-
     lockScreen();
-
-    setTimeout(() => {
-      setLoadingVisible(false);
-    }, 2000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

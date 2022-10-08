@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/iframe-has-title */
-// import { useState } from "react";
-// import { useRef } from "react";
 import { useLoading } from "../../../hooks/LoadingContext";
 import { Container, Content, LogoBox, LoadingBox } from "./styles";
 import Stack from "@mui/material/Stack";

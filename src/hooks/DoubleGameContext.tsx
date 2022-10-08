@@ -15,6 +15,7 @@ interface DoubleGameContextData {
   entries: IDouble[] | null;
   daily: IDailyResult;
   updateDoubleData(): void;
+  updateCrashDataWithLoading(): void
 }
 
 interface SocketProviderProps {
@@ -30,7 +31,7 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
 }) => {
   const [entries, setEntries] = useState<IDouble[] | null>(null);
   const [daily, setDaily] = useState<IDailyResult>({ win: 0, loss: 0 });
-  const { isLoading } = useLoading();
+  const { isLoading, setLoadingVisible } = useLoading();
   const { signOut, isAuthenticated } = useAuth();
 
   const getDailyWinAndLoss = useCallback(async (): Promise<void> => {
@@ -53,7 +54,12 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
 
   const updateDoubleData = useCallback(async () => {
     Promise.all([await getDailyWinAndLoss(), await getSignalsEntries()]);
+    
   }, [getDailyWinAndLoss, getSignalsEntries]);
+
+  const updateCrashDataWithLoading = useCallback(async () => {
+    Promise.all([setLoadingVisible(true), await getDailyWinAndLoss(), await getSignalsEntries(), setLoadingVisible(false)]);
+  }, [getDailyWinAndLoss, getSignalsEntries, setLoadingVisible]);
 
   useEffect(() => {
     if (
@@ -72,7 +78,7 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
   }, [daily, entries, isAuthenticated, isLoading]);
 
   return (
-    <DoubleGameContext.Provider value={{ entries, daily, updateDoubleData }}>
+    <DoubleGameContext.Provider value={{ entries, daily, updateDoubleData, updateCrashDataWithLoading }}>
       {children}
     </DoubleGameContext.Provider>
   );

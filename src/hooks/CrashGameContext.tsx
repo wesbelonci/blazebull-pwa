@@ -15,6 +15,7 @@ interface CrashGameContextData {
   entries: ICrash[] | null;
   daily: IDailyResult;
   updateCrashData(): void;
+  updateCrashDataWithLoading(): void
 }
 
 interface AuthProviderProps {
@@ -52,10 +53,13 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   }, [signOut]);
 
   const updateCrashData = useCallback(async () => {
-    setLoadingVisible(true);
-    Promise.all([await getDailyWinAndLoss(), await getSignalsEntries()]);
-    setLoadingVisible(false);
+    Promise.all([setLoadingVisible(true), await getDailyWinAndLoss(), await getSignalsEntries(), setLoadingVisible(false)]);
+    
   }, [getDailyWinAndLoss, getSignalsEntries, setLoadingVisible]);
+
+  const updateCrashDataWithLoading = useCallback(async () => {
+    Promise.all([await getDailyWinAndLoss(), await getSignalsEntries()]);
+  }, [getDailyWinAndLoss, getSignalsEntries]);
 
   useEffect(() => {
     if (
@@ -64,7 +68,7 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
       isAuthenticated &&
       isLoading === false
     ) {
-      updateCrashData();
+      updateCrashDataWithLoading();
 
       // window.addEventListener("focus", () => {
       //   updateCrashData();
@@ -74,7 +78,7 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
   }, [daily, entries, isAuthenticated, isLoading]);
 
   return (
-    <CrashGameContext.Provider value={{ entries, daily, updateCrashData }}>
+    <CrashGameContext.Provider value={{ entries, daily, updateCrashData, updateCrashDataWithLoading }}>
       {children}
     </CrashGameContext.Provider>
   );
