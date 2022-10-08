@@ -28,34 +28,35 @@ const CardDouble = () => {
     if (message && message.game === "double") {
       const data = message as ISocketGameDouble;
 
-      window.scrollTo(0, 0);
+      if (data.type === "cancel-analyzing") {
+        setMessages([] as ISocketGameDouble[]);
+      } else {
+        window.scrollTo(0, 0);
 
-      const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
+        const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
+        alert.play();
 
-      // alert.muted = true;
+        const checkExistGale = messages.find(
+          (message) => message.type === "gale"
+        );
 
-      alert.play();
+        if (!checkExistGale && data.type === "gale") {
+          data.martingale_sequence = 1;
+        }
 
-      const checkExistGale = messages.find(
-        (message) => message.type === "gale"
-      );
+        if (
+          checkExistGale &&
+          checkExistGale.martingale_sequence === 1 &&
+          data.type === "gale"
+        ) {
+          data.martingale_sequence = 2;
+        }
 
-      if (!checkExistGale && data.type === "gale") {
-        data.martingale_sequence = 1;
-      }
+        setMessages((oldValue) => [...oldValue, data]);
 
-      if (
-        checkExistGale &&
-        checkExistGale.martingale_sequence === 1 &&
-        data.type === "gale"
-      ) {
-        data.martingale_sequence = 2;
-      }
-
-      setMessages((oldValue) => [...oldValue, data]);
-
-      if (data.type === "loss" || data.type === "win") {
-        removeCard();
+        if (data.type === "loss" || data.type === "win") {
+          removeCard();
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

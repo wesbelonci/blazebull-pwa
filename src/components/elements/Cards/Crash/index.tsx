@@ -18,55 +18,44 @@ const CardCrash = () => {
   // const { locale } = useLocale();
 
   const removeCard = useCallback(() => {
-    const checkAnalyzing = messages.find(
-      (message) => message.type === "analyzing"
-    );
-
-    if (messages.length === 1 && checkAnalyzing) {
-      setTimeout(() => {
-        setMessages((oldValues) => {
-          return oldValues.filter((value) => value.type !== "analyzing");
-        });
-      }, 15000);
-    } else {
-      setTimeout(() => {
-        setMessages([] as ISocketGameCrash[]);
-      }, 10000);
-    }
-  }, [messages]);
+    setTimeout(() => {
+      setMessages([] as ISocketGameCrash[]);
+    }, 10000);
+  }, []);
 
   useEffect(() => {
     if (message && message.game === "crash") {
       const data = message as ISocketGameCrash;
-      window.scrollTo(0, 0);
-
-      const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
-      alert.play();
 
       if (data.type === "cancel-analyzing") {
         setMessages([] as ISocketGameCrash[]);
-      }
+      } else {
+        window.scrollTo(0, 0);
 
-      const checkExistGale = messages.find(
-        (message) => message.type === "gale"
-      );
+        const alert = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
+        alert.play();
 
-      if (!checkExistGale && data.type === "gale") {
-        data.martingale_sequence = 1;
-      }
+        const checkExistGale = messages.find(
+          (message) => message.type === "gale"
+        );
 
-      if (
-        checkExistGale &&
-        checkExistGale.martingale_sequence === 1 &&
-        data.type === "gale"
-      ) {
-        data.martingale_sequence = 2;
-      }
+        if (!checkExistGale && data.type === "gale") {
+          data.martingale_sequence = 1;
+        }
 
-      setMessages((oldValue) => [...oldValue, data]);
+        if (
+          checkExistGale &&
+          checkExistGale.martingale_sequence === 1 &&
+          data.type === "gale"
+        ) {
+          data.martingale_sequence = 2;
+        }
 
-      if (data.type === "loss" || data.type === "win") {
-        removeCard();
+        setMessages((oldValue) => [...oldValue, data]);
+
+        if (data.type === "loss" || data.type === "win") {
+          removeCard();
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

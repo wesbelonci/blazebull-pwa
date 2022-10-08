@@ -19,7 +19,7 @@ export const Container = styled("div")(({ theme }) => ({
 }));
 
 type ContentProps = {
-  type: "analyzing" | "entry" | "win" | "loss" | "gale";
+  type: "analyzing" | "entry" | "win" | "loss" | "gale" | "cancel-analyzing";
   position: number;
 };
 
