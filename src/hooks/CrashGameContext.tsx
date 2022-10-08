@@ -79,34 +79,32 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
 
   const listeningMessagesSocket = useCallback(
     (message: ISocketGameCrash) => {
-      if (message.type === "cancel-analyzing") {
+      let data = message;
+
+      if (data.type === "cancel-analyzing") {
         setMessages([] as ISocketGameCrash[]);
-      }
-
-      const checkExistMessage = messages.find((item) => item.id === message.id);
-
-      if (!checkExistMessage && message.type !== "cancel-analyzing") {
+      } else {
         window.scrollTo(0, 0);
 
         const checkExistGale = messages.find(
           (message) => message.type === "gale"
         );
 
-        if (!checkExistGale && message.type === "gale") {
-          message.martingale_sequence = 1;
+        if (!checkExistGale && data.type === "gale") {
+          data.martingale_sequence = 1;
         }
 
         if (
           checkExistGale &&
           checkExistGale.martingale_sequence === 1 &&
-          message.type === "gale"
+          data.type === "gale"
         ) {
-          message.martingale_sequence = 2;
+          data.martingale_sequence = 2;
         }
 
-        setMessages((oldValue) => [...oldValue, message]);
+        setMessages((oldValue) => [...oldValue, data]);
 
-        if (message.type === "loss" || message.type === "win") {
+        if (data.type === "loss" || data.type === "win") {
           removeCard();
           updateCrashData();
         }

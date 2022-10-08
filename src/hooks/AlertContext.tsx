@@ -32,6 +32,7 @@ export const AlertProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (alert === null) {
       const sound = new Audio(`${process.env.REACT_APP_ALERT_SOUND}`);
       sound.muted = true;
+      sound.autoplay = true;
 
       setAlert(sound);
     }

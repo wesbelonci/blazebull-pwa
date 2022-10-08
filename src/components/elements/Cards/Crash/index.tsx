@@ -101,6 +101,7 @@ const CardCrash = () => {
                         </Text>
                         <Text className="font-bold">{item.last_result}x</Text>
                         <Text className="px-2">
+                          <FormattedMessage id="bet" />:{" "}
                           <FormattedMessage id="currency" />{" "}
                           {bank?.total
                             ? new Intl.NumberFormat(
@@ -128,7 +129,7 @@ const CardCrash = () => {
                         <Text className="text-white">
                           <FormattedMessage id="enter-with" />:{" "}
                         </Text>
-                        <Text className="font-bold">
+                        <Text className="font-bold px-2">
                           <FormattedMessage id="currency" />{" "}
                           {bank?.total
                             ? new Intl.NumberFormat(
