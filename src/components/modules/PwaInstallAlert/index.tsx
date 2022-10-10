@@ -28,7 +28,7 @@ const PwaInstallAlert: React.FC = () => {
     setVisible(false);
     promptToInstall();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [promptToInstall]);
 
   return (
     <Modal ref={modalRef} show={visible}>
