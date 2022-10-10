@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { AnimatedTransictionPage } from "../../../components/modules/AnimatedTransictonPage";
 import { FormattedMessage } from "react-intl";
 import { useLocale } from "../../../hooks/LocaleContext";
+import { PwaInstallAlert } from "../../../components/modules/PwaInstallAlert";
 
 function InitialAccessPage() {
   const { locale } = useLocale();
 
   return (
     <AnimatedTransictionPage>
+      <PwaInstallAlert />
       <Container>
         <Content>
           <div className="flex flex-wrap flex-col md:flex-row"></div>

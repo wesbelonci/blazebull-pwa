@@ -60,5 +60,13 @@
   "stop-when-profit": [{ "type": 0, "value": "Parar quando ganhar" }],
   "stop-when-lose": [{ "type": 0, "value": "Parar quando perder" }],
   "entries-recommendation": [{ "type": 0, "value": "Recomendação de entrada" }],
-  "from-the-bank": [{ "type": 0, "value": "da banca" }]
+  "from-the-bank": [{ "type": 0, "value": "da banca" }],
+
+  "install": [{ "type": 0, "value": "Instalar" }],
+  "instalation-pwa": [
+    {
+      "type": 0,
+      "value": "Faça a instalação do aplicativo Blaze Bulls para ter uma melhor experiência."
+    }
+  ]
 }

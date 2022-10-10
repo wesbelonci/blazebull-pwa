@@ -60,5 +60,13 @@
   "stop-when-profit": [{ "type": 0, "value": "Stop when profit" }],
   "stop-when-lose": [{ "type": 0, "value": "Stop when lose" }],
   "entries-recommendation": [{ "type": 0, "value": "Entries recommendation" }],
-  "from-the-bank": [{ "type": 0, "value": "from the bank" }]
+  "from-the-bank": [{ "type": 0, "value": "from the bank" }],
+
+  "install": [{ "type": 0, "value": "Install" }],
+  "instalation-pwa": [
+    {
+      "type": 0,
+      "value": "Please install the Blaze Bulls app for a better experience."
+    }
+  ]
 }

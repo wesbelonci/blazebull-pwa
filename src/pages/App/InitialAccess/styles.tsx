@@ -10,13 +10,14 @@ export const Container = styled("div")(({ theme }) => ({
   height: window.innerHeight,
   flexDirection: "column",
   overflow: "hidden",
+  position: "relative",
 }));
 
 export const Content = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette["background-dark"].main,
   padding: theme.spacing(1),
-  maxWidth: "390px",
+  maxWidth: "428px",
   width: "100%",
   height: "auto",
   flexDirection: "column",
@@ -31,7 +32,7 @@ export const Content = styled("div")(({ theme }) => ({
     backgroundPosition: "50% 50%",
     backgroundSize: "cover",
     position: "fixed",
-    maxWidth: "390px",
+    maxWidth: "428px",
     width: "100%",
     height: "90vh",
     opacity: 0.8,

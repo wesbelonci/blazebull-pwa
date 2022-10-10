@@ -5,6 +5,7 @@ import { Header } from "./header";
 import { Sidebar } from "./sidebar";
 import { Loading } from "../../components/elements/Loading";
 import { Container, App } from "./styles";
+// import { PwaInstallAlert } from "../../components/modules/PwaInstallAlert";
 
 const Layout: React.FC<PropsWithChildren<any>> = ({ children }) => {
   const [sidebarActive, setSidebarActive] = useState<boolean>(false);
@@ -16,6 +17,7 @@ const Layout: React.FC<PropsWithChildren<any>> = ({ children }) => {
   return (
     <AnimatedTransictionPage>
       <Loading />
+      {/* <PwaInstallAlert /> */}
       <Container>
         <App>
           <Header setActiveSidebar={handleActiveSidebarHeader} />

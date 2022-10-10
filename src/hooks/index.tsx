@@ -9,29 +9,32 @@ import { DoubleGameProvider } from "./DoubleGameContext";
 import { LocaleProvider } from "./LocaleContext";
 import { BankProvider } from "./BankContext";
 import { AlertProvider } from "./AlertContext";
+import { PwaInstallHomeScreenProvider } from "./PwaInstallHomeScreen";
 
 interface AppProviderProps {
   children: any;
 }
 
 const AppProvider: React.FC<AppProviderProps> = ({ children }) => (
-  <LocaleProvider>
-    <AuthProvider>
-      <ToastProvider>
-        <LoadingProvider>
-          <CrashGameProvider>
-            <DoubleGameProvider>
-              <SocketProvider>
-                <BankProvider>
-                  <AlertProvider>{children}</AlertProvider>
-                </BankProvider>
-              </SocketProvider>
-            </DoubleGameProvider>
-          </CrashGameProvider>
-        </LoadingProvider>
-      </ToastProvider>
-    </AuthProvider>
-  </LocaleProvider>
+  <PwaInstallHomeScreenProvider>
+    <LocaleProvider>
+      <AuthProvider>
+        <ToastProvider>
+          <LoadingProvider>
+            <CrashGameProvider>
+              <DoubleGameProvider>
+                <SocketProvider>
+                  <BankProvider>
+                    <AlertProvider>{children}</AlertProvider>
+                  </BankProvider>
+                </SocketProvider>
+              </DoubleGameProvider>
+            </CrashGameProvider>
+          </LoadingProvider>
+        </ToastProvider>
+      </AuthProvider>
+    </LocaleProvider>
+  </PwaInstallHomeScreenProvider>
 );
 
 export default AppProvider;

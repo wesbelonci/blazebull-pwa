@@ -22,7 +22,7 @@ export const Content = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette["background-dark"].main,
   paddingLeft: theme.spacing(2),
   paddingRight: theme.spacing(2),
-  maxWidth: "390px",
+  maxWidth: "428px",
   width: "100%",
   height: "auto",
   flexDirection: "column",
@@ -39,7 +39,7 @@ export const Content = styled("div")(({ theme }) => ({
     // backgroundSize: "content",
     backgroundSize: "cover",
     position: "fixed",
-    maxWidth: "390px",
+    maxWidth: "428px",
     width: "100%",
     // height: "100vh",
     height: window.innerHeight,
@@ -55,7 +55,7 @@ export const Content = styled("div")(({ theme }) => ({
 export const LogoBox = styled("div")(({ theme }) => ({
   display: "flex",
   padding: theme.spacing(1),
-  maxWidth: "390px",
+  maxWidth: "428px",
   // width: "max(80px, 100px)",
   width: "100%",
   // marginTop: "10%",
@@ -74,7 +74,7 @@ export const LogoBox = styled("div")(({ theme }) => ({
 
 export const FormBox = styled("form")(({ theme }) => ({
   display: "flex",
-  maxWidth: "390px",
+  maxWidth: "428px",
   width: "100%",
   marginTop: 30,
   height: 110,
