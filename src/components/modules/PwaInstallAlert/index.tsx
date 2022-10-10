@@ -26,6 +26,8 @@ const PwaInstallAlert: React.FC = () => {
     }
   }, [promptable, isInstalled, OpenAndCloseModal]);
 
+  console.log(promptable, isInstalled);
+
   const installApp = useCallback(() => {
     setVisible(!visible);
     promptToInstall();
