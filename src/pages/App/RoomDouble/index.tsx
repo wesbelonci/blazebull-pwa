@@ -1,13 +1,12 @@
-import { useCallback, useEffect, useRef } from "react";
-import { RoomEntries } from "../../components/modules/Entries";
-import { CrashEntries } from "../../components/modules/GameEntries/Crash";
-import { Layout } from "../../layouts";
+import { useEffect, useRef, useCallback } from "react";
+import { RoomEntries } from "../../../components/modules/Entries";
+import { DoubleEntries } from "../../../components/modules/GameEntries/Double";
+import { Layout } from "../../../layouts/app";
 import { useWakeLock } from "react-screen-wake-lock";
 import { Container, Content, Blaze, Iframe, Divider } from "./styles";
 
-function RoomCrash() {
+function RoomDouble() {
   const divRef = useRef<HTMLIFrameElement>(null);
-
   const { isSupported, released, request, release } = useWakeLock();
 
   const lockScreen = useCallback(() => {
@@ -31,22 +30,22 @@ function RoomCrash() {
     <Layout>
       <Container>
         <Content>
-          <RoomEntries room="crash" />
+          <RoomEntries room="double" />
           <Blaze id="blazeFrame">
             <Iframe
               ref={divRef}
               id="testeIframe"
               scrolling="no"
-              src="https://blaze.com/en/games/crash"
+              src="https://blaze.com/en/games/double"
               frameBorder="0"
             />
           </Blaze>
           <Divider />
-          <CrashEntries />
+          <DoubleEntries />
         </Content>
       </Container>
     </Layout>
   );
 }
 
-export { RoomCrash };
+export { RoomDouble };

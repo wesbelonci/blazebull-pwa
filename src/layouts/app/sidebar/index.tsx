@@ -15,9 +15,9 @@ import {
   Icon,
 } from "./styles";
 import { FiChevronLeft, FiLogOut } from "react-icons/fi";
-import { useAuth } from "../../hooks/AuthContext";
+import { useAuth } from "../../../hooks/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { useLocale } from "../../hooks/LocaleContext";
+import { useLocale } from "../../../hooks/LocaleContext";
 
 type SidebarProps = {
   active: boolean;

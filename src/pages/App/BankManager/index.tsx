@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useRef } from "react";
-import { Layout } from "../../layouts";
+import { Layout } from "../../../layouts/app";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -19,10 +19,10 @@ import {
   ManagerContainer,
 } from "./styles";
 import { FiEdit } from "react-icons/fi";
-import { InputMask } from "../../components/elements/InputMask";
-import { useLocale } from "../../hooks/LocaleContext";
-import { useBank } from "../../hooks/BankContext";
-import { useToast } from "../../hooks/ToastContext";
+import { InputMask } from "../../../components/elements/InputMask";
+import { useLocale } from "../../../hooks/LocaleContext";
+import { useBank } from "../../../hooks/BankContext";
+import { useToast } from "../../../hooks/ToastContext";
 
 function BankManagerPage() {
   const [modalIsVisible, setModalIsVisible] = useState(false);

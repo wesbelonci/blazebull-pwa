@@ -1,17 +1,18 @@
 import React from "react";
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { AuthenticationPage } from "../pages/Authentication";
-import { HomePage } from "../pages/Home";
-import { InitialAccessPage } from "../pages/InitialAccess";
+import { AuthenticationPage } from "../pages/App/Authentication";
+import { HomePage } from "../pages/App/Home";
+import { InitialAccessPage } from "../pages/App/InitialAccess";
 import ProtectedRoute from "./ProtectedRoute";
 import { AnimatePresence } from "framer-motion";
-import { RoomCrash } from "../pages/RoomCrash";
-import { RoomDouble } from "../pages/RoomDouble";
-import { Classroom } from "../pages/Classroom";
-import { Settings } from "../pages/Settings";
+import { RoomCrash } from "../pages/App/RoomCrash";
+import { RoomDouble } from "../pages/App/RoomDouble";
+import { Classroom } from "../pages/App/Classroom";
+import { Settings } from "../pages/App/Settings";
 import { useAuth } from "../hooks/AuthContext";
 import { getLocale, suportedLanguages } from "../language";
-import { BankManagerPage } from "../pages/BankManager";
+import { BankManagerPage } from "../pages/App/BankManager";
+// import { Admin } from "../pages/Admin/Home";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -41,6 +42,7 @@ const App: React.FC = () => {
             <Route path="classroom" element={<Classroom />} />
             <Route path="bank-manager" element={<BankManagerPage />} />
             <Route path="settings" element={<Settings />} />
+            {/* <Route path="admin" element={<Admin />} /> */}
           </Route>
           <Route path="authentication" element={<AuthenticationPage />} />
           <Route path="*" element={<p>There's nothing here: 404!</p>} />

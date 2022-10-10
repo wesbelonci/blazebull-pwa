@@ -1,4 +1,4 @@
-import { Layout } from "../../layouts";
+import { Layout } from "../../../layouts/app";
 import {
   Container,
   Content,
@@ -16,9 +16,9 @@ import {
 } from "./styles";
 import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { useCrashGame } from "../../hooks/CrashGameContext";
-import { useDoubleGame } from "../../hooks/DoubleGameContext";
-import { useLocale } from "../../hooks/LocaleContext";
+import { useCrashGame } from "../../../hooks/CrashGameContext";
+import { useDoubleGame } from "../../../hooks/DoubleGameContext";
+import { useLocale } from "../../../hooks/LocaleContext";
 // import { FormattedMessage, useIntl } from "react-intl";
 
 function HomePage() {

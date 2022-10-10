@@ -1,15 +1,13 @@
 import React, { PropsWithChildren, useCallback, useState } from "react";
-import { AnimatedTransictionPage } from "../components/modules/AnimatedTransictonPage";
+import { AnimatedTransictionPage } from "../../components/modules/AnimatedTransictonPage";
 import { Content } from "./content";
 import { Header } from "./header";
 import { Sidebar } from "./sidebar";
-import { Loading } from "../components/elements/Loading";
+import { Loading } from "../../components/elements/Loading";
 import { Container, App } from "./styles";
-// import { useLoading } from "../hooks/LoadingContext";
 
 const Layout: React.FC<PropsWithChildren<any>> = ({ children }) => {
   const [sidebarActive, setSidebarActive] = useState<boolean>(false);
-  // const { isLoading } = useLoading();
 
   const handleActiveSidebarHeader = useCallback(() => {
     setSidebarActive(!sidebarActive);

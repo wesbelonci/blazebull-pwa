@@ -1,8 +1,8 @@
 import { Container, Button, Content, NeedHelp } from "./styles";
 import { Link } from "react-router-dom";
-import { AnimatedTransictionPage } from "../../components/modules/AnimatedTransictonPage";
+import { AnimatedTransictionPage } from "../../../components/modules/AnimatedTransictonPage";
 import { FormattedMessage } from "react-intl";
-import { useLocale } from "../../hooks/LocaleContext";
+import { useLocale } from "../../../hooks/LocaleContext";
 
 function InitialAccessPage() {
   const { locale } = useLocale();

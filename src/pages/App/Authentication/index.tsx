@@ -15,15 +15,15 @@ import {
 import { FiUser, FiLock } from "react-icons/fi";
 import * as React from "react";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { AnimatedTransictionPage } from "../../components/modules/AnimatedTransictonPage";
+import { AnimatedTransictionPage } from "../../../components/modules/AnimatedTransictonPage";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useToast } from "../../hooks/ToastContext";
-import { useAuth } from "../../hooks/AuthContext";
+import { useToast } from "../../../hooks/ToastContext";
+import { useAuth } from "../../../hooks/AuthContext";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
-import { useLocale } from "../../hooks/LocaleContext";
+import { useLocale } from "../../../hooks/LocaleContext";
 
 const schema = yup
   .object({
