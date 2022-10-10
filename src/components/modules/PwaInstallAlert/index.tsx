@@ -9,19 +9,10 @@ const PwaInstallAlert: React.FC = () => {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [visible, setVisible] = React.useState(false);
 
-  // const OpenAndCloseModal = React.useCallback(() => {
-  //   setVisible(!visible);
-
-  //   modalRef.current?.addEventListener("click", (event) => {
-  //     if (event.target === modalRef.current) {
-  //       event.preventDefault();
-  //       setVisible(false);
-  //     }
-  //   });
-  // }, [visible]);
+  console.log(promptable);
 
   React.useEffect(() => {
-    if (!!promptable && !isInstalled) {
+    if (promptable && !isInstalled) {
       setVisible(true);
 
       modalRef.current?.addEventListener("click", (event) => {
