@@ -9,30 +9,35 @@ const PwaInstallAlert: React.FC = () => {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [visible, setVisible] = React.useState(false);
 
-  const OpenAndCloseModal = React.useCallback(() => {
-    setVisible(!visible);
+  // const OpenAndCloseModal = React.useCallback(() => {
+  //   setVisible(!visible);
 
-    modalRef.current?.addEventListener("click", (event) => {
-      if (event.target === modalRef.current) {
-        event.preventDefault();
-        setVisible(false);
-      }
-    });
-  }, [visible]);
+  //   modalRef.current?.addEventListener("click", (event) => {
+  //     if (event.target === modalRef.current) {
+  //       event.preventDefault();
+  //       setVisible(false);
+  //     }
+  //   });
+  // }, [visible]);
 
   React.useEffect(() => {
     if (!!promptable && !isInstalled) {
-      OpenAndCloseModal();
-    }
-  }, [promptable, isInstalled, OpenAndCloseModal]);
+      setVisible(true);
 
-  console.log(promptable, isInstalled);
+      modalRef.current?.addEventListener("click", (event) => {
+        if (event.target === modalRef.current) {
+          event.preventDefault();
+          setVisible(false);
+        }
+      });
+    }
+  }, [promptable, isInstalled]);
 
   const installApp = useCallback(() => {
-    setVisible(!visible);
+    setVisible(false);
     promptToInstall();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [visible, promptToInstall]);
+  }, []);
 
   return (
     <Modal ref={modalRef} show={visible}>
