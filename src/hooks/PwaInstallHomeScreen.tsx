@@ -32,7 +32,6 @@ export const PwaInstallHomeScreenProvider: React.FC<
   const [isInstalled, setIsInstalled] = React.useState<boolean>(false);
 
   const promptToInstall = useCallback(() => {
-    console.log(promptable);
     if (promptable) {
       return promptable.prompt();
     }

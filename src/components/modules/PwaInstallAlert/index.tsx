@@ -9,8 +9,6 @@ const PwaInstallAlert: React.FC = () => {
   const modalRef = React.useRef<HTMLDivElement>(null);
   const [visible, setVisible] = React.useState(false);
 
-  console.log(promptable);
-
   React.useEffect(() => {
     if (promptable && !isInstalled) {
       setVisible(true);
