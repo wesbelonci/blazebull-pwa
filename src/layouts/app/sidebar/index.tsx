@@ -66,15 +66,15 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
       </UserInfo>
       <BetsInfo>
         <BetInfoDetail>
-          <span className="text-white">5364</span>
+          <span className="text-white">0</span>
           <span className="font-bold text-white">Entradas</span>
         </BetInfoDetail>
         <BetInfoDetail>
-          <span className="text-white">128</span>
+          <span className="text-white">0</span>
           <span className="font-bold text-white">Perdas</span>
         </BetInfoDetail>
         <BetInfoDetail>
-          <span className="text-white">5236</span>
+          <span className="text-white">0</span>
           <span className="font-bold text-white">Ganhos</span>
         </BetInfoDetail>
       </BetsInfo>
