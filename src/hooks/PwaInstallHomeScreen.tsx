@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useCallback, useContext } from "react";
 
 interface PwaInstallHomeScreenContextData {
   promptable: IBeforeInstallPromptEvent | null;
@@ -31,16 +31,18 @@ export const PwaInstallHomeScreenProvider: React.FC<
     React.useState<IBeforeInstallPromptEvent | null>(null);
   const [isInstalled, setIsInstalled] = React.useState<boolean>(false);
 
-  const promptToInstall = () => {
+  const promptToInstall = useCallback(() => {
+    console.log(promptable);
     if (promptable) {
       return promptable.prompt();
     }
+
     return Promise.reject(
       new Error(
         'Tried installing before browser sent "beforeinstallprompt" event'
       )
     );
-  };
+  }, [promptable]);
 
   React.useEffect(() => {
     const ready = (e: IBeforeInstallPromptEvent) => {
