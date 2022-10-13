@@ -3,8 +3,10 @@ import React, {
   useContext,
   useCallback,
   useEffect,
+  useState,
 } from "react";
-import { socket } from "../services/socket";
+import { Socket, io } from "socket.io-client";
+// import { socket } from "../services/socket";
 import { ISocketMessage } from "../types/ISocketMessage";
 import { useAuth } from "./AuthContext";
 import { useCrashGame } from "./CrashGameContext";
@@ -29,30 +31,58 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { isLoading } = useLoading();
   const { isAuthenticated } = useAuth();
 
+  const [socket, setSocket] = useState<Socket | null>(null);
+
   const webSocket = useCallback(() => {
-    if (socket.connected) {
+    if (socket) {
       socket.on("message", (msg: ISocketMessage) => {
         if (msg.game === "crash") {
-          // console.log("crash", msg);
           listeningCrash(msg);
         }
 
         if (msg.game === "double") {
-          // console.log("double", msg);
           listeningDouble(msg);
         }
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading, socket.connected]);
+  }, [isLoading]);
 
   useEffect(() => {
     if (isAuthenticated) {
-      webSocket();
-    }
+      if (!socket) {
+        const connection = io(process.env.REACT_APP_API_URL as string, {
+          reconnectionDelayMax: 10000,
+          autoConnect: false,
+        });
 
+        setSocket(connection);
+      }
+      if (socket && !socket.active) {
+        socket.connect();
+      }
+    } else {
+      socket?.disconnect();
+    }
+  }, [isAuthenticated, socket]);
+
+  useEffect(() => {
+    if (socket && socket.active) {
+      socket.on("connect", () => {
+        webSocket();
+      });
+
+      socket.on("disconnect", () => {
+        setSocket(null);
+      });
+
+      return () => {
+        socket.off("connect");
+        socket.off("disconnect");
+      };
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated, socket.connected]);
+  }, [webSocket, socket]);
 
   return <SocketContext.Provider value={{}}>{children}</SocketContext.Provider>;
 };

@@ -13,12 +13,16 @@ import {
   Rate,
   DividerStats,
   Live,
+  Course,
+  CourseHeader,
+  KeepWatching,
 } from "./styles";
-import { FiArrowUp, FiArrowDown } from "react-icons/fi";
+import { FiArrowUp, FiArrowDown, FiChevronRight } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useCrashGame } from "../../../hooks/CrashGameContext";
 import { useDoubleGame } from "../../../hooks/DoubleGameContext";
 import { useLocale } from "../../../hooks/LocaleContext";
+import Vimeo from "@u-wave/react-vimeo";
 // import { FormattedMessage, useIntl } from "react-intl";
 
 function HomePage() {
@@ -31,8 +35,30 @@ function HomePage() {
     <Layout>
       <Container>
         <Content>
+          <Course>
+            <CourseHeader>
+              <h2>Assista as aulas</h2>
+              <div
+                className="flex flex-row w-auto items-center cursor-pointer"
+                onClick={() => navigate(`/${locale}/classroom`)}
+              >
+                <span>Sala de aula</span>
+                <FiChevronRight size={20} />
+              </div>
+            </CourseHeader>
+            <KeepWatching>
+              <Vimeo
+                video="https://player.vimeo.com/video/745133849?h=832ca16084"
+                controls={true}
+                // responsive
+                showByline
+                showTitle
+                showPortrait
+              />
+            </KeepWatching>
+          </Course>
           <Rooms>
-            <span>Salas de sinais</span>
+            <h2>Salas de sinais</h2>
             <Crash onClick={() => navigate(`/${locale}/room-crash`)}>
               <Live>
                 <span>Ao vivo</span>

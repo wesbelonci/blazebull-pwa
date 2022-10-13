@@ -16,8 +16,8 @@ export const Container = styled("div")(({ theme }) => ({
 export const Content = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette["background-dark"].main,
-  paddingLeft: theme.spacing(0.8),
-  paddingRight: theme.spacing(0.8),
+  paddingLeft: theme.spacing(1.8),
+  paddingRight: theme.spacing(1.8),
   width: "100%",
   height: "auto",
   flexDirection: "column",
@@ -61,15 +61,15 @@ export const BankEditButton = styled("button")(({ theme }) => ({
 }));
 
 export const Modal = styled("div")<{ show: boolean }>(({ theme, show }) => ({
-  display: show ? 'flex' : 'none',
+  display: show ? "flex" : "none",
   backgroundColor: "rgba(0,0,0, 0.9)",
-  position: 'fixed',
+  position: "fixed",
   maxWidth: "428px",
-  width: '100%',
+  width: "100%",
   top: 0,
   left: 0,
   right: 0,
-  opacity: show ? 1: 0,
+  opacity: show ? 1 : 0,
   margin: "0 auto",
   height: window.innerHeight,
   zIndex: show ? "99" : "-99",

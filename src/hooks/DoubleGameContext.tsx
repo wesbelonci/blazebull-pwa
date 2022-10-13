@@ -122,7 +122,7 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
       isAuthenticated &&
       isLoading === false
     ) {
-      updateDoubleData();
+      updateCrashDataWithLoading();
 
       // window.addEventListener("focus", () => {
       //   updateDoubleData();

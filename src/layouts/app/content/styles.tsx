@@ -9,7 +9,7 @@ export const Container = styled("div")(({ theme }) => ({
   overflowX: "hidden",
   overflowY: "hidden",
   position: "relative",
-
-  paddingLeft: theme.spacing(1),
-  paddingRight: theme.spacing(1),
+  marginTop: 70,
+  // paddingLeft: theme.spacing(1),
+  // paddingRight: theme.spacing(1),
 }));

@@ -6,8 +6,24 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ setActiveSidebar }) => {
+  const [boxShadow, setBoxShadow] = React.useState(false);
+
+  const handleMenuType = React.useCallback((height: number) => {
+    if (height >= 60) {
+      setBoxShadow(true);
+    } else {
+      setBoxShadow(false);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    document.addEventListener("scroll", () => {
+      handleMenuType(window.pageYOffset);
+    });
+  }, [handleMenuType]);
+
   return (
-    <Container>
+    <Container shadow={boxShadow}>
       <Navigation>
         <Logo>
           <img src="../assets/images/logo-white.svg" alt="Logo BazeBulls" />

@@ -14,8 +14,8 @@ export const Container = styled("div")(({ theme }) => ({
 export const Content = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette["background-dark"].main,
-  paddingLeft: theme.spacing(0.8),
-  paddingRight: theme.spacing(0.8),
+  // paddingLeft: theme.spacing(1.8),
+  // paddingRight: theme.spacing(1.8),
   //maxWidth: "390px",
   width: "100%",
   height: "auto",
@@ -25,28 +25,6 @@ export const Content = styled("div")(({ theme }) => ({
   overflowX: "hidden",
   overflowY: "hidden",
   // resize: "vertical",
-
-  // "&::before": {
-  //   content: '""',
-  //   // backgroundColor: theme.palette["background-dark"].main,
-  //   backgroundImage:
-  //   backgroundRepeat: "no-repeat",
-  //   opacity: 0.2,
-  //   backgroundPosition: "50% 50%",
-  //   // backgroundSize: "content",
-  //   backgroundSize: "cover",
-  //   position: "fixed",
-  //   maxWidth: "390px",
-  //   width: "100%",
-  //   // height: "100vh",
-  //   height: window.innerHeight,
-  //   top: -50,
-  //   left: 0,
-  //   right: 0,
-  //   bottom: 0,
-  //   margin: "0 auto",
-  //   // zIndex: -9,
-  // },
 }));
 
 export const Blaze = styled("div")(({ theme }) => ({
@@ -59,12 +37,16 @@ export const Blaze = styled("div")(({ theme }) => ({
 }));
 
 export const Rooms = styled("div")(({ theme }) => ({
-  display: "div",
+  display: "flex",
   width: "100%",
   height: "auto",
+  flexDirection: "column",
   justifyContent: "flex-start",
+  // justifyContent: "flex-start",
+  paddingLeft: theme.spacing(1.8),
+  paddingRight: theme.spacing(1.8),
 
-  span: {
+  h2: {
     fontSize: 20,
     color: theme.palette["white"].main,
     marginBottom: 10,
@@ -240,5 +222,58 @@ export const Live = styled("div")(({ theme }) => ({
     color: theme.palette["white"].main,
     paddingLeft: theme.spacing(0.2),
     paddingRight: theme.spacing(0.2),
+  },
+}));
+
+export const Course = styled("div")(({ theme }) => ({
+  display: "flex",
+  width: "100%",
+  alignItems: "center",
+  flexDirection: "column",
+  marginBottom: 15,
+}));
+
+export const CourseHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  width: "100%",
+  justifyContent: "space-between",
+  alignItems: "center",
+  flexDirection: "row",
+  marginBottom: 10,
+  paddingLeft: theme.spacing(1.8),
+  paddingRight: theme.spacing(1.8),
+
+  h2: {
+    fontSize: 20,
+    color: theme.palette["white"].main,
+    // marginBottom: 10,
+  },
+
+  span: {
+    fontWeight: 700,
+    fontSize: 14,
+    color: theme.palette["lightish-blue"].main,
+  },
+
+  svg: {
+    color: theme.palette["lightish-blue"].main,
+  },
+}));
+
+export const KeepWatching = styled("div")(({ theme }) => ({
+  display: "block",
+  padding: "56.25% 0 0 0",
+  position: "relative",
+  zIndex: 100,
+  width: "100%",
+
+  iframe: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    width: "100%",
+    height: "100%",
+    zIndex: 999,
   },
 }));

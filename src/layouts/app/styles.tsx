@@ -12,6 +12,7 @@ export const Container = styled("div")(({ theme }) => ({
   flexDirection: "column",
   overflow: "hidden",
   margin: "0 auto",
+  position: "relative",
 }));
 
 export const App = styled("div")(({ theme }) => ({
@@ -21,6 +22,7 @@ export const App = styled("div")(({ theme }) => ({
   width: "100%",
   height: "100%",
   overflow: "hidden",
+  // position: 'relative',
 
   display: "grid",
   position: "relative",
