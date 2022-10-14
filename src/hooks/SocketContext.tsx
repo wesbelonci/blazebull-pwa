@@ -34,6 +34,7 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
 
   const webSocket = useCallback(() => {
+    // console.log(socket, "teste");
     if (socket) {
       socket.on("message", (msg: ISocketMessage) => {
         if (msg.game === "crash") {
@@ -46,7 +47,7 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -55,13 +56,15 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
           autoConnect: false,
         });
 
+        connection.connect();
+
         setSocket(connection);
       }
     } else {
       socket?.disconnect();
       setSocket(null);
     }
-  }, [isAuthenticated, socket]);
+  }, [isAuthenticated, socket, webSocket]);
 
   useEffect(() => {
     if (socket) {
@@ -78,8 +81,8 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
 
       return () => {
-        socket.off("connect");
-        socket.off("disconnect");
+        socket.offAny();
+        // socket.off("disconnect");
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
