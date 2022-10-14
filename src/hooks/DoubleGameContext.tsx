@@ -93,19 +93,19 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
       } else {
         window.scrollTo(0, 0);
 
-        if (data.type === "gale") {
-          const checkExistGale = messages.find(
-            (message) => message.martingale_sequence === 1
-          );
+        setMessages((oldValue) => {
+          if (data.type === "gale") {
+            const checkExistGale = oldValue.find(
+              (message) => message.martingale_sequence === 1
+            );
 
-          if (!checkExistGale) {
-            data.martingale_sequence = 1;
+            data.martingale_sequence = !checkExistGale ? 1 : 2;
+
+            return [...oldValue, data];
           } else {
-            data.martingale_sequence = 2;
+            return [...oldValue, data];
           }
-        }
-
-        setMessages((oldValue) => [...oldValue, data]);
+        });
 
         if (data.type === "loss" || data.type === "win") {
           removeCard();
@@ -113,7 +113,7 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
         }
       }
     },
-    [messages, removeCard, updateDoubleData]
+    [removeCard, updateDoubleData]
   );
 
   useEffect(() => {
