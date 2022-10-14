@@ -21,8 +21,14 @@ export const SocketContext = createContext<SocketContextData>(
 );
 
 export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const { listeningMessagesSocket: listeningCrash } = useCrashGame();
-  const { listeningMessagesSocket: listeningDouble } = useDoubleGame();
+  const {
+    listeningMessagesSocket: listeningCrash,
+    clearMessages: clearMessagesCrash,
+  } = useCrashGame();
+  const {
+    listeningMessagesSocket: listeningDouble,
+    clearMessages: clearMessagesDouble,
+  } = useDoubleGame();
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
@@ -34,11 +40,13 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
 
       socket.on("connect", () => {
-        console.log("connect");
+        clearMessagesCrash();
+        clearMessagesDouble();
+        // console.log("connect");
       });
 
       socket.on("message", (msg: ISocketMessage) => {
-        console.log(msg);
+        // console.log(msg);
         if (msg.game === "crash") {
           listeningCrash(msg);
         }
@@ -48,9 +56,23 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
       });
 
+      socket.on("disconnect", () => {
+        clearMessagesCrash();
+        clearMessagesDouble();
+        // socket.connect();
+      });
+
+      socket.on("reconnect", () => {
+        clearMessagesCrash();
+        clearMessagesDouble();
+        // socket.connect();
+      });
+
       return () => {
         socket.off("connect");
         socket.off("message");
+        socket.off("disconnect");
+        socket.off("reconnect");
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

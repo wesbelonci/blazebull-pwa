@@ -19,6 +19,7 @@ interface DoubleGameContextData {
   updateDoubleData(): void;
   updateCrashDataWithLoading(): void;
   listeningMessagesSocket(message: ISocketGameDouble): void;
+  clearMessages(): void;
 }
 
 interface SocketProviderProps {
@@ -79,6 +80,10 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
     }, 15000);
   }, []);
 
+  const clearMessages = useCallback(() => {
+    setMessages([] as ISocketGameDouble[]);
+  }, []);
+
   const listeningMessagesSocket = useCallback(
     (message: ISocketGameDouble) => {
       let data = message;
@@ -136,6 +141,7 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
         updateCrashDataWithLoading,
         listeningMessagesSocket,
         messages,
+        clearMessages,
       }}
     >
       {children}

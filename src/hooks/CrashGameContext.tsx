@@ -19,6 +19,7 @@ interface CrashGameContextData {
   updateCrashData(): void;
   updateCrashDataWithLoading(): void;
   listeningMessagesSocket(message: ISocketGameCrash): void;
+  clearMessages(): void;
 }
 
 interface AuthProviderProps {
@@ -79,6 +80,10 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
     }, 10000);
   }, []);
 
+  const clearMessages = useCallback(() => {
+    setMessages([] as ISocketGameCrash[]);
+  }, []);
+
   const listeningMessagesSocket = useCallback(
     (message: ISocketGameCrash) => {
       let data = message;
@@ -135,6 +140,7 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
         updateCrashDataWithLoading,
         listeningMessagesSocket,
         messages,
+        clearMessages,
       }}
     >
       {children}
