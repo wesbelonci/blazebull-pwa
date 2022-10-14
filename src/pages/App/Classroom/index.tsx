@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { Layout } from "../../../layouts/app";
 import {
   Container,
@@ -11,85 +11,58 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  LoadingBox,
 } from "./styles";
 import Vimeo from "@u-wave/react-vimeo";
 import { CourseSlider } from "../../../components/elements/CourseSlider";
-import { useLoading } from "../../../hooks/LoadingContext";
-import api from "../../../services/api";
+import { useClassRoom } from "../../../hooks/ClassRoomContext";
+import Stack from "@mui/material/Stack";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Classroom() {
-  const [modules, setModules] = React.useState<any[] | null>(null);
-  const [totalCompleteLessons, setTotalCompleteLessons] =
-    React.useState<number>(0);
-  const [totalLessons, setTotalLessons] = React.useState<number>(0);
-  const [currentLesson, setCurrentLesson] = React.useState<any | null>();
-  const { setLoadingVisible } = useLoading();
+  const {
+    currentActiveLesson,
+    classModules,
+    totalCompletedLessons,
+    totalLessons,
+    completeLesson,
+  } = useClassRoom();
 
-  const getModules = React.useCallback(async () => {
-    setLoadingVisible(true);
-
-    try {
-      const response = await api.get("/lesson");
-
-      setModules(response.data);
-
-      let total = 0;
-      let completed = 0;
-      let current_lesson: any | null = null;
-      // eslint-disable-next-line array-callback-return
-      response.data.map((module: any) => {
-        total = total + module.lessons.length;
-
-        completed =
-          completed +
-          module.lessons.filter((lesson: any) => lesson.user_viewed !== null)
-            .length;
-
-        if (current_lesson === null) {
-          current_lesson = module.lessons.find(
-            (lesson: any) =>
-              lesson.user_viewed && lesson.user_viewed.complete === false
-          );
-        }
-      });
-
-      setTotalLessons(total);
-      setTotalCompleteLessons(completed);
-      setCurrentLesson(current_lesson);
-
-      setLoadingVisible(false);
-    } catch (err) {
-      setLoadingVisible(false);
-    }
-  }, [setLoadingVisible]);
-
-  React.useEffect(() => {
-    if (!modules) {
-      getModules();
-    }
-  }, [getModules, modules]);
+  console.log(currentActiveLesson);
 
   return (
     <Layout>
       <Container>
         <Content>
-          <CurrentClass>
-            <Watching>
-              {modules && currentLesson && (
-                <Vimeo
-                  video={currentLesson.video_url}
-                  controls={true}
-                  showByline
-                  showTitle
-                  showPortrait
-                />
-              )}
-            </Watching>
-            <Button className="mx-auto">
-              <img src="/assets/objects/check-icon.svg" alt="Check" />
-              <span>Concluir Aula</span>
-            </Button>
-          </CurrentClass>
+          {currentActiveLesson ? (
+            <CurrentClass>
+              <Watching>
+                {currentActiveLesson && (
+                  <Vimeo
+                    video={currentActiveLesson.video_url}
+                    controls={true}
+                    showByline
+                    showTitle
+                    showPortrait
+                  />
+                )}
+              </Watching>
+              <Button
+                className="mx-auto"
+                onClick={() => completeLesson(currentActiveLesson.id)}
+              >
+                <img src="/assets/objects/check-icon.svg" alt="Check" />
+                <span>Concluir Aula</span>
+              </Button>
+            </CurrentClass>
+          ) : (
+            <LoadingBox>
+              <Stack sx={{ color: "grey.500" }} spacing={2} direction="row">
+                <CircularProgress color="red" />
+              </Stack>
+            </LoadingBox>
+          )}
+
           <ModuleAndCourses>
             <div className="flex flex-row justify-between w-full items-center mb-4 px-4">
               <div className="w-auto">
@@ -101,18 +74,18 @@ function Classroom() {
                   <BorderLinearProgress
                     variant="determinate"
                     value={Number(
-                      100 / Number(totalLessons / totalCompleteLessons)
+                      100 / Number(totalLessons / totalCompletedLessons)
                     )}
                   />
                 </div>
                 <span className="text-xs text-white ml-2">
-                  {Number(100 / Number(totalLessons / totalCompleteLessons))}%
+                  {Number(100 / Number(totalLessons / totalCompletedLessons))}%
                 </span>
               </div>
             </div>
-            {modules && modules.length > 0 && (
+            {classModules && classModules.length > 0 && (
               <>
-                {modules.map((moduleLession) => (
+                {classModules.map((moduleLession: any) => (
                   <Accordion
                     background={moduleLession.thumb_url}
                     key={moduleLession.id}

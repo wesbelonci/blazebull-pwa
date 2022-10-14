@@ -23,6 +23,7 @@ import { useCrashGame } from "../../../hooks/CrashGameContext";
 import { useDoubleGame } from "../../../hooks/DoubleGameContext";
 import { useLocale } from "../../../hooks/LocaleContext";
 import Vimeo from "@u-wave/react-vimeo";
+import { useClassRoom } from "../../../hooks/ClassRoomContext";
 // import { FormattedMessage, useIntl } from "react-intl";
 
 function HomePage() {
@@ -30,6 +31,7 @@ function HomePage() {
   const { daily: dataCrash } = useCrashGame();
   const { daily: dataDouble } = useDoubleGame();
   const { locale } = useLocale();
+  const { currentActiveLesson } = useClassRoom();
 
   return (
     <Layout>
@@ -47,14 +49,15 @@ function HomePage() {
               </div>
             </CourseHeader>
             <KeepWatching>
-              <Vimeo
-                video="https://player.vimeo.com/video/745133849?h=832ca16084"
-                controls={true}
-                // responsive
-                showByline
-                showTitle
-                showPortrait
-              />
+              {currentActiveLesson && (
+                <Vimeo
+                  video={currentActiveLesson.video_url}
+                  controls={true}
+                  showByline
+                  showTitle
+                  showPortrait
+                />
+              )}
             </KeepWatching>
           </Course>
           <Rooms>

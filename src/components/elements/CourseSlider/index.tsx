@@ -2,12 +2,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider, { Settings as CarouselSetting } from "react-slick";
 import { Container, Slide, Card } from "./styles";
+import { useClassRoom } from "../../../hooks/ClassRoomContext";
 
 interface ILessons {
   lessons: any[];
 }
 
 const CourseSlider: React.FC<ILessons> = ({ lessons }) => {
+  const { setCurrentActiveLesson } = useClassRoom();
   const settings: CarouselSetting = {
     className: "slider variable-width",
     infinite: false,
@@ -26,7 +28,7 @@ const CourseSlider: React.FC<ILessons> = ({ lessons }) => {
           <Slide key={lesson.id}>
             <Card
               background={lesson.thumb_url}
-              onClick={() => console.log("teste")}
+              onClick={() => setCurrentActiveLesson(lesson)}
             >
               {lesson.user_viewed && (
                 <img

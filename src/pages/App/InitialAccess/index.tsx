@@ -39,7 +39,7 @@ function InitialAccessPage() {
           </Button> */}
           <div className="flex w-full justify-center mt-8">
             <span className=" font-light text-md text-dark-grey-three">
-              Blaze Bull - 2022
+              Blaze Bulls - 2022
             </span>
           </div>
         </Content>

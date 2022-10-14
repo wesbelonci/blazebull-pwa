@@ -179,3 +179,14 @@ export const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   paddingTop: theme.spacing(0),
   paddingBottom: theme.spacing(1),
 }));
+
+export const LoadingBox = styled("div")(({ theme }) => ({
+  display: "flex",
+  transition: "all 200ms ease-in",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  height: "250px",
+  top: 0,
+  left: 0,
+}));

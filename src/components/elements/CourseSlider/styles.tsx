@@ -9,7 +9,7 @@ export const Container = styled("div")(({ theme }) => ({
 
   ".slick-slide": {
     // padding: "0 25px",
-    paddingLeft: 25,
+    paddingLeft: 20,
     boxSizing: "border-box",
 
     // "&:first-of-type": {
@@ -33,9 +33,10 @@ export const Card = styled("div")<{ background: string }>(
     background: `linear-gradient(0deg, rgba(0, 0, 0, 0.63), rgba(0, 0, 0, 0.63)), linear-gradient(180deg, rgba(0, 0, 0, 0) 5.21%, rgba(0, 0, 0, 0.9) 100%), url(${background})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
-    width: "150px",
+    width: "160px",
     height: "200px",
     borderRadius: 12,
+    cursor: "pointer",
     boxShadow: "-6px 5px 10px rgba(0, 0, 0, 0.3)",
     padding: theme.spacing(1),
     // paddingLeft: theme.spacing(0.8),

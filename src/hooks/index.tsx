@@ -10,6 +10,7 @@ import { LocaleProvider } from "./LocaleContext";
 import { BankProvider } from "./BankContext";
 import { AlertProvider } from "./AlertContext";
 import { PwaInstallHomeScreenProvider } from "./PwaInstallHomeScreen";
+import { ClassRoomProvider } from "./ClassRoomContext";
 
 interface AppProviderProps {
   children: any;
@@ -25,7 +26,9 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => (
               <DoubleGameProvider>
                 <SocketProvider>
                   <BankProvider>
-                    <AlertProvider>{children}</AlertProvider>
+                    <AlertProvider>
+                      <ClassRoomProvider>{children}</ClassRoomProvider>
+                    </AlertProvider>
                   </BankProvider>
                 </SocketProvider>
               </DoubleGameProvider>
