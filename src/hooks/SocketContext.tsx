@@ -11,7 +11,7 @@ import { ISocketMessage } from "../types/ISocketMessage";
 import { useAuth } from "./AuthContext";
 import { useCrashGame } from "./CrashGameContext";
 import { useDoubleGame } from "./DoubleGameContext";
-import { useLoading } from "./LoadingContext";
+// import { useLoading } from "./LoadingContext";
 
 interface SocketContextData {
   // message: ISocketMessage | null;
@@ -28,7 +28,7 @@ export const SocketContext = createContext<SocketContextData>(
 export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { listeningMessagesSocket: listeningCrash } = useCrashGame();
   const { listeningMessagesSocket: listeningDouble } = useDoubleGame();
-  const { isLoading } = useLoading();
+  // const { isLoading } = useLoading();
   const { isAuthenticated } = useAuth();
 
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -46,30 +46,31 @@ export const SocketProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
+  }, []);
 
   useEffect(() => {
     if (isAuthenticated) {
       if (!socket) {
         const connection = io(process.env.REACT_APP_API_URL as string, {
-          reconnectionDelayMax: 10000,
           autoConnect: false,
         });
 
         setSocket(connection);
       }
-      if (socket && !socket.active) {
-        socket.connect();
-      }
     } else {
       socket?.disconnect();
+      setSocket(null);
     }
   }, [isAuthenticated, socket]);
 
   useEffect(() => {
-    if (socket && socket.active) {
+    if (socket) {
       socket.on("connect", () => {
-        webSocket();
+        if (socket.connected) {
+          webSocket();
+        } else {
+          socket.connect();
+        }
       });
 
       socket.on("disconnect", () => {

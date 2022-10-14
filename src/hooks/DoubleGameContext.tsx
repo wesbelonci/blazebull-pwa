@@ -88,20 +88,16 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
       } else {
         window.scrollTo(0, 0);
 
-        const checkExistGale = messages.find(
-          (message) => message.type === "gale"
-        );
+        if (data.type === "gale") {
+          const checkExistGale = messages.find(
+            (message) => message.martingale_sequence === 1
+          );
 
-        if (!checkExistGale && data.type === "gale") {
-          data.martingale_sequence = 1;
-        }
-
-        if (
-          checkExistGale &&
-          checkExistGale.martingale_sequence === 1 &&
-          data.type === "gale"
-        ) {
-          data.martingale_sequence = 2;
+          if (!checkExistGale) {
+            data.martingale_sequence = 1;
+          } else {
+            data.martingale_sequence = 2;
+          }
         }
 
         setMessages((oldValue) => [...oldValue, data]);
