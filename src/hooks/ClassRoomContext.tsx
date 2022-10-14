@@ -5,7 +5,7 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import api from "../services/api";
 import { useLoading } from "./LoadingContext";
 import { useToast } from "./ToastContext";
@@ -53,7 +53,7 @@ export const ClassRoomProvider: React.FC<ClassRoomProviderProps> = ({
   const [totalLessons, setTotalLessons] = useState<number>(0);
 
   const { setLoadingVisible } = useLoading();
-  const location = useLocation();
+  // const location = useLocation();
   const { addToast } = useToast();
 
   const updateCurrentLesson = useCallback(async (lesson: ILesson) => {
@@ -128,12 +128,8 @@ export const ClassRoomProvider: React.FC<ClassRoomProviderProps> = ({
   );
 
   useEffect(() => {
-    const route = location.pathname.split("/");
-
-    if (route[2] === "home" || route[2] === "classroom") {
-      getModules();
-    }
-  }, [getModules, location]);
+    getModules();
+  }, [getModules]);
 
   return (
     <ClassRoomContext.Provider
