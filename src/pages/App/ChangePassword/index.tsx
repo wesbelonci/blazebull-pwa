@@ -11,7 +11,7 @@ import {
   FormBox,
   InputBox,
 } from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -19,6 +19,8 @@ import { AnimatedTransictionPage } from "../../../components/modules/AnimatedTra
 import { FormattedMessage, useIntl } from "react-intl";
 import { useLocale } from "../../../hooks/LocaleContext";
 import { FiChevronLeft, FiLock } from "react-icons/fi";
+import { useToast } from "../../../hooks/ToastContext";
+import api from "../../../services/api";
 
 const schema = yup
   .object({
@@ -27,10 +29,10 @@ const schema = yup
       .required("password is required")
       .min(4, "Password length should be at least 4 characters")
       .max(12, "Password cannot exceed more than 12 characters"),
-    password_confirm: yup
+    password_confirmation: yup
       .string()
       .oneOf([yup.ref("password")], "Passwords do not match")
-      .required("password is required"),
+      .required("password confirmation is required"),
   })
   .required();
 
@@ -41,19 +43,65 @@ function ChangePassword() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const { locale } = useLocale();
+  const location = useLocation();
+  const navigate = useNavigate();
   const { formatMessage: f } = useIntl();
+  const { addToast } = useToast();
 
-  const onSubmit = React.useCallback(async (data: any) => {
-    try {
-      // await signIn(data);
-      // navigate(`/${locale}/home`);
-    } catch (err) {
-      // addToast({
-      //   title: "Invalid E-mail or password",
-      //   type: "error",
-      // });
+  const useQuery = (search = location.search) => {
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  };
+
+  const query = useQuery();
+
+  const token = query.get("token");
+
+  React.useEffect(() => {
+    if (errors) {
+      if (errors.password?.message) {
+        const message = errors.password?.message as unknown as string;
+
+        addToast({
+          title: message,
+          type: "error",
+        });
+      } else if (errors.password_confirmation?.message) {
+        const message = errors.password_confirmation
+          ?.message as unknown as string;
+
+        addToast({
+          title: message,
+          type: "error",
+        });
+      }
     }
-  }, []);
+  }, [addToast, errors]);
+
+  const onSubmit = React.useCallback(
+    async (data: any) => {
+      try {
+        await api.post(`/password/${token}`, {
+          password: data.password,
+          password_confirmation: data.password_confirmation,
+        });
+
+        addToast({
+          title: "Successfully updated",
+          type: "success",
+        });
+
+        setTimeout(() => {
+          navigate(`/${locale}/authentication`);
+        }, 2000);
+      } catch (err) {
+        addToast({
+          title: "Invalid E-mail or password",
+          type: "error",
+        });
+      }
+    },
+    [addToast, locale, navigate, token]
+  );
 
   return (
     <AnimatedTransictionPage>
@@ -76,26 +124,31 @@ function ChangePassword() {
 
           <div className="flex flex-wrap flex-col md:flex-row">
             <FormBox id="hook-form" onSubmit={handleSubmit(onSubmit)}>
-              <InputBox error={!!errors.email}>
+              <InputBox error={!!errors.password}>
                 <FiLock size={30} />
                 <input
-                  type="text"
+                  type="password"
                   placeholder={f({ id: "password" })}
                   {...register("password")}
                 />
               </InputBox>
-              <InputBox error={!!errors.password} className="mt-4">
+              <InputBox error={!!errors.password_confirmation} className="mt-4">
                 <FiLock size={30} />
                 <input
                   type="password"
-                  placeholder={f({ id: "password_confirm" })}
-                  {...register("password_confirm")}
+                  placeholder={f({ id: "password_confirmation" })}
+                  {...register("password_confirmation")}
                 />
               </InputBox>
             </FormBox>
           </div>
 
-          <Button variant="contained" className="mt-4">
+          <Button
+            variant="contained"
+            className="mt-4"
+            type="submit"
+            form="hook-form"
+          >
             <div className="flex w-full h-full justify-center items-center">
               <span className="font-bold text-lg">
                 <FormattedMessage id="send" />

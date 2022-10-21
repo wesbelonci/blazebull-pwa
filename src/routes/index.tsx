@@ -22,17 +22,17 @@ const App: React.FC = () => {
   const language = getLocale();
   const param = location.pathname.split("/");
 
-  const useQuery = (search = location.search) => {
-    return React.useMemo(() => new URLSearchParams(search), [search]);
-  };
+  // const useQuery = (search = location.search) => {
+  //   return React.useMemo(() => new URLSearchParams(search), [search]);
+  // };
 
-  const query = useQuery();
+  // const query = useQuery();
 
-  const token = query.get("token");
+  // const token = query.get("token");
 
-  if (token) {
-    return <Navigate to={`${language}/create-password`} />;
-  }
+  // if (token) {
+  //   return <Navigate to={`${language}/change-password?token=${token}`} />;
+  // }
 
   const checkSuportedLanguage = suportedLanguages.find(
     (language) => language === param[1]
@@ -48,7 +48,7 @@ const App: React.FC = () => {
         <Route path=":lang">
           {isAuthenticated && <Route index element={<HomePage />} />}
           {!isAuthenticated && <Route index element={<InitialAccessPage />} />}
-          <Route path="create-password" element={<ChangePassword />} />
+          <Route path="change-password" element={<ChangePassword />} />
           <Route element={<ProtectedRoute />}>
             <Route path="home" element={<HomePage />} />
             <Route path="room-crash" element={<RoomCrash />} />

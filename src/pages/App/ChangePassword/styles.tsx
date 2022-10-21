@@ -33,6 +33,7 @@ export const Header = styled("div")(({ theme }) => ({
   // backgroundColor: theme.palette["background-dark"].main,
   padding: theme.spacing(1),
   // maxWidth: "100%",
+  maxWidth: "428px",
   width: "100%",
   height: 50,
   flexDirection: "column",
@@ -82,7 +83,7 @@ interface ButtonProps {
   variant?: "contained" | "outlined";
 }
 
-export const Button = styled("div")<ButtonProps>(({ theme, variant }) => ({
+export const Button = styled("button")<ButtonProps>(({ theme, variant }) => ({
   display: "flex",
   width: "100%",
   height: "60px",
@@ -91,6 +92,7 @@ export const Button = styled("div")<ButtonProps>(({ theme, variant }) => ({
   left: 0,
   cursor: "pointer",
   borderRadius: "0.563rem",
+  outline: "none",
 
   backgroundColor:
     variant === "contained" ? theme.palette.red.main : "transparent",
@@ -156,7 +158,9 @@ export const InputBox = styled("div")<{ error?: boolean | undefined }>(
     borderRadius: "0.563rem",
     border: 2,
     borderStyle: "solid",
-    borderColor: theme.palette["separator"].main,
+    borderColor: error
+      ? theme.palette["red"].main
+      : theme.palette["separator"].main,
 
     svg: {
       color: theme.palette["white"].main,
@@ -167,7 +171,9 @@ export const InputBox = styled("div")<{ error?: boolean | undefined }>(
       backgroundColor: "transparent!important",
       width: "100%",
       height: "100%",
-      color: theme.palette["white"].main,
+      // color: theme.palette["white"].main,
+
+      color: error ? theme.palette["red"].main : theme.palette["white"].main,
 
       "&:focus": {
         outline: 0,
