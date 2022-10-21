@@ -12,6 +12,7 @@ import { Settings } from "../pages/App/Settings";
 import { useAuth } from "../hooks/AuthContext";
 import { getLocale, suportedLanguages } from "../language";
 import { BankManagerPage } from "../pages/App/BankManager";
+import { ChangePassword } from "../pages/App/ChangePassword";
 // import { Admin } from "../pages/Admin/Home";
 
 const App: React.FC = () => {
@@ -21,12 +22,24 @@ const App: React.FC = () => {
   const language = getLocale();
   const param = location.pathname.split("/");
 
+  const useQuery = (search = location.search) => {
+    return React.useMemo(() => new URLSearchParams(search), [search]);
+  };
+
+  const query = useQuery();
+
+  const token = query.get("token");
+
+  if (token) {
+    return <Navigate to={`${language}/create-password`} />;
+  }
+
   const checkSuportedLanguage = suportedLanguages.find(
     (language) => language === param[1]
   );
 
   if (location.pathname === "/" || !checkSuportedLanguage) {
-    return <Navigate to={`${language}/`} />;
+    return <Navigate to={`${language}`} />;
   }
 
   return (
@@ -35,6 +48,7 @@ const App: React.FC = () => {
         <Route path=":lang">
           {isAuthenticated && <Route index element={<HomePage />} />}
           {!isAuthenticated && <Route index element={<InitialAccessPage />} />}
+          <Route path="create-password" element={<ChangePassword />} />
           <Route element={<ProtectedRoute />}>
             <Route path="home" element={<HomePage />} />
             <Route path="room-crash" element={<RoomCrash />} />

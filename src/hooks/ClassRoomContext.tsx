@@ -7,6 +7,7 @@ import React, {
 } from "react";
 // import { useLocation } from "react-router-dom";
 import api from "../services/api";
+import { useAuth } from "./AuthContext";
 import { useLoading } from "./LoadingContext";
 import { useToast } from "./ToastContext";
 
@@ -51,6 +52,7 @@ export const ClassRoomProvider: React.FC<ClassRoomProviderProps> = ({
   const [currentActiveLesson, setCurrentActiveLesson] =
     useState<ILesson | null>(null);
   const [totalLessons, setTotalLessons] = useState<number>(0);
+  const { isAuthenticated } = useAuth();
 
   const { setLoadingVisible } = useLoading();
   // const location = useLocation();
@@ -128,8 +130,10 @@ export const ClassRoomProvider: React.FC<ClassRoomProviderProps> = ({
   );
 
   useEffect(() => {
-    getModules();
-  }, [getModules]);
+    if (isAuthenticated) {
+      getModules();
+    }
+  }, [getModules, isAuthenticated]);
 
   return (
     <ClassRoomContext.Provider

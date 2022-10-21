@@ -3,7 +3,9 @@ const suportedLanguages = ["en", "pt", "es"];
 function getLocale() {
   const url = window.location.href;
 
-  const locale = url.split("/")[3] ? url.split("/")[3] : navigator.language;
+  const locale = url.split("/")[3]
+    ? url.split("/")[3].split("?")[0]
+    : navigator.language;
 
   const checkSuportedLanguage = suportedLanguages.find(
     (language) => language === locale
@@ -37,7 +39,7 @@ function getLocale() {
         language = "en";
     }
 
-    console.log(language);
+    // console.log(language);
 
     // localStorage.setItem("@blazebull:locale", language);
 
