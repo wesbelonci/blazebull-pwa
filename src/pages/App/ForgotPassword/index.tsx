@@ -11,63 +11,42 @@ import {
   FormBox,
   InputBox,
 } from "./styles";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { AnimatedTransictionPage } from "../../../components/modules/AnimatedTransictonPage";
 import { FormattedMessage, useIntl } from "react-intl";
 import { useLocale } from "../../../hooks/LocaleContext";
-import { FiChevronLeft, FiLock } from "react-icons/fi";
+import { FiChevronLeft, FiMail, FiLock } from "react-icons/fi";
 import { useToast } from "../../../hooks/ToastContext";
 import api from "../../../services/api";
 
 const schema = yup
   .object({
-    password: yup
+    email: yup
       .string()
-      .required("password is required")
-      .min(4, "Password length should be at least 4 characters")
-      .max(12, "Password cannot exceed more than 12 characters"),
-    password_confirmation: yup
-      .string()
-      .oneOf([yup.ref("password")], "Passwords do not match")
-      .required("password confirmation is required"),
+      .email("fill in with a valid e-mail")
+      .required("email is required"),
   })
   .required();
 
-function ChangePassword() {
+function ForgotPassword() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const { locale } = useLocale();
-  const location = useLocation();
-  const navigate = useNavigate();
+  // const location = useLocation();
+  // const navigate = useNavigate();
   const { formatMessage: f } = useIntl();
   const { addToast } = useToast();
 
-  const useQuery = (search = location.search) => {
-    return React.useMemo(() => new URLSearchParams(search), [search]);
-  };
-
-  const query = useQuery();
-
-  const token = query.get("token");
-
   React.useEffect(() => {
     if (errors) {
-      if (errors.password?.message) {
-        const message = errors.password?.message as unknown as string;
-
-        addToast({
-          title: message,
-          type: "error",
-        });
-      } else if (errors.password_confirmation?.message) {
-        const message = errors.password_confirmation
-          ?.message as unknown as string;
+      if (errors.email?.message) {
+        const message = errors.email?.message as unknown as string;
 
         addToast({
           title: message,
@@ -80,27 +59,20 @@ function ChangePassword() {
   const onSubmit = React.useCallback(
     async (data: any) => {
       try {
-        await api.patch(`/password/${token}`, {
-          password: data.password,
-          password_confirmation: data.password_confirmation,
-        });
+        await api.post(`/password?email=${data.email}`);
 
         addToast({
-          title: "Successfully updated",
+          title: "Check your email",
           type: "success",
         });
-
-        setTimeout(() => {
-          navigate(`/${locale}/authentication`);
-        }, 2000);
       } catch (err) {
         addToast({
-          title: "Invalid Token",
+          title: "Invalid E-mail or password",
           type: "error",
         });
       }
     },
-    [addToast, locale, navigate, token]
+    [addToast]
   );
 
   return (
@@ -117,27 +89,25 @@ function ChangePassword() {
               <FiLock size={40} />
             </div>
             <div className="w-10/12">
-              <Title>Crie uma senha!</Title>
-              <HelpText>Digite uma senha para acessar a Blaze Bulls.</HelpText>
+              <Title>Esqueceu sua senha?</Title>
+              <HelpText>Altere sua senha de acesso</HelpText>
             </div>
           </PageTitle>
 
-          <div className="flex flex-wrap flex-col md:flex-row">
+          <div className="flex flex-wrap flex-col">
+            <div className="flex mt-4 px-2">
+              <span className="text-sm text-white">
+                Para recuperar sua senha, é necessário que informe seu email
+                para o envio do código de confirmação...
+              </span>
+            </div>
             <FormBox id="hook-form" onSubmit={handleSubmit(onSubmit)}>
-              <InputBox error={!!errors.password}>
-                <FiLock size={30} />
+              <InputBox error={!!errors.email}>
+                <FiMail size={30} />
                 <input
-                  type="password"
-                  placeholder={f({ id: "password" })}
-                  {...register("password")}
-                />
-              </InputBox>
-              <InputBox error={!!errors.password_confirmation} className="mt-4">
-                <FiLock size={30} />
-                <input
-                  type="password"
-                  placeholder={f({ id: "password_confirmation" })}
-                  {...register("password_confirmation")}
+                  type="text"
+                  placeholder={f({ id: "email" })}
+                  {...register("email")}
                 />
               </InputBox>
             </FormBox>
@@ -177,4 +147,4 @@ function ChangePassword() {
   );
 }
 
-export { ChangePassword };
+export { ForgotPassword };
