@@ -25,6 +25,7 @@ export const Content = styled("div")(({ theme }) => ({
   overflowX: "hidden",
   overflowY: "hidden",
   // resize: "vertical",
+  paddingBottom: 50,
 }));
 
 export const Blaze = styled("div")(({ theme }) => ({
