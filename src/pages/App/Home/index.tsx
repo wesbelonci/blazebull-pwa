@@ -154,6 +154,7 @@ function HomePage() {
               </RoomStats>
             </Double>
           </Rooms>
+          <div style={{ height: 100 }}></div>
         </Content>
       </Container>
     </Layout>
