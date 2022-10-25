@@ -10,7 +10,6 @@ import {
   ForgotPassword,
   KeepConnected,
   CheckBoxField,
-  NeedHelp,
 } from "./styles";
 import { FiUser, FiLock } from "react-icons/fi";
 import * as React from "react";
@@ -22,7 +21,7 @@ import * as yup from "yup";
 import { useToast } from "../../../hooks/ToastContext";
 import { useAuth } from "../../../hooks/AuthContext";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useLocale } from "../../../hooks/LocaleContext";
 
 const schema = yup
@@ -110,10 +109,13 @@ function AuthenticationPage() {
               />
             </InputBox>
           </FormBox>
+
           <ForgotPassword>
-            <span className="font-bold text-md">
-              <FormattedMessage id="forgot-password" />
-            </span>
+            <Link to={`/${locale}/forgot-password`}>
+              <span className="font-bold text-md cursor-pointer">
+                <FormattedMessage id="forgot-password" />
+              </span>
+            </Link>
           </ForgotPassword>
           <KeepConnected>
             <FormControlLabel
@@ -140,14 +142,14 @@ function AuthenticationPage() {
             </div>
           </Button>
 
-          <NeedHelp>
+          {/* <NeedHelp>
             <span className="text-white font-normal">
               <FormattedMessage id="need-help" />{" "}
               <a href="#" className="text-red underline cursor-pointer">
                 <FormattedMessage id="click-here" />
               </a>
             </span>
-          </NeedHelp>
+          </NeedHelp> */}
         </Content>
       </Container>
     </AnimatedTransictionPage>

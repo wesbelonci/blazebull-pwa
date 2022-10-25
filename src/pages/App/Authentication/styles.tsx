@@ -77,7 +77,7 @@ export const FormBox = styled("form")(({ theme }) => ({
   maxWidth: "428px",
   width: "100%",
   marginTop: 30,
-  height: 110,
+  height: 120,
   flexDirection: "column",
   overflow: "hidden",
   position: "relative",
@@ -177,9 +177,15 @@ export const ForgotPassword = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
   marginTop: 5,
   color: theme.palette["red"].main,
+  cursor: "pointer",
 
   textDecoration: "underline",
   textUnderlineOffset: 3,
+  zIndex: 9000,
+
+  span: {
+    cursor: "pointer",
+  },
 }));
 
 export const KeepConnected = styled("div")(({ theme }) => ({

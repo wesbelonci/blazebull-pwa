@@ -6,7 +6,6 @@ import React, {
   useEffect,
 } from "react";
 import api from "../services/api";
-// import { useNavigate, useParams } from "react-router-dom";
 
 interface SignInCredentials {
   email: string;
@@ -23,6 +22,7 @@ interface UserProps {
 interface AuthContextData {
   user: UserProps | null;
   isAuthenticated: boolean;
+  token: string | null;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
@@ -36,13 +36,24 @@ export const AuthContext = createContext<AuthContextData>(
 );
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<UserProps | null>(() => {
+  const [token, setToken] = useState<string | null>(() => {
     const token = localStorage.getItem("@blazebull:token");
-    const user = localStorage.getItem("@blazebull:user");
 
     if (token) {
       api.defaults.headers.common = { Authorization: `Bearer ${token}` };
+      return token;
     }
+
+    return null;
+  });
+
+  const [user, setUser] = useState<UserProps | null>(() => {
+    // const token = localStorage.getItem("@blazebull:token");
+    const user = localStorage.getItem("@blazebull:user");
+
+    // if (token) {
+    //   api.defaults.headers.common = { Authorization: `Bearer ${token}` };
+    // }
 
     if (user) {
       return JSON.parse(user);
@@ -73,6 +84,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       api.defaults.headers.common = { Authorization: `bearer ${token}` };
 
+      setToken(token);
       setUser(user);
     } catch (err) {
       throw new Error("Invalid E-mail or password");
@@ -81,6 +93,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signOut = useCallback(() => {
     setUser(null);
+    setToken(null);
 
     localStorage.removeItem("@blazebull:token");
     localStorage.removeItem("@blazebull:user");
@@ -98,7 +111,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, [signOut]);
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut, isAuthenticated }}>
+    <AuthContext.Provider
+      value={{ user, signIn, signOut, isAuthenticated, token }}
+    >
       {children}
     </AuthContext.Provider>
   );
