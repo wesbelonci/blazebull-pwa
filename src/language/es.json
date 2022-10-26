@@ -69,5 +69,21 @@
       "type": 0,
       "value": "Please install the Blaze Bulls app for a better experience."
     }
-  ]
+  ],
+
+  "passsword_required": [{ "type": 0, "value": "Password is required" }],
+  "passsword_lenght_should": [
+    { "type": 0, "value": "Password length should be at least 4 characters" }
+  ],
+  "passsword_lenght_exceed": [
+    { "type": 0, "value": "Password cannot exceed more than 12 characters" }
+  ],
+  "passsword_confirmation_not_match": [
+    { "type": 0, "value": "Passwords do not match" }
+  ],
+  "passsword_confirmation_required": [
+    { "type": 0, "value": "Password confirmation is required" }
+  ],
+  "email_is_not_valid": [{ "type": 0, "value": "Fill in with a valid e-mail" }],
+  "email_required": [{ "type": 0, "value": "E-mail is required" }]
 }

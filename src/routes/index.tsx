@@ -15,6 +15,7 @@ import { BankManagerPage } from "../pages/App/BankManager";
 import { ChangePassword } from "../pages/App/ChangePassword";
 import { ForgotPassword } from "../pages/App/ForgotPassword";
 import { Admin } from "../pages/Admin/Home";
+import ProtectedAdminRoute from "./ProtectedAdminRoute";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -46,6 +47,9 @@ const App: React.FC = () => {
             <Route path="classroom" element={<Classroom />} />
             <Route path="bank-manager" element={<BankManagerPage />} />
             <Route path="settings" element={<Settings />} />
+            {/* <Route path="admin" element={<Admin />} /> */}
+          </Route>
+          <Route element={<ProtectedAdminRoute />}>
             <Route path="admin" element={<Admin />} />
           </Route>
           <Route path="authentication" element={<AuthenticationPage />} />

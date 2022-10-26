@@ -70,5 +70,21 @@
       "type": 0,
       "value": "Faça a instalação do aplicativo Blaze Bulls para ter uma melhor experiência."
     }
-  ]
+  ],
+
+  "passsword_required": [{ "type": 0, "value": "A senha é obrigatória!" }],
+  "passsword_lenght_should": [
+    { "type": 0, "value": "Sua senha precisa ter no mínimo 4 caracteres!" }
+  ],
+  "passsword_lenght_exceed": [
+    { "type": 0, "value": "Sua senha não pode exceder 12 caracteres!" }
+  ],
+  "passsword_confirmation_not_match": [
+    { "type": 0, "value": "Sua confirmação de senha não confere!" }
+  ],
+  "passsword_confirmation_required": [
+    { "type": 0, "value": "A confirmação de senha é obrigatória!" }
+  ],
+  "email_is_not_valid": [{ "type": 0, "value": "Digite um e-mail válido!" }],
+  "email_required": [{ "type": 0, "value": "Digite um e-mail válido!" }]
 }

@@ -24,16 +24,6 @@ import { FormattedMessage, useIntl } from "react-intl";
 import { useNavigate, Link } from "react-router-dom";
 import { useLocale } from "../../../hooks/LocaleContext";
 
-const schema = yup
-  .object({
-    email: yup
-      .string()
-      .email("fill in with a valid e-mail")
-      .required("email is required"),
-    password: yup.string().required("password is required"),
-  })
-  .required();
-
 function AuthenticationPage() {
   const [checked, setChecked] = React.useState(true);
   const { addToast } = useToast();
@@ -41,6 +31,16 @@ function AuthenticationPage() {
   const { formatMessage: f } = useIntl();
   const { locale } = useLocale();
   const navigate = useNavigate();
+
+  const schema = yup
+    .object({
+      email: yup
+        .string()
+        .email(f({ id: "email_is_not_valid" }))
+        .required(f({ id: "email_required" })),
+      password: yup.string().required(f({ id: "passsword_required" })),
+    })
+    .required();
 
   const {
     register,

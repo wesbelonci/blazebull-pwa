@@ -6,15 +6,15 @@ interface ProtectedRouteProps {
   children?: JSX.Element;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { isAuthenticated } = useAuth();
+const ProtectedAdminRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+  const { isAuthenticated, user } = useAuth();
   const { lang } = useParams();
 
-  if (!isAuthenticated) {
-    return <Navigate to={`/${lang}/authentication`} replace />;
+  if (isAuthenticated && user && user.role !== "admin") {
+    return <Navigate to={`/${lang}/home`} replace />;
   }
 
   return children ? children : <Outlet />;
 };
 
-export default ProtectedRoute;
+export default ProtectedAdminRoute;

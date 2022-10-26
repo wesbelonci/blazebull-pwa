@@ -3,7 +3,6 @@ import {
   Container,
   Button,
   Content,
-  NeedHelp,
   Header,
   PageTitle,
   HelpText,
@@ -22,21 +21,26 @@ import { FiChevronLeft, FiLock } from "react-icons/fi";
 import { useToast } from "../../../hooks/ToastContext";
 import api from "../../../services/api";
 
-const schema = yup
-  .object({
-    password: yup
-      .string()
-      .required("password is required")
-      .min(4, "Password length should be at least 4 characters")
-      .max(12, "Password cannot exceed more than 12 characters"),
-    password_confirmation: yup
-      .string()
-      .oneOf([yup.ref("password")], "Passwords do not match")
-      .required("password confirmation is required"),
-  })
-  .required();
-
 function ChangePassword() {
+  const { formatMessage: f } = useIntl();
+
+  const schema = yup
+    .object({
+      password: yup
+        .string()
+        .required(f({ id: "passsword_required" }))
+        .min(4, f({ id: "passsword_lenght_should" }))
+        .max(12, f({ id: "passsword_lenght_exceed" })),
+      password_confirmation: yup
+        .string()
+        .oneOf(
+          [yup.ref("password")],
+          f({ id: "passsword_confirmation_not_match" })
+        )
+        .required(f({ id: "passsword_confirmation_required" })),
+    })
+    .required();
+
   const {
     register,
     handleSubmit,
@@ -45,7 +49,6 @@ function ChangePassword() {
   const { locale } = useLocale();
   const location = useLocation();
   const navigate = useNavigate();
-  const { formatMessage: f } = useIntl();
   const { addToast } = useToast();
 
   const useQuery = (search = location.search) => {
@@ -157,14 +160,14 @@ function ChangePassword() {
           </Button>
 
           <div className="flex w-full h-auto absolute bottom-8 left-0 flex-col">
-            <NeedHelp>
+            {/* <NeedHelp>
               <span className="text-white font-normal text-sm">
                 <FormattedMessage id="need-help" />{" "}
                 <strong className="text-red underline">
                   <FormattedMessage id="click-here" />
                 </strong>
               </span>
-            </NeedHelp>
+            </NeedHelp> */}
             <div className="flex w-full justify-center mt-8">
               <span className=" font-light text-md text-dark-grey-three">
                 Blaze Bulls - 2022

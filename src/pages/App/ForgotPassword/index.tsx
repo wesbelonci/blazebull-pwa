@@ -3,7 +3,6 @@ import {
   Container,
   Button,
   Content,
-  NeedHelp,
   Header,
   PageTitle,
   HelpText,
@@ -22,16 +21,18 @@ import { FiChevronLeft, FiMail, FiLock } from "react-icons/fi";
 import { useToast } from "../../../hooks/ToastContext";
 import api from "../../../services/api";
 
-const schema = yup
-  .object({
-    email: yup
-      .string()
-      .email("fill in with a valid e-mail")
-      .required("email is required"),
-  })
-  .required();
-
 function ForgotPassword() {
+  const { formatMessage: f } = useIntl();
+
+  const schema = yup
+    .object({
+      email: yup
+        .string()
+        .email(f({ id: "email_is_not_valid" }))
+        .required(f({ id: "email_required" })),
+    })
+    .required();
+
   const {
     register,
     handleSubmit,
@@ -40,7 +41,6 @@ function ForgotPassword() {
   const { locale } = useLocale();
   // const location = useLocation();
   // const navigate = useNavigate();
-  const { formatMessage: f } = useIntl();
   const { addToast } = useToast();
 
   React.useEffect(() => {
@@ -127,14 +127,14 @@ function ForgotPassword() {
           </Button>
 
           <div className="flex w-full h-auto absolute bottom-8 left-0 flex-col">
-            <NeedHelp>
+            {/* <NeedHelp>
               <span className="text-white font-normal text-sm">
                 <FormattedMessage id="need-help" />{" "}
                 <strong className="text-red underline">
                   <FormattedMessage id="click-here" />
                 </strong>
               </span>
-            </NeedHelp>
+            </NeedHelp> */}
             <div className="flex w-full justify-center mt-8">
               <span className=" font-light text-md text-dark-grey-three">
                 Blaze Bulls - 2022

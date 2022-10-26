@@ -3,7 +3,7 @@ import { Layout } from "../../../layouts/admin";
 function Admin() {
   return (
     <Layout>
-      <span>Configurações</span>
+      <span>Dashboard Admin</span>
     </Layout>
   );
 }

@@ -17,6 +17,7 @@ interface UserProps {
   name: string;
   email: string;
   avatar_url: string;
+  role: "admin" | "user";
 }
 
 interface AuthContextData {
@@ -64,6 +65,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const isAuthenticated = !!user;
 
+  console.log(user);
+
   useEffect(() => {
     if (isAuthenticated) {
       getUserData();
@@ -77,6 +80,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         email,
         password,
       });
+
       const { token, user } = response.data;
 
       localStorage.setItem("@blazebull:token", token);

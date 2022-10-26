@@ -4,7 +4,7 @@ import React, {
   useState,
   useEffect,
 } from "react";
-import { AnimatedTransictionPage } from "../../components/modules/AnimatedTransictonPage";
+// import { AnimatedTransictionPage } from "../../components/modules/AnimatedTransictonPage";
 import { Content } from "./content";
 import { Header } from "./header";
 import { Sidebar } from "./sidebar";
@@ -72,20 +72,18 @@ const Layout: React.FC<PropsWithChildren<any>> = ({ children }) => {
   }, [sidebarActive]);
 
   return (
-    <AnimatedTransictionPage>
-      <Container>
-        <App>
-          <Header setActiveSidebar={handleActiveSidebarHeader} />
-          <Sidebar
-            setActiveSidebar={handleActiveSidebarHeader}
-            active={sidebarActive}
-          />
-          <Content setActiveHeader={handleActiveSidebarContent}>
-            {children}
-          </Content>
-        </App>
-      </Container>
-    </AnimatedTransictionPage>
+    <Container>
+      <App>
+        <Header setActiveSidebar={handleActiveSidebarHeader} />
+        <Sidebar
+          setActiveSidebar={handleActiveSidebarHeader}
+          active={sidebarActive}
+        />
+        <Content setActiveHeader={handleActiveSidebarContent}>
+          {children}
+        </Content>
+      </App>
+    </Container>
   );
 };
 
