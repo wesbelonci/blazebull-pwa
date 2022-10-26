@@ -122,7 +122,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
             </Icon>
             <span>Gerenciador de Banca</span>
           </NavItem>
-          <NavItem onClick={() => navigate(`/${locale}/settings`)}>
+          {/* <NavItem onClick={() => navigate(`/${locale}/settings`)}>
             <Icon>
               <img src="/assets/objects/config.svg" alt="Configuraçoes" />
             </Icon>
@@ -133,7 +133,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
               <img src="/assets/objects/suporte.svg" alt="Suporte" />
             </Icon>
             <span>Suporte</span>
-          </NavItem>
+          </NavItem> */}
         </NavList>
       </Nav>
     </Container>
