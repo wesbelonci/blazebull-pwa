@@ -14,7 +14,7 @@ import {
   NavItem,
   Icon,
 } from "./styles";
-import { FiChevronLeft, FiLogOut } from "react-icons/fi";
+import { FiChevronLeft, FiLogOut, FiAlertTriangle } from "react-icons/fi";
 import { useAuth } from "../../../hooks/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLocale } from "../../../hooks/LocaleContext";
@@ -113,16 +113,24 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
             </Icon>
             <span>Indique e Ganhe</span>
           </NavItem> */}
-          <NavItem onClick={() => navigate(`/${locale}/bank-manager`)}>
+          {/* <NavItem onClick={() => navigate(`/${locale}/bank-manager`)}> */}
+          <NavItem>
             <Icon>
               <img
                 src="/assets/objects/gerenciador.svg"
                 alt="Gerenciador de Banca"
               />
             </Icon>
-            <span>Gerenciador de Banca</span>
+            <div className="flex w-full justify-between row">
+              <span className="menu">Gerenciador de Banca</span>
+              <div className="flex row w-auto items-center justify-center space-x-2">
+                <FiAlertTriangle size={20} className="text-red" />
+                <span className="warning">Manutenção</span>
+              </div>
+            </div>
           </NavItem>
-          {/* <NavItem onClick={() => navigate(`/${locale}/settings`)}>
+          {/* <NavItem onClick={() => navigate(`/${locale}/settings`)}> */}
+          <NavItem>
             <Icon>
               <img src="/assets/objects/config.svg" alt="Configuraçoes" />
             </Icon>
@@ -133,7 +141,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
               <img src="/assets/objects/suporte.svg" alt="Suporte" />
             </Icon>
             <span>Suporte</span>
-          </NavItem> */}
+          </NavItem>
         </NavList>
       </Nav>
     </Container>

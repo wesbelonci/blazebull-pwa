@@ -4,7 +4,7 @@ export const Container = styled("nav")(({ theme }) => ({
   gridArea: "sidebar",
   display: "flex",
   width: "100%",
-  maxWidth: 428,
+  maxWidth: "428px",
   height: "100%",
   backgroundColor: theme.palette["background-dark"].main,
   position: "fixed",
@@ -13,10 +13,10 @@ export const Container = styled("nav")(({ theme }) => ({
   transform: "translateX(-100%)",
   transition: "all 200ms ease-in",
   opacity: 0,
-  zIndex: 9999,
+  zIndex: -50,
 
   "&.show": {
-    transform: "none",
+    transform: "translateX(0)",
     transition: "all 200ms ease-out",
     zIndex: 9999,
     opacity: 1,
@@ -160,6 +160,17 @@ export const NavItem = styled("a")(({ theme }) => ({
 
   "&:hover": {
     //backgroundColor: theme.palette["red"].main,
+  },
+
+  ".menu": {
+    span: {
+      color: theme.palette["white"].main,
+      marginLeft: 16,
+    },
+  },
+
+  ".warning": {
+    color: theme.palette["red"].main,
   },
 
   span: {

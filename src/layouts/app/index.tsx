@@ -17,7 +17,6 @@ const Layout: React.FC<PropsWithChildren<any>> = ({ children }) => {
   return (
     <AnimatedTransictionPage>
       <Loading />
-      {/* <PwaInstallAlert /> */}
       <Container>
         <App>
           <Header setActiveSidebar={handleActiveSidebarHeader} />
