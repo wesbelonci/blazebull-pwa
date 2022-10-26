@@ -15,7 +15,6 @@ type Ref = HTMLDivElement;
 const DropdownUser = React.forwardRef<Ref, DropdownProps>(
   ({ visible }, ref) => {
     const { signOut } = useAuth();
-    console.log(visible, "teste");
 
     const navigate = useNavigate();
 

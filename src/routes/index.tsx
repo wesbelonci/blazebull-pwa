@@ -14,7 +14,7 @@ import { getLocale, suportedLanguages } from "../language";
 import { BankManagerPage } from "../pages/App/BankManager";
 import { ChangePassword } from "../pages/App/ChangePassword";
 import { ForgotPassword } from "../pages/App/ForgotPassword";
-// import { Admin } from "../pages/Admin/Home";
+import { Admin } from "../pages/Admin/Home";
 
 const App: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -46,7 +46,7 @@ const App: React.FC = () => {
             <Route path="classroom" element={<Classroom />} />
             <Route path="bank-manager" element={<BankManagerPage />} />
             <Route path="settings" element={<Settings />} />
-            {/* <Route path="admin" element={<Admin />} /> */}
+            <Route path="admin" element={<Admin />} />
           </Route>
           <Route path="authentication" element={<AuthenticationPage />} />
           <Route path="*" element={<p>There's nothing here: 404!</p>} />

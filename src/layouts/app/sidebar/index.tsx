@@ -28,7 +28,6 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
   const { signOut, user } = useAuth();
   const { locale } = useLocale();
   const navigate = useNavigate();
-  console.log(active);
 
   return (
     <Container className={`${active ? "show" : ""}`}>
