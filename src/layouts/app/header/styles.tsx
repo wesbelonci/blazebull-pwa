@@ -12,13 +12,13 @@ export const Container = styled("div")<{ shadow: boolean }>(
     justifyContent: "space-between",
     backgroundColor: theme.palette["background-dark"].main,
     alignItems: "center",
-    position: "fixed",
+    position: "relative",
     top: 0,
     left: 0,
     right: 0,
     zIndex: 500,
     boxShadow: shadow ? "-6px 5px 10px rgba(0, 0, 0, 0.3)" : "",
-    margin: "0 auto",
+    // margin: "0 auto",
   })
 );
 

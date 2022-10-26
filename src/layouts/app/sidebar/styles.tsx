@@ -10,7 +10,7 @@ export const Container = styled("nav")(({ theme }) => ({
   position: "fixed",
   flexDirection: "column",
 
-  transform: "translateX(-100%)",
+  transform: "translateX(-200%)",
   transition: "all 200ms ease-in",
   opacity: 0,
   zIndex: -50,

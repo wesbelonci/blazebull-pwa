@@ -12,7 +12,7 @@ export const Container = styled("div")<{ show?: boolean }>(
     height: window.innerHeight,
     flexDirection: "column",
     overflow: "hidden",
-    zIndex: 600,
+    zIndex: 99999,
     top: 0,
     left: 0,
   })
@@ -23,7 +23,7 @@ export const Content = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette["background-dark"].main,
   paddingLeft: theme.spacing(2),
   paddingRight: theme.spacing(2),
-  maxWidth: "390px",
+  maxWidth: "428px",
   width: "100%",
   height: "auto",
   flexDirection: "column",

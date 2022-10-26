@@ -1,13 +1,13 @@
 import { styled } from "@mui/system";
 
 export const Container = styled("div")(({ theme }) => ({
-  display: "flex",
+  display: "block",
   backgroundColor: theme.palette["background-dark"].main,
   justifyContent: "center",
   alignItems: "center",
   maxWidth: "428px",
   width: "100%",
-  //minHeight: window.innerHeight,
+  minHeight: window.innerHeight,
   height: "100%",
   flexDirection: "column",
   overflow: "hidden",
