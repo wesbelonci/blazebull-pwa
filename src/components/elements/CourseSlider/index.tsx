@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider, { Settings as CarouselSetting } from "react-slick";
 import { Container, Slide, Card } from "./styles";
 import { useClassRoom } from "../../../hooks/ClassRoomContext";
+import { FiLock } from "react-icons/fi";
 
 interface ILessons {
   lessons: any[];
@@ -28,7 +29,10 @@ const CourseSlider: React.FC<ILessons> = ({ lessons }) => {
           <Slide key={lesson.id}>
             <Card
               background={lesson.thumb_url}
-              onClick={() => setCurrentActiveLesson(lesson)}
+              onClick={() =>
+                lesson.active ? setCurrentActiveLesson(lesson) : null
+              }
+              active={lesson.active}
             >
               {lesson.user_viewed && (
                 <img
@@ -39,11 +43,15 @@ const CourseSlider: React.FC<ILessons> = ({ lessons }) => {
                 />
               )}
               <div className="play">
-                <img
-                  src="/assets/objects/play-circle.svg"
-                  alt="Play Course"
-                  width={50}
-                />
+                {lesson.active ? (
+                  <img
+                    src="/assets/objects/play-circle.svg"
+                    alt="Play Course"
+                    width={50}
+                  />
+                ) : (
+                  <FiLock size={40} />
+                )}
               </div>
               <div className="title">
                 <span>{lesson.title}</span>

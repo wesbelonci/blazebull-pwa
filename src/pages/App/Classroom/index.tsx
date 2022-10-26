@@ -13,11 +13,14 @@ import {
   AccordionDetails,
   LoadingBox,
 } from "./styles";
-import Vimeo from "@u-wave/react-vimeo";
+// import Vimeo from "@u-wave/react-vimeo";
+import YouTube from "react-youtube";
 import { CourseSlider } from "../../../components/elements/CourseSlider";
 import { useClassRoom } from "../../../hooks/ClassRoomContext";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
+import { FiArrowRight } from "react-icons/fi";
+// import { Link } from "react-router-dom";
 
 function Classroom() {
   const {
@@ -28,8 +31,6 @@ function Classroom() {
     completeLesson,
   } = useClassRoom();
 
-  console.log(currentActiveLesson);
-
   return (
     <Layout>
       <Container>
@@ -38,17 +39,28 @@ function Classroom() {
             <CurrentClass>
               <Watching>
                 {currentActiveLesson && (
-                  <Vimeo
-                    video={currentActiveLesson.video_url}
-                    controls={true}
-                    showByline
-                    showTitle
-                    showPortrait
+                  <YouTube
+                    videoId={currentActiveLesson.video_url}
+                    opts={{ allowFullScreen: true, showInfo: 0 }}
                   />
                 )}
               </Watching>
+              {currentActiveLesson.action_url && (
+                <a
+                  href={currentActiveLesson.action_url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Button className="mx-auto" color="red">
+                    <span>Acessar o site</span>
+                    <FiArrowRight className="text-red ml-2" size={25} />
+                  </Button>
+                </a>
+              )}
+
               <Button
-                className="mx-auto"
+                className="mx-auto mt-8"
+                color="lime-green"
                 onClick={() => completeLesson(currentActiveLesson.id)}
               >
                 <img src="/assets/objects/check-icon.svg" alt="Check" />

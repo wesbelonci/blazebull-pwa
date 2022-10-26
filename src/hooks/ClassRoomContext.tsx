@@ -31,6 +31,7 @@ interface ILesson {
   thumb_url: string;
   user_viewed: boolean;
   video_url: string;
+  action_url: string;
 }
 
 interface IModule {

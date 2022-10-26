@@ -27,8 +27,8 @@ export const Slide = styled("div")(({ theme }) => ({
   paddingBottom: 10,
 }));
 
-export const Card = styled("div")<{ background: string }>(
-  ({ theme, background }) => ({
+export const Card = styled("div")<{ background: string; active: boolean }>(
+  ({ theme, background, active }) => ({
     display: "flex",
     background: `linear-gradient(0deg, rgba(0, 0, 0, 0.63), rgba(0, 0, 0, 0.63)), linear-gradient(180deg, rgba(0, 0, 0, 0) 5.21%, rgba(0, 0, 0, 0.9) 100%), url(${background})`,
     backgroundPosition: "center",
@@ -43,6 +43,7 @@ export const Card = styled("div")<{ background: string }>(
     // paddingRight: theme.spacing(0.8),
     position: "relative",
     flexDirection: "column",
+    filter: active ? "grayscale(0)" : "grayscale(1)",
 
     ".check": {
       position: "absolute",
@@ -53,6 +54,7 @@ export const Card = styled("div")<{ background: string }>(
     ".play": {
       display: "flex",
       justifyContent: "center",
+      alignItems: "center",
       width: "100%",
       height: "100%",
       position: "absolute",
@@ -61,6 +63,13 @@ export const Card = styled("div")<{ background: string }>(
       left: 0,
       bottom: 0,
       margin: "0 auto",
+      zIndex: 0,
+
+      svg: {
+        marginTop: -25,
+        color: theme.palette["white"].main,
+        zIndex: 999,
+      },
     },
 
     ".title": {

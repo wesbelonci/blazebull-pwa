@@ -22,7 +22,8 @@ import { useNavigate } from "react-router-dom";
 import { useCrashGame } from "../../../hooks/CrashGameContext";
 import { useDoubleGame } from "../../../hooks/DoubleGameContext";
 import { useLocale } from "../../../hooks/LocaleContext";
-import Vimeo from "@u-wave/react-vimeo";
+// import Vimeo from "@u-wave/react-vimeo";
+import YouTube from "react-youtube";
 import { useClassRoom } from "../../../hooks/ClassRoomContext";
 // import { FormattedMessage, useIntl } from "react-intl";
 
@@ -50,12 +51,9 @@ function HomePage() {
             </CourseHeader>
             <KeepWatching>
               {currentActiveLesson && (
-                <Vimeo
-                  video={currentActiveLesson.video_url}
-                  controls={true}
-                  showByline
-                  showTitle
-                  showPortrait
+                <YouTube
+                  videoId={currentActiveLesson.video_url}
+                  opts={{ allowFullScreen: true, showInfo: 0 }}
                 />
               )}
             </KeepWatching>

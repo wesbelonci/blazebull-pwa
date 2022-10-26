@@ -65,28 +65,30 @@ export const Watching = styled("div")(({ theme }) => ({
   },
 }));
 
-export const Button = styled("button")(({ theme }) => ({
-  display: "flex",
-  width: "300px",
-  height: 50,
-  marginTop: 10,
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "row",
-  position: "relative",
-  bottom: 0,
-  left: 0,
-  cursor: "pointer",
-  borderRadius: "0.563rem",
-  backgroundColor: "transparent",
-  padding: "11px, 10px, 11px, 10px",
-  border: `1px solid ${theme.palette["lime-green"].main}`,
-  color: theme.palette["lime-green"].main,
+export const Button = styled("button")<{ color: string }>(
+  ({ theme, color }) => ({
+    display: "flex",
+    width: "300px",
+    height: 50,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    position: "relative",
+    bottom: 0,
+    left: 0,
+    cursor: "pointer",
+    borderRadius: "0.563rem",
+    backgroundColor: "transparent",
+    padding: "11px, 10px, 11px, 10px",
+    border: `1px solid ${theme.palette[color].main}`,
+    color: theme.palette[color].main,
 
-  "&:hover": {
-    // backgroundColor: theme.palette["dark-red"].main,
-  },
-}));
+    "&:hover": {
+      // backgroundColor: theme.palette["dark-red"].main,
+    },
+  })
+);
 
 export const ModuleAndCourses = styled("div")(({ theme }) => ({
   display: "flex",
