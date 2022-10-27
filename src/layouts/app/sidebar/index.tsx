@@ -80,7 +80,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
       </BetsInfo>
       <Nav className="sidebar-nav">
         <NavList>
-          <NavItem onClick={() => navigate(`/${locale}/home`)}>
+          <NavItem onClick={() => navigate(`/${locale}`)}>
             <Icon>
               <img src="/assets/objects/home.svg" alt="Home" />
             </Icon>

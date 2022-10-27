@@ -72,7 +72,7 @@ function AuthenticationPage() {
     async (data: any) => {
       try {
         await signIn(data);
-        navigate(`/${locale}/home`);
+        navigate(`/${locale}/`);
       } catch (err) {
         addToast({
           title: "Invalid E-mail or password",

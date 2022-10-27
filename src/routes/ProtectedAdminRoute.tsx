@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, Outlet, useParams } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/AuthContext";
 
 interface ProtectedRouteProps {
@@ -8,13 +8,13 @@ interface ProtectedRouteProps {
 
 const ProtectedAdminRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isAuthenticated, user } = useAuth();
-  const { lang } = useParams();
+  // const { lang } = useParams();
 
   if (isAuthenticated && user && user.role !== "admin") {
-    return <Navigate to={`/${lang}/home`} replace />;
+    return <Navigate to="/authentication" replace />;
   }
 
   return children ? children : <Outlet />;
 };
 
-export default ProtectedAdminRoute;
+export { ProtectedAdminRoute };

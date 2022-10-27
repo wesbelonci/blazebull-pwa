@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { DropdownUser } from "../../../components/elements/DropdownUser";
-// import { useAuth } from "../../../hooks/AuthContext";
 import {
   Container,
   Navigation,
@@ -10,12 +9,13 @@ import {
   UserContent,
 } from "./styles";
 
+import HamburguerIcon from "../../../assets/hamburguer.svg";
+
 type HeaderProps = {
   setActiveSidebar: () => void;
 };
 
 const Header: React.FC<HeaderProps> = ({ setActiveSidebar }) => {
-  // const { user } = useAuth();
   const [dropDownVisible, setDropdownVisible] = useState<boolean>(false);
   const dropDownRef = React.useRef<HTMLDivElement>(null);
 
@@ -39,7 +39,7 @@ const Header: React.FC<HeaderProps> = ({ setActiveSidebar }) => {
     <Container>
       <Navigation>
         <Hamburguer onClick={setActiveSidebar}>
-          <img src="../assets/objects/hamburguer.svg" alt="Hamburguer" />
+          <img src={HamburguerIcon} alt="Hamburguer" />
         </Hamburguer>
 
         <UserContent>

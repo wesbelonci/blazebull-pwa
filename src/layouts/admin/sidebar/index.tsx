@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 // import { FiHome } from "react-icons/fi";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import Logo from "../../../assets/logo-white.svg";
+// import { useLocale } from "../../../hooks/LocaleContext";
 // import { IconBaseProps } from "react-icons/lib";
 
 type SidebarProps = {
@@ -28,17 +29,17 @@ interface ItemProps {
   icon?: any;
 }
 
-export const SidebarData = [
+const sidebarData = [
   {
     title: "Home",
-    path: "/home",
+    path: "/",
     icon: "/assets/objects/home.svg",
     subNav: [],
   },
 
   {
     title: "Usuários",
-    path: "/admin/users",
+    path: `/users`,
     icon: "/assets/objects/indique-ganhe.svg",
   },
 
@@ -56,7 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active }) => {
         <Image src={Logo} alt="Logo" />
       </LogoContent>
       <Menu>
-        {SidebarData.map((item, index) => (
+        {sidebarData.map((item, index) => (
           <SidebarItem item={item} key={index} />
         ))}
       </Menu>
@@ -65,6 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active }) => {
 };
 const SidebarItem: React.FC<SidebarItemProps> = ({ item }) => {
   const location = useLocation();
+  console.log(location);
 
   const handleTabActive = useCallback(
     (name: string) => {

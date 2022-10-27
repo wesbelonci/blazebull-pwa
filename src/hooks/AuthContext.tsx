@@ -65,8 +65,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const isAuthenticated = !!user;
 
-  console.log(user);
-
   useEffect(() => {
     if (isAuthenticated) {
       getUserData();
