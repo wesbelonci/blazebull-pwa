@@ -85,5 +85,6 @@
     { "type": 0, "value": "Password confirmation is required" }
   ],
   "email_is_not_valid": [{ "type": 0, "value": "Fill in with a valid e-mail" }],
-  "email_required": [{ "type": 0, "value": "E-mail is required" }]
+  "email_required": [{ "type": 0, "value": "E-mail is required" }],
+  "speak-now": [{ "type": 0, "value": "Speak Now!" }]
 }

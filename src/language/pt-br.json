@@ -86,5 +86,6 @@
     { "type": 0, "value": "A confirmação de senha é obrigatória!" }
   ],
   "email_is_not_valid": [{ "type": 0, "value": "Digite um e-mail válido!" }],
-  "email_required": [{ "type": 0, "value": "Digite um e-mail válido!" }]
+  "email_required": [{ "type": 0, "value": "Digite um e-mail válido!" }],
+  "speak-now": [{ "type": 0, "value": "Falar agora!" }]
 }

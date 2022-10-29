@@ -136,7 +136,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
             </Icon>
             <span>Configurações</span>
           </NavItem>
-          <NavItem>
+          <NavItem onClick={() => navigate(`/${locale}/support`)}>
             <Icon>
               <img src="/assets/objects/suporte.svg" alt="Suporte" />
             </Icon>

@@ -14,6 +14,8 @@ import { getLocale, suportedLanguages } from "../language";
 import { BankManagerPage } from "../pages/App/BankManager";
 import { ChangePassword } from "../pages/App/ChangePassword";
 import { ForgotPassword } from "../pages/App/ForgotPassword";
+import { NeedHelp } from "../pages/App/NeedHelp";
+import { Support } from "../pages/App/Support";
 
 const AppRoutes: React.FC = () => {
   const { isAuthenticated } = useAuth();
@@ -42,6 +44,7 @@ const AppRoutes: React.FC = () => {
               <Route path="forgot-password" element={<ForgotPassword />} />
             </>
           )}
+          <Route path="need-help" element={<NeedHelp />} />
           <Route element={<ProtectedRoute />}>
             <Route index element={<HomePage />} />
             <Route path="room-crash" element={<RoomCrash />} />
@@ -49,6 +52,7 @@ const AppRoutes: React.FC = () => {
             <Route path="classroom" element={<Classroom />} />
             <Route path="bank-manager" element={<BankManagerPage />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="support" element={<Support />} />
           </Route>
           <Route path="*" element={<p>There's nothing here: 404!</p>} />
         </Route>
