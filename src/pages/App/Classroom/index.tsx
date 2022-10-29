@@ -91,7 +91,10 @@ function Classroom() {
                   />
                 </div>
                 <span className="text-xs text-white ml-2">
-                  {Number(100 / Number(totalLessons / totalCompletedLessons))}%
+                  {Number(
+                    100 / Number(totalLessons / totalCompletedLessons)
+                  ).toFixed(2)}
+                  %
                 </span>
               </div>
             </div>
