@@ -82,6 +82,8 @@
     --bluey-grey-two: #9095ac;
     --bluey-grey-three: #aab0c4;
     --separator-three: #515963;
+    --whatsapp: rgb(10, 143, 67);
+    --telegram: rgba(96, 189, 228, 255)
 }
 
 @font-face {

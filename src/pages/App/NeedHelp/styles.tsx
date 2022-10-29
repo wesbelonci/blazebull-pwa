@@ -98,23 +98,21 @@ export const Button = styled("button")<ButtonProps>(({ theme, variant }) => ({
   outline: "none",
 
   backgroundColor:
-    variant === "contained" ? theme.palette.red.main : "transparent",
+    variant === "contained" ? theme.palette["whatsapp"].main : "transparent",
 
   border:
-    variant === "contained" ? "none" : `1px solid ${theme.palette["red"].main}`,
+    variant === "contained"
+      ? "none"
+      : `1px solid ${theme.palette["lime-green"].main}`,
 
   color:
     variant === "contained"
       ? theme.palette["white"].main
-      : theme.palette["red"].main,
+      : theme.palette["lime-green"].main,
 
   svg: {
     marginRight: 5,
   },
-
-  // "&:hover": {
-  //   backgroundColor: theme.palette["dark-red"].main,
-  // },
 }));
 
 export const IconButton = styled("div")(({ theme }) => ({

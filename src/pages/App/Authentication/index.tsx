@@ -10,6 +10,7 @@ import {
   ForgotPassword,
   KeepConnected,
   CheckBoxField,
+  NeedHelp,
 } from "./styles";
 import { FiUser, FiLock } from "react-icons/fi";
 import * as React from "react";
@@ -142,14 +143,17 @@ function AuthenticationPage() {
             </div>
           </Button>
 
-          {/* <NeedHelp>
+          <NeedHelp>
             <span className="text-white font-normal">
               <FormattedMessage id="need-help" />{" "}
-              <a href="#" className="text-red underline cursor-pointer">
+              <Link
+                to={`/${locale}/need-help`}
+                className="text-red underline cursor-pointer"
+              >
                 <FormattedMessage id="click-here" />
-              </a>
+              </Link>
             </span>
-          </NeedHelp> */}
+          </NeedHelp>
         </Content>
       </Container>
     </AnimatedTransictionPage>

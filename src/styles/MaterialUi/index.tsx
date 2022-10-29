@@ -42,6 +42,8 @@ declare module "@mui/material/styles" {
     "footer-color": Palette["primary"];
     gold: Palette["primary"];
     bronze: Palette["primary"];
+    whatsapp: Palette["primary"];
+    telegram: Palette["primary"];
   }
 
   // allow configuration using `createTheme`
@@ -84,6 +86,8 @@ declare module "@mui/material/styles" {
     "footer-color": PaletteOptions["primary"];
     gold: PaletteOptions["primary"];
     bronze: PaletteOptions["primary"];
+    whatsapp: PaletteOptions["primary"];
+    telegram: PaletteOptions["primary"];
   }
 }
 
@@ -128,6 +132,8 @@ declare module "@mui/material/TextField" {
     "footer-color": true;
     gold: true;
     bronze: true;
+    whatsapp: true;
+    telegram: true;
   }
 }
 
@@ -172,6 +178,8 @@ declare module "@mui/material/Button" {
     "footer-color": true;
     gold: true;
     bronze: true;
+    whatsapp: true;
+    telegram: true;
   }
 }
 
@@ -216,6 +224,8 @@ declare module "@mui/material/InputBase" {
     "footer-color": true;
     gold: true;
     bronze: true;
+    whatsapp: true;
+    telegram: true;
   }
 }
 
@@ -260,6 +270,8 @@ declare module "@mui/material/Checkbox" {
     "footer-color": true;
     gold: true;
     bronze: true;
+    whatsapp: true;
+    telegram: true;
   }
 }
 
@@ -391,6 +403,12 @@ const defaultTheme = createTheme({
     },
     bronze: {
       main: cssVar("--bronze"),
+    },
+    whatsapp: {
+      main: cssVar("--whatsapp"),
+    },
+    telegram: {
+      main: cssVar("--telegram"),
     },
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.

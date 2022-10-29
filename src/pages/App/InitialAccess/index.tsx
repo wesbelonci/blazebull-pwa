@@ -1,4 +1,4 @@
-import { Container, Button, Content } from "./styles";
+import { Container, Button, Content, NeedHelp } from "./styles";
 import { Link } from "react-router-dom";
 import { AnimatedTransictionPage } from "../../../components/modules/AnimatedTransictonPage";
 import { FormattedMessage } from "react-intl";
@@ -14,14 +14,17 @@ function InitialAccessPage() {
       <Container>
         <Content>
           <div className="flex flex-wrap flex-col md:flex-row"></div>
-          {/* <NeedHelp>
+          <NeedHelp>
             <span className="text-white font-normal text-sm">
               <FormattedMessage id="need-help" />{" "}
-              <strong className="text-red underline">
+              <Link
+                to={`/${locale}/need-help`}
+                className="text-red underline cursor-pointer"
+              >
                 <FormattedMessage id="click-here" />
-              </strong>
+              </Link>
             </span>
-          </NeedHelp> */}
+          </NeedHelp>
           <Link to={`/${locale}/authentication`}>
             <Button variant="contained">
               <div className="flex w-full h-full justify-center items-center">

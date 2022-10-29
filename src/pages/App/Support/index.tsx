@@ -9,9 +9,11 @@ function Support() {
       <Container>
         <Content>
           <div className="flex w-full justify-center flex-col">
-            <span className="text-white">Entre em contato pelo Telegram</span>
+            <span className="text-white text-center">
+              Entre em contato pelo Telegram
+            </span>
 
-            <div className="">
+            <div className="w-full px-4">
               <a href="https://t.me/blazebullsoficial">
                 <Button variant="contained" className="mt-4" type="submit">
                   <div className="flex w-full h-full justify-center items-center">

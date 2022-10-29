@@ -19,7 +19,7 @@ export const Content = styled("div")(({ theme }) => ({
   padding: theme.spacing(1),
   maxWidth: "428px",
   width: "100%",
-  height: "150px",
+  height: "200px",
   flexDirection: "column",
   overflow: "hidden",
   position: "relative",

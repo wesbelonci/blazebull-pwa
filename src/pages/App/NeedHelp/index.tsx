@@ -38,7 +38,7 @@ function NeedHelp() {
             </div>
           </PageTitle>
 
-          <div className="">
+          <div className="px-4">
             <a href="https://api.whatsapp.com/send?phone=5566996594962&text=Preciso%20de%20suporte%20no%20aplicativo%20Blaze%20Bulls">
               <Button variant="contained" className="mt-4" type="submit">
                 <div className="flex w-full h-full justify-center items-center">
