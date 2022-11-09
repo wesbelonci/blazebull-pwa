@@ -91,7 +91,7 @@ export const DoubleGameProvider: React.FC<SocketProviderProps> = ({
       if (data.type === "cancel-analyzing") {
         setMessages([] as ISocketGameDouble[]);
       } else {
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
 
         setMessages((oldValue) => {
           if (data.type === "gale") {

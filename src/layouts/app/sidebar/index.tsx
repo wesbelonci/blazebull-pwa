@@ -113,8 +113,8 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
             </Icon>
             <span>Indique e Ganhe</span>
           </NavItem> */}
-          {/* <NavItem onClick={() => navigate(`/${locale}/bank-manager`)}> */}
-          <NavItem>
+          <NavItem onClick={() => navigate(`/${locale}/bank-manager`)}>
+            {/* <NavItem> */}
             <Icon>
               <img
                 src="/assets/objects/gerenciador.svg"

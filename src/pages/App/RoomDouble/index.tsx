@@ -1,12 +1,15 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { RoomEntries } from "../../../components/modules/Entries";
 import { DoubleEntries } from "../../../components/modules/GameEntries/Double";
 import { Layout } from "../../../layouts/app";
 import { useWakeLock } from "react-screen-wake-lock";
 import { Container, Content, Blaze, Iframe, Divider } from "./styles";
+import { MarkManager } from "../../../components/modules/MarkManager";
 
 function RoomDouble() {
   const divRef = useRef<HTMLIFrameElement>(null);
+  const [modalManagerIsVisible, setModalManagerIsVisible] = useState(false);
+  const [entry, setEntry] = useState(null);
   const { isSupported, released, request, release } = useWakeLock();
 
   const lockScreen = useCallback(() => {
@@ -26,6 +29,11 @@ function RoomDouble() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [released]);
 
+  const selectEntryManager = useCallback((data: any) => {
+    setModalManagerIsVisible(true);
+    setEntry(data);
+  }, []);
+
   return (
     <Layout>
       <Container>
@@ -41,7 +49,12 @@ function RoomDouble() {
             />
           </Blaze>
           <Divider />
-          <DoubleEntries />
+          <DoubleEntries selectEntry={selectEntryManager} />
+          <MarkManager
+            showModal={modalManagerIsVisible}
+            entry={entry}
+            toggleModal={() => setModalManagerIsVisible(false)}
+          />
         </Content>
       </Container>
     </Layout>

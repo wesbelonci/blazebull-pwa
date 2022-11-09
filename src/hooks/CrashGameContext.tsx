@@ -91,7 +91,7 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
       if (data.type === "cancel-analyzing") {
         setMessages([] as ISocketGameCrash[]);
       } else {
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
 
         setMessages((oldValue) => {
           if (data.type === "gale") {

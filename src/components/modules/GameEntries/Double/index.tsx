@@ -1,10 +1,15 @@
 import React from "react";
-import { Container, Header, Title, Table, Entry } from "./styles";
+import { Container, Header, Title, Table, Entry, Marker } from "./styles";
 import { useDoubleGame } from "../../../../hooks/DoubleGameContext";
 import { IDouble } from "../../../../types/IDouble";
 import { FormattedMessage } from "react-intl";
+import { FiEdit } from "react-icons/fi";
 
-const DoubleEntries: React.FC = () => {
+interface IDoubleEntries {
+  selectEntry(data: any): void;
+}
+
+const DoubleEntries: React.FC<IDoubleEntries> = ({ selectEntry }) => {
   const { entries } = useDoubleGame();
 
   return (
@@ -13,6 +18,9 @@ const DoubleEntries: React.FC = () => {
         <Title>
           <FormattedMessage id="todays-results" />
         </Title>
+        <div className="flex w-6 justify-center items-center">
+          <img src="../assets/objects/entries.svg" alt="Entries" />
+        </div>
       </Header>
       <Table className="min-w-full table-auto">
         <thead>
@@ -25,6 +33,9 @@ const DoubleEntries: React.FC = () => {
             </th>
             <th className="py-3 px-6 text-center text-xs font-medium text-white tracking-wider">
               <FormattedMessage id="roll" />
+            </th>
+            <th className="py-3 px-2 text-center text-xs font-medium text-white tracking-wider">
+              Gerenciador
             </th>
           </tr>
         </thead>
@@ -83,6 +94,11 @@ const DoubleEntries: React.FC = () => {
                     />
                   )}
                 </div>
+              </td>
+              <td className="flex flex-row px-6 py-2 whitespace-nowrap text-white justify-center">
+                <Marker onClick={() => selectEntry(double)}>
+                  <FiEdit size={20} />
+                </Marker>
               </td>
             </Entry>
           ))}

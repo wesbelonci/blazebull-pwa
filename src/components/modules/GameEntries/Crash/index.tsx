@@ -13,6 +13,9 @@ const CrashEntries: React.FC = () => {
         <Title>
           <FormattedMessage id="todays-results" />
         </Title>
+        <div className="flex w-6 justify-center items-center">
+          <img src="../assets/objects/entries.svg" alt="Entries" />
+        </div>
       </Header>
       <Table className="min-w-full table-auto">
         <thead>
