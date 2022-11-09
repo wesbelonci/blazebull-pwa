@@ -167,6 +167,7 @@ export const GameActive = styled("div")<{ active: boolean }>(
     width: "auto",
     borderRadius: "0.563rem",
     padding: 2,
+    zIndex: 100,
     // backgroundColor: theme.palette["separator"].main,
     cursor: "pointer",
 

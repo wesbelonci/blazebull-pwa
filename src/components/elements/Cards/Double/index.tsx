@@ -146,7 +146,7 @@ const CardDouble = () => {
                                   : locale === "pt"
                                   ? "pt-BR"
                                   : "es-ES"
-                              ).format(bank.total * 0.003)
+                              ).format(bank.entry * 0.02)
                             : "0"}
                         </Text>
                       </div>
