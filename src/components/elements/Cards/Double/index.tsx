@@ -186,7 +186,7 @@ const CardDouble = () => {
                                 messages[messages.length - 1]
                                   .martingale_sequence === 1
                                   ? bank.total * 0.01 * 2
-                                  : bank.total * 0.01 * 4
+                                  : bank.entry * 0.02 * 2
                               )
                             : "0"}
                         </Text>
@@ -213,8 +213,8 @@ const CardDouble = () => {
                               ).format(
                                 messages[messages.length - 1]
                                   .martingale_sequence === 2
-                                  ? bank.total * 0.003 * 2
-                                  : bank.total * 0.003 * 4
+                                  ? bank.total * 0.01 * 2 * 2
+                                  : bank.entry * 0.02 * 2 * 2
                               )
                             : "0"}
                         </Text>
