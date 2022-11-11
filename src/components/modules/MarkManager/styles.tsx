@@ -173,7 +173,7 @@ export const GameActive = styled("div")<{ active: boolean }>(
     cursor: "pointer",
 
     img: {
-      filter: !active ? "grayscale(80%)" : "grayscale(0%)",
+      // filter: !active ? "grayscale(80%)" : "grayscale(0%)",
       opacity: !active ? 0.4 : 1,
     },
     // borderRadius: "0.563rem",
