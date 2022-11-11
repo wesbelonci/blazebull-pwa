@@ -1,33 +1,34 @@
 import { styled } from "@mui/system";
 import Switch from "@mui/material/Switch";
 
-export const Container = styled("div")(({ theme }) => ({
-  display: "block",
-  // backgroundColor: theme.palette["white"].main,
-  width: "428px",
-  height: "100px",
-  overflow: "hidden",
-  position: "fixed",
-  // bottom: 0,
-  top: 0,
-  left: 0,
-  right: 0,
-  margin: "0 auto",
-  zIndex: 999,
-}));
+export const Container = styled("div")<{ show: boolean }>(
+  ({ theme, show }) => ({
+    display: show ? "flex" : "none",
+    // backgroundColor: theme.palette["white"].main,
+    width: "100%",
+    height: "100vh",
+    overflow: "hidden",
+    position: "fixed",
+    // bottom: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+    margin: "0 auto",
+    zIndex: 999,
+  })
+);
 
 export const Modal = styled("div")<{ show: boolean }>(({ theme, show }) => ({
   display: show ? "flex" : "none",
   backgroundColor: "rgba(0,0,0, 0.9)",
-  position: "fixed",
+  position: "relative",
   maxWidth: "428px",
-  width: "100%",
   top: 0,
   left: 0,
   right: 0,
   opacity: show ? 1 : 0,
   margin: "0 auto",
-  height: "100%",
+  height: "100vh",
   zIndex: show ? "9999" : "-99",
   alignItems: "center",
   justifyContent: "center",
