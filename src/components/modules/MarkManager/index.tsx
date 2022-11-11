@@ -138,7 +138,6 @@ const MarkManager: React.FC<IMarkManagerProps> = ({
                         <FormattedMessage id="currency" />{" "}
                       </span>
                       <InputMask
-                        autoFocus
                         type="text"
                         name="red"
                         label=""
