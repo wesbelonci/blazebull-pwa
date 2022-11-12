@@ -15,8 +15,9 @@ import {
 } from "./styles";
 import { InputMask } from "../../elements/InputMask";
 import { useLocale } from "../../../hooks/LocaleContext";
-// import { useAuth } from "../../../hooks/AuthContext";
+import { useAuth } from "../../../hooks/AuthContext";
 import { useToast } from "../../../hooks/ToastContext";
+import api from "../../../services/api";
 
 interface IMarkManagerProps {
   showModal: boolean;
@@ -30,7 +31,7 @@ const MarkManager: React.FC<IMarkManagerProps> = ({
   entry,
 }) => {
   const modalRef = React.useRef<HTMLDivElement>(null);
-  // const { user } = useAuth();
+  const { user } = useAuth();
   const { addToast } = useToast();
   const [colorActive, setColorActive] = useState({
     black: false,
@@ -58,7 +59,7 @@ const MarkManager: React.FC<IMarkManagerProps> = ({
   });
 
   const onSubmit = useCallback(
-    (data: any) => {
+    async (data: any) => {
       const red = parseInt(data.red.replace(/[\D]+/g, ""));
       const black = parseInt(data.black.replace(/[\D]+/g, ""));
       const white = parseInt(data.white.replace(/[\D]+/g, ""));
@@ -72,28 +73,67 @@ const MarkManager: React.FC<IMarkManagerProps> = ({
         return;
       }
 
-      // const formData = {
-      //   bet: {
-      //     red: red || undefined,
-      //     black: black || undefined,
-      //     white: white || undefined,
-      //     gale1: martingale.gale1,
-      //     gale2: martingale.gale2,
-      //   },
-      //   user_id: user?.id,
-      //   round_id: entry?.round_id,
-      // };
+      const formData = {
+        bet: {
+          red: red
+            ? {
+                amount: red,
+              }
+            : null,
+          black: black
+            ? {
+                amount: black,
+              }
+            : null,
+          white: white
+            ? {
+                amount: white,
+              }
+            : null,
+          martingale1: martingale.gale1,
+          martingale2: martingale.gale2,
+        },
+        user_id: user?.id,
+        round_id: entry?.round_id,
+      };
 
-      toggleModal();
-      reset();
+      try {
+        await api.post("/entries", formData);
 
-      addToast({
-        title: "Salvo com sucesso!",
-        type: "success",
-      });
+        addToast({
+          title: "Salvo com sucesso!",
+          type: "success",
+        });
+
+        toggleModal();
+        reset();
+      } catch (err: any) {
+        if (err.response.data.message === "Entry already added") {
+          addToast({
+            title: "Entrada já adicionada",
+            type: "error",
+          });
+
+          return;
+        }
+
+        addToast({
+          title: "Ocorreu um erro ao Salvar a entrada",
+          type: "error",
+        });
+      }
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     },
-    [toggleModal, reset, addToast]
+    [
+      martingale.gale1,
+      martingale.gale2,
+      user?.id,
+      entry?.round_id,
+      addToast,
+      toggleModal,
+      reset,
+    ]
   );
 
   useEffect(() => {
