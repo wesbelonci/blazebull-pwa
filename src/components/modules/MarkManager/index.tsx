@@ -18,6 +18,7 @@ import { useLocale } from "../../../hooks/LocaleContext";
 import { useAuth } from "../../../hooks/AuthContext";
 import { useToast } from "../../../hooks/ToastContext";
 import api from "../../../services/api";
+import { useDoubleGame } from "../../../hooks/DoubleGameContext";
 
 interface IMarkManagerProps {
   showModal: boolean;
@@ -33,6 +34,7 @@ const MarkManager: React.FC<IMarkManagerProps> = ({
   const modalRef = React.useRef<HTMLDivElement>(null);
   const { user } = useAuth();
   const { addToast } = useToast();
+  const { updateDoubleData } = useDoubleGame();
   const [colorActive, setColorActive] = useState({
     black: false,
     white: false,
@@ -107,6 +109,7 @@ const MarkManager: React.FC<IMarkManagerProps> = ({
 
         toggleModal();
         reset();
+        updateDoubleData();
       } catch (err: any) {
         if (err.response.data.message === "Entry already added") {
           addToast({
@@ -133,6 +136,7 @@ const MarkManager: React.FC<IMarkManagerProps> = ({
       addToast,
       toggleModal,
       reset,
+      updateDoubleData,
     ]
   );
 
