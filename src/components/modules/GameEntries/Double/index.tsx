@@ -96,9 +96,11 @@ const DoubleEntries: React.FC<IDoubleEntries> = ({ selectEntry }) => {
                 </div>
               </td>
               <td className="flex flex-row px-6 py-2 whitespace-nowrap text-white justify-center">
-                <Marker onClick={() => selectEntry(double)}>
-                  <FiEdit size={20} />
-                </Marker>
+                {!double.round.user_entry && (
+                  <Marker onClick={() => selectEntry(double)}>
+                    <FiEdit size={20} />
+                  </Marker>
+                )}
               </td>
             </Entry>
           ))}

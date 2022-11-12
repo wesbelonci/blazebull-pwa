@@ -9,6 +9,8 @@ type IRound = {
   created_at: Date;
   updated_at: Date;
   finish_at: Date;
+
+  user_entry?: any;
 };
 
 export type { IRound };
