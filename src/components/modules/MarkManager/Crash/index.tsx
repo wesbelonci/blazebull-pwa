@@ -17,7 +17,7 @@ import { useLocale } from "../../../../hooks/LocaleContext";
 import { useAuth } from "../../../../hooks/AuthContext";
 import { useToast } from "../../../../hooks/ToastContext";
 import api from "../../../../services/api";
-import { useDoubleGame } from "../../../../hooks/DoubleGameContext";
+import { useCrashGame } from "../../../../hooks/CrashGameContext";
 
 interface IMarkManagerProps {
   showModal: boolean;
@@ -33,7 +33,7 @@ const CrashMarkManager: React.FC<IMarkManagerProps> = ({
   const modalRef = React.useRef<HTMLDivElement>(null);
   const { user } = useAuth();
   const { addToast } = useToast();
-  const { updateDoubleData } = useDoubleGame();
+  const { updateCrashData } = useCrashGame();
 
   const [martingale, setMartingale] = useState({
     gale1: false,
@@ -89,7 +89,7 @@ const CrashMarkManager: React.FC<IMarkManagerProps> = ({
 
         toggleModal();
         reset();
-        updateDoubleData();
+        updateCrashData();
       } catch (err: any) {
         if (err.response.data.message === "Entry already added") {
           addToast({
@@ -116,7 +116,7 @@ const CrashMarkManager: React.FC<IMarkManagerProps> = ({
       addToast,
       toggleModal,
       reset,
-      updateDoubleData,
+      updateCrashData,
     ]
   );
 
