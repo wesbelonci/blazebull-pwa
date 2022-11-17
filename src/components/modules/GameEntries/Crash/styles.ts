@@ -55,3 +55,17 @@ export const Entry = styled("tr")<{ type: "win" | "loss" }>(
     // alignItems: "center",
   })
 );
+
+export const Marker = styled("div")(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: 20,
+  height: 20,
+  cursor: "pointer",
+
+  // background: theme.palette["white"].main,
+  color: theme.palette["white"].main,
+  padding: 2,
+  borderRadius: 5,
+}));

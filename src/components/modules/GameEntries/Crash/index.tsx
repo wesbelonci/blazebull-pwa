@@ -1,10 +1,15 @@
 import React from "react";
-import { Container, Header, Table, Entry, Title } from "./styles";
+import { Container, Header, Table, Entry, Title, Marker } from "./styles";
 import { useCrashGame } from "../../../../hooks/CrashGameContext";
 import { ICrash } from "../../../../types/ICrash";
 import { FormattedMessage } from "react-intl";
+import { FiEdit } from "react-icons/fi";
 
-const CrashEntries: React.FC = () => {
+interface ICrashEntries {
+  selectEntry(data: any): void;
+}
+
+const CrashEntries: React.FC<ICrashEntries> = ({ selectEntry }) => {
   const { entries } = useCrashGame();
 
   return (
@@ -29,6 +34,9 @@ const CrashEntries: React.FC = () => {
             <th className="py-3 text-center text-xs font-medium text-white tracking-wider">
               Crash
             </th>
+            <th className="py-3 px-2 text-center text-xs font-medium text-white tracking-wider">
+              Gerenciador
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -50,6 +58,13 @@ const CrashEntries: React.FC = () => {
               </td>
               <td className="px-6 py-2 whitespace-nowrap text-white">
                 {crash.round.crash_point}x
+              </td>
+              <td className="flex flex-row px-6 py-2 whitespace-nowrap text-white justify-center">
+                {!crash.round.user_entry && (
+                  <Marker onClick={() => selectEntry(crash)}>
+                    <FiEdit size={20} />
+                  </Marker>
+                )}
               </td>
             </Entry>
           ))}

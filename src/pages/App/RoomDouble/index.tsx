@@ -4,7 +4,7 @@ import { DoubleEntries } from "../../../components/modules/GameEntries/Double";
 import { Layout } from "../../../layouts/app";
 import { useWakeLock } from "react-screen-wake-lock";
 import { Container, Content, Blaze, Iframe, Divider } from "./styles";
-import { MarkManager } from "../../../components/modules/MarkManager";
+import { DoubleMarkManager } from "../../../components/modules/MarkManager/Double";
 
 function RoomDouble() {
   const divRef = useRef<HTMLIFrameElement>(null);
@@ -50,7 +50,7 @@ function RoomDouble() {
           </Blaze>
           <Divider />
           <DoubleEntries selectEntry={selectEntryManager} />
-          <MarkManager
+          <DoubleMarkManager
             showModal={modalManagerIsVisible}
             entry={entry}
             toggleModal={() => setModalManagerIsVisible(false)}

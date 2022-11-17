@@ -13,12 +13,12 @@ import {
   GameActive,
   Container,
 } from "./styles";
-import { InputMask } from "../../elements/InputMask";
-import { useLocale } from "../../../hooks/LocaleContext";
-import { useAuth } from "../../../hooks/AuthContext";
-import { useToast } from "../../../hooks/ToastContext";
-import api from "../../../services/api";
-import { useDoubleGame } from "../../../hooks/DoubleGameContext";
+import { InputMask } from "../../../elements/InputMask";
+import { useLocale } from "../../../../hooks/LocaleContext";
+import { useAuth } from "../../../../hooks/AuthContext";
+import { useToast } from "../../../../hooks/ToastContext";
+import api from "../../../../services/api";
+import { useDoubleGame } from "../../../../hooks/DoubleGameContext";
 
 interface IMarkManagerProps {
   showModal: boolean;
@@ -26,7 +26,7 @@ interface IMarkManagerProps {
   entry: any | null;
 }
 
-const MarkManager: React.FC<IMarkManagerProps> = ({
+const DoubleMarkManager: React.FC<IMarkManagerProps> = ({
   showModal,
   toggleModal,
   entry,
@@ -324,4 +324,4 @@ const MarkManager: React.FC<IMarkManagerProps> = ({
   );
 };
 
-export { MarkManager };
+export { DoubleMarkManager };

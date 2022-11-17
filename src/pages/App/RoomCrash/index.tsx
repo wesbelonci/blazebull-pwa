@@ -1,13 +1,15 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { RoomEntries } from "../../../components/modules/Entries";
 import { CrashEntries } from "../../../components/modules/GameEntries/Crash";
 import { Layout } from "../../../layouts/app";
 import { useWakeLock } from "react-screen-wake-lock";
 import { Container, Content, Blaze, Iframe, Divider } from "./styles";
+import { CrashMarkManager } from "../../../components/modules/MarkManager/Crash";
 
 function RoomCrash() {
   const divRef = useRef<HTMLIFrameElement>(null);
-
+  const [modalManagerIsVisible, setModalManagerIsVisible] = useState(false);
+  const [entry, setEntry] = useState(null);
   const { isSupported, released, request, release } = useWakeLock();
 
   const lockScreen = useCallback(() => {
@@ -27,6 +29,11 @@ function RoomCrash() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [released]);
 
+  const selectEntryManager = useCallback((data: any) => {
+    setModalManagerIsVisible(true);
+    setEntry(data);
+  }, []);
+
   return (
     <Layout>
       <Container>
@@ -42,7 +49,12 @@ function RoomCrash() {
             />
           </Blaze>
           <Divider />
-          <CrashEntries />
+          <CrashEntries selectEntry={selectEntryManager} />
+          <CrashMarkManager
+            showModal={modalManagerIsVisible}
+            entry={entry}
+            toggleModal={() => setModalManagerIsVisible(false)}
+          />
         </Content>
       </Container>
     </Layout>
