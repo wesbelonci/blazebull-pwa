@@ -61,6 +61,21 @@ export const CrashGameProvider: React.FC<AuthProviderProps> = ({
     }
   }, [signOut]);
 
+  const getCrashUserEntries = useCallback(async (): Promise<void> => {
+    try {
+      const response = await api.get("/entries?game=crash");
+
+      const data = response.data as ICrash[];
+      setEntries(
+        data.filter(
+          (item) => item?.win_loss !== undefined && item?.win_loss !== null
+        )
+      );
+    } catch (err) {
+      signOut();
+    }
+  }, [signOut]);
+
   const updateCrashData = useCallback(async () => {
     Promise.all([await getDailyWinAndLoss(), await getSignalsEntries()]);
   }, [getDailyWinAndLoss, getSignalsEntries]);
