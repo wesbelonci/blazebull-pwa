@@ -99,7 +99,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                   // legends={null}
                 />
 
-                <div className="mx-auto w-full py-4">
+                <div className="mx-auto w-full py-2">
                   <span className="text-white font-bold text-xl">Placar</span>
                 </div>
               </div>
@@ -146,7 +146,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                   }}
                   // legends={null}
                 />
-                <div className="mx-auto w-full py-4">
+                <div className="mx-auto w-full py-2">
                   <span className="text-white font-bold text-xl">Ganhos</span>
                 </div>
               </div>
@@ -216,7 +216,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                   // legends={null}
                 />
 
-                <div className="mx-auto w-full py-4">
+                <div className="mx-auto w-full py-2">
                   <span className="text-white font-bold text-xl">Placar</span>
                 </div>
               </div>
@@ -263,7 +263,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                   }}
                   // legends={null}
                 />
-                <div className="mx-auto w-full py-4">
+                <div className="mx-auto w-full py-2">
                   <span className="text-white font-bold text-xl">Ganhos</span>
                 </div>
               </div>
