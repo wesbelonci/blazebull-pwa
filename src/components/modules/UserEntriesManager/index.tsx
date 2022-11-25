@@ -51,7 +51,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
               </Badge>
             </div>
           </HeaderResult>
-          <div className="flex flex-row w-full h-full">
+          <div className="flex flex-row w-full items-center justify-center">
             <div className="w-full block">
               <ResponsiveRadialBar
                 data={[
@@ -165,7 +165,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
               </Badge>
             </div>
           </HeaderResult>
-          <div className="flex flex-row w-full h-full">
+          <div className="flex flex-row w-full items-center justify-center">
             <div className="w-full block">
               <ResponsiveRadialBar
                 data={[
