@@ -23,7 +23,7 @@ import { useCrashGame } from "../../../hooks/CrashGameContext";
 import { useDoubleGame } from "../../../hooks/DoubleGameContext";
 import { useLocale } from "../../../hooks/LocaleContext";
 // import Vimeo from "@u-wave/react-vimeo";
-import YouTube from "react-youtube";
+// import YouTube from "react-youtube";
 import { useClassRoom } from "../../../hooks/ClassRoomContext";
 // import { UserEntriesManager } from "../../../components/modules/UserEntriesManager";
 // import { FormattedMessage, useIntl } from "react-intl";
@@ -52,10 +52,18 @@ function HomePage() {
             </CourseHeader>
             <KeepWatching>
               {currentActiveLesson && (
-                <YouTube
-                  videoId={currentActiveLesson.video_url}
-                  opts={{ allowFullScreen: true, showInfo: 0 }}
+                <iframe
+                  title="Video"
+                  frameBorder="0"
+                  allowFullScreen
+                  src={currentActiveLesson.video_url}
+                  id="ifr_637eb356f44ca1000986d8f4"
+                  referrerPolicy="origin"
                 />
+                // <YouTube
+                //   videoId={currentActiveLesson.video_url}
+                //   opts={{ allowFullScreen: true, showInfo: 0 }}
+                // />
               )}
             </KeepWatching>
           </Course>
