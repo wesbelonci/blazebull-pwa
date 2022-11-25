@@ -25,7 +25,7 @@ import { useLocale } from "../../../hooks/LocaleContext";
 // import Vimeo from "@u-wave/react-vimeo";
 import YouTube from "react-youtube";
 import { useClassRoom } from "../../../hooks/ClassRoomContext";
-import { UserEntriesManager } from "../../../components/modules/UserEntriesManager";
+// import { UserEntriesManager } from "../../../components/modules/UserEntriesManager";
 // import { FormattedMessage, useIntl } from "react-intl";
 
 function HomePage() {
