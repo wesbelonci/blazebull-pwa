@@ -153,7 +153,7 @@ function HomePage() {
               </RoomStats>
             </Double>
           </Rooms>
-          <UserEntriesManager />
+          {/* <UserEntriesManager /> */}
           <div style={{ height: 40 }}></div>
         </Content>
       </Container>
