@@ -145,7 +145,7 @@ export const GameResults = styled("button")(({ theme }) => ({
   // backgroundImage: `linear-gradient(to right, rgba(255,255,255,0) 5%,${theme.palette["background-dark"].main}), url(/assets/images/bg-room-crash.webp)`,
   backgroundRepeat: "no-repeat",
   backgroundSize: "contain",
-  height: 335,
+  height: 300,
   position: "relative",
   flexDirection: "column",
 

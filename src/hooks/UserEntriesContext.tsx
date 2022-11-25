@@ -32,9 +32,7 @@ export const UserEntriesProvider: React.FC<UserEntriesProviderProps> = ({
   const [crashEntries, setCrashEntries] = useState<IUserEntries | null>(null);
   const [doubleEntries, setDoubleEntries] = useState<IUserEntries | null>(null);
   const { signOut, isAuthenticated } = useAuth();
-  const { isLoading, setLoadingVisible } = useLoading();
-
-  // console.log(crashEntries, doubleEntries);
+  const { setLoadingVisible } = useLoading();
 
   const getCrashEntries = useCallback(async () => {
     try {
@@ -66,21 +64,10 @@ export const UserEntriesProvider: React.FC<UserEntriesProviderProps> = ({
   }, [getCrashEntries, getDoubleEntries, setLoadingVisible]);
 
   useEffect(() => {
-    if (
-      !crashEntries &&
-      !doubleEntries &&
-      isAuthenticated &&
-      isLoading === false
-    ) {
+    if (isAuthenticated) {
       updateUserEntries();
     }
-  }, [
-    crashEntries,
-    doubleEntries,
-    isAuthenticated,
-    isLoading,
-    updateUserEntries,
-  ]);
+  }, [isAuthenticated, updateUserEntries]);
 
   return (
     <UserEntriesContext.Provider
