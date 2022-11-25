@@ -34,6 +34,8 @@ export const UserEntriesProvider: React.FC<UserEntriesProviderProps> = ({
   const { signOut, isAuthenticated } = useAuth();
   const { isLoading, setLoadingVisible } = useLoading();
 
+  // console.log(crashEntries, doubleEntries);
+
   const getCrashEntries = useCallback(async () => {
     try {
       const response = await api.get("/entries?game=crash");

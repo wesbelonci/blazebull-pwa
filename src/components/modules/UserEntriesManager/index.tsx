@@ -10,6 +10,7 @@ import {
   Divider,
 } from "./styles";
 import { ResponsiveRadialBar } from "@nivo/radial-bar";
+import { useUserEntries } from "../../../hooks/UserEntriesContext";
 // import { FiArrowUp, FiArrowDown } from "react-icons/fi";
 // import { CardCrash } from "../../elements/Cards/Crash";
 // import { CardDouble } from "../../elements/Cards/Double";
@@ -21,23 +22,9 @@ interface EntriesProps {
   // room: "crash" | "double";
 }
 
-const data = [
-  {
-    id: "Ganhos",
-    data: [
-      {
-        x: "win",
-        y: 2469,
-      },
-      {
-        x: "loss",
-        y: 400,
-      },
-    ],
-  },
-];
-
 const UserEntriesManager: React.FC<EntriesProps> = () => {
+  const { double, crash } = useUserEntries();
+
   return (
     <Container>
       <Header>
@@ -59,13 +46,29 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
             </div>
             <div className="flex flex-row w-auto items-center justify-end">
               <span>Entradas feitas</span>
-              <Badge>300</Badge>
+              <Badge>
+                {Number(double?.loss || 0) + Number(double?.win || 0)}
+              </Badge>
             </div>
           </HeaderResult>
           <div className="flex flex-row w-full h-full">
             <div className="w-full block">
               <ResponsiveRadialBar
-                data={data}
+                data={[
+                  {
+                    id: "Placar",
+                    data: [
+                      {
+                        x: "win",
+                        y: double?.win || 0,
+                      },
+                      {
+                        x: "loss",
+                        y: double?.loss || 0,
+                      },
+                    ],
+                  },
+                ]}
                 // valueFormat=">-$.2f"
                 startAngle={0}
                 endAngle={360}
@@ -98,7 +101,21 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
 
             <div className="w-full block">
               <ResponsiveRadialBar
-                data={data}
+                data={[
+                  {
+                    id: "Ganhos",
+                    data: [
+                      {
+                        x: "win",
+                        y: double?.win_amount || 0,
+                      },
+                      {
+                        x: "loss",
+                        y: double?.loss_amount || 0,
+                      },
+                    ],
+                  },
+                ]}
                 // valueFormat=">-.2f"
                 startAngle={0}
                 endAngle={360}
@@ -143,31 +160,140 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
             </div>
             <div className="flex flex-row w-auto items-center justify-end">
               <span>Entradas feitas</span>
-              <Badge>300</Badge>
+              <Badge>
+                {Number(crash?.loss || 0) + Number(crash?.win || 0)}
+              </Badge>
             </div>
           </HeaderResult>
+          <div className="flex flex-row w-full h-full">
+            <div className="w-full block">
+              <ResponsiveRadialBar
+                data={[
+                  {
+                    id: "Placar",
+                    data: [
+                      {
+                        x: "win",
+                        y: crash?.win || 0,
+                      },
+                      {
+                        x: "loss",
+                        y: crash?.loss || 0,
+                      },
+                    ],
+                  },
+                ]}
+                // valueFormat=">-$.2f"
+                startAngle={0}
+                endAngle={360}
+                innerRadius={0.15}
+                colors={["#32D74B", "#f12c4cb3"]}
+                padding={0.6}
+                padAngle={7}
+                cornerRadius={12}
+                // margin={{ top: 2, right: 2, bottom: 2, left: 2 }}
+                enableTracks={false}
+                enableRadialGrid={false}
+                radialAxisStart={null}
+                circularAxisOuter={null}
+                // radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
+                // circularAxisOuter={null}
+                labelsTextColor="#ffffff"
+                enableLabels={true}
+                enableCircularGrid={false}
+                labelsSkipAngle={7}
+                labelsRadiusOffset={2}
+                theme={{
+                  fontSize: 16,
+                }}
+              />
+
+              <div className="mx-auto w-full -mt-10">
+                <span className="text-white font-bold text-xl">Placar</span>
+              </div>
+            </div>
+
+            <div className="w-full block">
+              <ResponsiveRadialBar
+                data={[
+                  {
+                    id: "Ganhos",
+                    data: [
+                      {
+                        x: "win",
+                        y: crash?.win_amount || 0,
+                      },
+                      {
+                        x: "loss",
+                        y: crash?.loss_amount || 0,
+                      },
+                    ],
+                  },
+                ]}
+                // valueFormat=">-.2f"
+                startAngle={0}
+                endAngle={360}
+                innerRadius={0.15}
+                colors={["#32D74B", "#f12c4cb3"]}
+                padding={0.6}
+                padAngle={7}
+                cornerRadius={12}
+                // margin={{ top: 2, right: 2, bottom: 2, left: 2 }}
+                enableTracks={false}
+                enableRadialGrid={false}
+                radialAxisStart={null}
+                circularAxisOuter={null}
+                // radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
+                // circularAxisOuter={null}
+                labelsTextColor="#ffffff"
+                enableLabels={true}
+                enableCircularGrid={false}
+                labelsSkipAngle={7}
+                labelsRadiusOffset={2.5}
+                theme={{
+                  fontSize: 16,
+                }}
+                // legends={null}
+              />
+              <div className="mx-auto w-full -mt-10">
+                <span className="text-white font-bold text-xl">Ganhos</span>
+              </div>
+            </div>
+          </div>
         </GameResults>
       </div>
 
       <FinancialStatus>
         <div className="flex w-full flex-row justify-between text-white py-2">
           <h3>Total investido:</h3>
-          <span className="font-light">R$1.502,68</span>
+          <span className="font-light">
+            R$ {Number(double?.amount) + Number(crash?.amount)}
+          </span>
         </div>
         <Divider />
         <div className="flex w-full flex-row justify-between text-white py-2">
           <h3>Ganhos totais:</h3>
-          <span className="font-light">+ R$964,93</span>
+          <span className="font-light">
+            R$ {Number(double?.win_amount) + Number(crash?.win_amount)}
+          </span>
         </div>
         <Divider />
         <div className="flex w-full flex-row justify-between text-white py-2">
           <h3>Perdas totais:</h3>
-          <span className="font-light">- R$86,88</span>
+          <span className="font-light">
+            R$ {Number(double?.loss_amount) + Number(crash?.loss_amount)}
+          </span>
         </div>
         <Divider />
         <div className="flex w-full flex-row justify-between text-white py-2">
           <h3>Total:</h3>
-          <span className="text-lime-green">R$2.380,70</span>
+          <span className="text-lime-green">
+            R${" "}
+            {Number(double?.win_amount) +
+              Number(crash?.win_amount) -
+              Number(double?.loss_amount) +
+              Number(crash?.loss_amount)}
+          </span>
         </div>
         <Divider />
       </FinancialStatus>

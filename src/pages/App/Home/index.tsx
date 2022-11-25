@@ -25,7 +25,8 @@ import { useLocale } from "../../../hooks/LocaleContext";
 // import Vimeo from "@u-wave/react-vimeo";
 // import YouTube from "react-youtube";
 import { useClassRoom } from "../../../hooks/ClassRoomContext";
-// import { UserEntriesManager } from "../../../components/modules/UserEntriesManager";
+import { UserEntriesManager } from "../../../components/modules/UserEntriesManager";
+// import { useUserEntries } from "../../../hooks/UserEntriesContext";
 // import { FormattedMessage, useIntl } from "react-intl";
 
 function HomePage() {
@@ -161,7 +162,7 @@ function HomePage() {
               </RoomStats>
             </Double>
           </Rooms>
-          {/* <UserEntriesManager /> */}
+          <UserEntriesManager />
           <div style={{ height: 40 }}></div>
         </Content>
       </Container>
