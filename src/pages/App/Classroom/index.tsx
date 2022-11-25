@@ -1,3 +1,4 @@
+/* eslint-disable react/style-prop-object */
 // import React from "react";
 import { Layout } from "../../../layouts/app";
 import {
@@ -14,7 +15,7 @@ import {
   LoadingBox,
 } from "./styles";
 // import Vimeo from "@u-wave/react-vimeo";
-import YouTube from "react-youtube";
+// import YouTube from "react-youtube";
 import { CourseSlider } from "../../../components/elements/CourseSlider";
 import { useClassRoom } from "../../../hooks/ClassRoomContext";
 import Stack from "@mui/material/Stack";
@@ -39,10 +40,18 @@ function Classroom() {
             <CurrentClass>
               <Watching>
                 {currentActiveLesson && (
-                  <YouTube
-                    videoId={currentActiveLesson.video_url}
-                    opts={{ allowFullScreen: true, showInfo: 0 }}
+                  <iframe
+                    title="Video"
+                    frameBorder="0"
+                    allowFullScreen
+                    src={currentActiveLesson.video_url}
+                    id="ifr_637eb356f44ca1000986d8f4"
+                    referrerPolicy="origin"
                   />
+                  // <YouTube
+                  //   videoId={currentActiveLesson.video_url}
+                  //   opts={{ allowFullScreen: true, showInfo: 0 }}
+                  // />
                 )}
               </Watching>
               {currentActiveLesson.action_url && (

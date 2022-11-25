@@ -12,6 +12,7 @@ import { AlertProvider } from "./AlertContext";
 import { PwaInstallHomeScreenProvider } from "./PwaInstallHomeScreen";
 import { ClassRoomProvider } from "./ClassRoomContext";
 import { SocketProvider } from "./SocketContext";
+import { UserEntriesProvider } from "./UserEntriesContext";
 
 interface AppProviderProps {
   children: any;
@@ -28,7 +29,9 @@ const AppProvider: React.FC<AppProviderProps> = ({ children }) => (
                 <BankProvider>
                   <AlertProvider>
                     <ClassRoomProvider>
-                      <SocketProvider>{children}</SocketProvider>
+                      <SocketProvider>
+                        <UserEntriesProvider>{children}</UserEntriesProvider>
+                      </SocketProvider>
                     </ClassRoomProvider>
                   </AlertProvider>
                 </BankProvider>

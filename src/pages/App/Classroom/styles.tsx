@@ -49,10 +49,11 @@ export const CurrentClass = styled("div")(({ theme }) => ({
 
 export const Watching = styled("div")(({ theme }) => ({
   display: "block",
-  padding: "56.25% 0 0 0",
+  padding: "62% 0 0 0",
   position: "relative",
   zIndex: 100,
   width: "100%",
+  height: "100%",
 
   iframe: {
     position: "absolute",
