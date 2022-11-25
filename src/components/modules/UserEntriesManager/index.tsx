@@ -190,7 +190,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                       ],
                     },
                   ]}
-                  // valueFormat=">-$.2f"
+                  // valueFormat=">-.2f"
                   startAngle={0}
                   endAngle={360}
                   innerRadius={0.15}
@@ -209,10 +209,11 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                   enableLabels={true}
                   enableCircularGrid={false}
                   labelsSkipAngle={7}
-                  labelsRadiusOffset={2}
+                  labelsRadiusOffset={2.5}
                   theme={{
                     fontSize: 16,
                   }}
+                  // legends={null}
                 />
 
                 <div className="mx-auto w-full mt-4">
