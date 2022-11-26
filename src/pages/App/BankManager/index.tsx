@@ -23,6 +23,7 @@ import { InputMask } from "../../../components/elements/InputMask";
 import { useLocale } from "../../../hooks/LocaleContext";
 import { useBank } from "../../../hooks/BankContext";
 import { useToast } from "../../../hooks/ToastContext";
+import { UserEntriesManager } from "../../../components/modules/UserEntriesManager";
 
 function BankManagerPage() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -227,6 +228,7 @@ function BankManagerPage() {
               </div>
             </div>
           </ManagerContainer>
+          <UserEntriesManager />
         </Content>
         <Modal ref={modalRef} show={modalIsVisible}>
           <ModalContent show={modalIsVisible}>
