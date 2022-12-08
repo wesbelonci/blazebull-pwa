@@ -2,89 +2,137 @@
   "sign-in": [{ "type": 0, "value": "Iniciar sesión" }],
   "sign-out": [{ "type": 0, "value": "Salir" }],
   "sign-up": [{ "type": 0, "value": "Inscribirse" }],
+  "logout": [{ "type": 0, "value": "Cerrar sesión" }],
   "need-help": [{ "type": 0, "value": "Necesitas ayuda?" }],
   "click-here": [{ "type": 0, "value": "Haga clic aquí" }],
   "email": [{ "type": 0, "value": "E-mail" }],
   "password": [{ "type": 0, "value": "Clave" }],
-  "password_confirmation": [{ "type": 0, "value": "Confirm password" }],
-  "keep-me-connected": [{ "type": 0, "value": "keep me connected" }],
-  "forgot-password": [{ "type": 0, "value": "forgot password?" }],
-  "send": [{ "type": 0, "value": "Send" }],
+  "password_confirmation": [{ "type": 0, "value": "Confirmar contraseña" }],
+  "keep-me-connected": [{ "type": 0, "value": "Mantenme conectado" }],
+  "forgot-password": [{ "type": 0, "value": "¿Has olvidado tu contraseña?" }],
+  "send": [{ "type": 0, "value": "Enviar" }],
   "currency": [{ "type": 0, "value": "$ " }],
-  "total-bankroll": [{ "type": 0, "value": "Total Bankroll: " }],
-  "save": [{ "type": 0, "value": "Save" }],
-  "is-required": [{ "type": 0, "value": "is Required" }],
-  "value": [{ "type": 0, "value": "value" }],
+  "total-bankroll": [{ "type": 0, "value": "Fondos totales: " }],
+  "save": [{ "type": 0, "value": "Ahorrar" }],
+  "is-required": [{ "type": 0, "value": "Es requerido" }],
+  "value": [{ "type": 0, "value": "valor" }],
 
-  "bet": [{ "type": 0, "value": "Bet" }],
-  "entry-after": [{ "type": 0, "value": "Entry after" }],
-  "exit-in": [{ "type": 0, "value": "Exit in" }],
-  "enter-with": [{ "type": 0, "value": "Enter With" }],
-  "crash-in": [{ "type": 0, "value": "Crash in" }],
-  "exit": [{ "type": 0, "value": "Exit" }],
+  "bet": [{ "type": 0, "value": "Apuesta" }],
+  "entry-after": [{ "type": 0, "value": "Entrada después" }],
+  "exit-in": [{ "type": 0, "value": "salir en" }],
+  "enter-with": [{ "type": 0, "value": "Entrar con" }],
+  "crash-in": [{ "type": 0, "value": "Estrellarse en" }],
+  "exit": [{ "type": 0, "value": "Salida" }],
 
-  "white": [{ "type": 0, "value": "White" }],
-  "red": [{ "type": 0, "value": "Red" }],
-  "black": [{ "type": 0, "value": "Black" }],
+  "white": [{ "type": 0, "value": "Blanco" }],
+  "red": [{ "type": 0, "value": "Rojo" }],
+  "black": [{ "type": 0, "value": "Negro" }],
 
-  "possible-entry": [{ "type": 0, "value": "Possible Entry!" }],
-  "confirmed-entry": [{ "type": 0, "value": "Confirmed Entry!" }],
-  "make-martingale": [{ "type": 0, "value": "Make Martingale!" }],
-  "make-martingale-again": [{ "type": 0, "value": "Make Martingale Again!" }],
-  "loss": [{ "type": 0, "value": "Loss!!!!" }],
-  "win": [{ "type": 0, "value": "Wiiiiiinnnnnnn!!!!" }],
+  "possible-entry": [{ "type": 0, "value": "¡Posible entrada!" }],
+  "confirmed-entry": [{ "type": 0, "value": "¡Entrada confirmada!" }],
+  "make-martingale": [{ "type": 0, "value": "¡Haz Martingala!" }],
+  "make-martingale-again": [
+    { "type": 0, "value": "¡Haz Martingala otra vez!" }
+  ],
+  "loss": [{ "type": 0, "value": "¡¡¡¡Pérdida!!!!" }],
+  "win": [{ "type": 0, "value": "Wiiiiiiinnnnnn!!!!" }],
   "wait-for-signal": [
     {
       "type": 0,
-      "value": "Hold! Our artificial intelligence is analyzing upcoming entries!"
+      "value": "¡Mantener! ¡Nuestra inteligencia artificial está analizando las próximas entradas!"
     }
   ],
 
   "wait-for-confirmation-bot": [
     {
       "type": 0,
-      "value": "Stay tuned, our artificial intelligence is, analyzing a possible entry."
+      "value": "Estad atentos, nuestra inteligencia artificial está analizando una posible entrada."
     }
   ],
 
-  "color-bet": [{ "type": 0, "value": "Color bet" }],
-  "todays-results": [{ "type": 0, "value": "Today's results" }],
-  "result": [{ "type": 0, "value": "Result" }],
-  "entry": [{ "type": 0, "value": "Entry" }],
-  "entries": [{ "type": 0, "value": "Entries" }],
-  "roll": [{ "type": 0, "value": "Roll" }],
-  "wait-for-confirmation": [{ "type": 0, "value": "Wait for confirmation" }],
-  "live": [{ "type": 0, "value": "Live" }],
+  "color-bet": [{ "type": 0, "value": "Apuesta de color" }],
+  "todays-results": [{ "type": 0, "value": "Resultados de hoy" }],
+  "result": [{ "type": 0, "value": "Resultado" }],
+  "entry": [{ "type": 0, "value": "Entrada" }],
+  "entries": [{ "type": 0, "value": "Entradas" }],
+  "losses": [{ "type": 0, "value": "Pérdidas" }],
+  "roll": [{ "type": 0, "value": "Rodar" }],
+  "wait-for-confirmation": [{ "type": 0, "value": "Esperar confirmación" }],
+  "live": [{ "type": 0, "value": "Vivir" }],
+  "earnings": [{ "type": 0, "value": "Ganancias" }],
 
-  "win-loss-manager": [{ "type": 0, "value": "Win and Loss Manager" }],
-  "bank-of-the-day": [{ "type": 0, "value": "Bank of the day" }],
-  "stop-when-profit": [{ "type": 0, "value": "Stop when profit" }],
-  "stop-when-lose": [{ "type": 0, "value": "Stop when lose" }],
-  "entries-recommendation": [{ "type": 0, "value": "Entries recommendation" }],
-  "from-the-bank": [{ "type": 0, "value": "from the bank" }],
+  "win-loss-manager": [
+    { "type": 0, "value": "Administrador de pérdidas y ganancias" }
+  ],
+  "bank-of-the-day": [{ "type": 0, "value": "Banco del dia" }],
+  "stop-when-profit": [{ "type": 0, "value": "Detener cuando el beneficio" }],
+  "stop-when-lose": [{ "type": 0, "value": "Detente cuando pierdas" }],
+  "entries-recommendation": [
+    { "type": 0, "value": "Recomendación de entradas" }
+  ],
+  "from-the-bank": [{ "type": 0, "value": "desde el banco" }],
 
-  "install": [{ "type": 0, "value": "Install" }],
+  "install": [{ "type": 0, "value": "Instalar" }],
   "instalation-pwa": [
     {
       "type": 0,
-      "value": "Please install the Blaze Bulls app for a better experience."
+      "value": "Instale la aplicación Blaze Bulls para una mejor experiencia."
     }
   ],
 
-  "passsword_required": [{ "type": 0, "value": "Password is required" }],
+  "passsword_required": [{ "type": 0, "value": "Se requiere contraseña" }],
   "passsword_lenght_should": [
-    { "type": 0, "value": "Password length should be at least 4 characters" }
+    {
+      "type": 0,
+      "value": "La longitud de la contraseña debe ser de al menos 4 caracteres"
+    }
   ],
   "passsword_lenght_exceed": [
-    { "type": 0, "value": "Password cannot exceed more than 12 characters" }
+    {
+      "type": 0,
+      "value": "La contraseña no puede exceder más de 12 caracteres"
+    }
   ],
   "passsword_confirmation_not_match": [
-    { "type": 0, "value": "Passwords do not match" }
+    { "type": 0, "value": "Las contraseñas no coinciden" }
   ],
   "passsword_confirmation_required": [
-    { "type": 0, "value": "Password confirmation is required" }
+    { "type": 0, "value": "Se requiere confirmación de contraseña" }
   ],
-  "email_is_not_valid": [{ "type": 0, "value": "Fill in with a valid e-mail" }],
-  "email_required": [{ "type": 0, "value": "E-mail is required" }],
-  "speak-now": [{ "type": 0, "value": "Speak Now!" }]
+  "email_is_not_valid": [
+    { "type": 0, "value": "Rellenar con un correo electrónico válido" }
+  ],
+  "email_required": [{ "type": 0, "value": "Correo electronico es requerido" }],
+  "speak-now": [{ "type": 0, "value": "¡Habla ahora!" }],
+
+  "home": [{ "type": 0, "value": "Hogar" }],
+  "course": [{ "type": 0, "value": "Curso" }],
+  "banking-manager": [{ "type": 0, "value": "Gerente bancario" }],
+  "settings": [{ "type": 0, "value": "Ajustes" }],
+  "support": [{ "type": 0, "value": "Apoyo" }],
+  "maintenance": [{ "type": 0, "value": "Mantenimiento" }],
+  "subscription-status": [{ "type": 0, "value": "Estado de suscripción" }],
+  "active": [{ "type": 0, "value": "Activo" }],
+
+  "attended-classes": [{ "type": 0, "value": "Clases Asistidas" }],
+  "classroom": [{ "type": 0, "value": "Aula" }],
+
+  "sign-room": [{ "type": 0, "value": "Sala de letreros" }],
+
+  "in-the-last-24-hours": [{ "type": 0, "value": "En las últimas 24 horas" }],
+  "hit-rate": [{ "type": 0, "value": "Tasa de éxito" }],
+  "my-results": [{ "type": 0, "value": "Mis resultados" }],
+  "entries-made": [{ "type": 0, "value": "Entradas hechas" }],
+  "scoreboard": [{ "type": 0, "value": "Marcador" }],
+
+  "total-invested": [{ "type": 0, "value": "Total invertido" }],
+  "total-earnings": [{ "type": 0, "value": "Ganancias Totales" }],
+  "total-losses": [{ "type": 0, "value": "Pérdidas totales" }],
+  "total": [{ "type": 0, "value": "Total" }],
+
+  "access-the-website": [{ "type": 0, "value": "Accede al sitio web" }],
+  "end-class": [{ "type": 0, "value": "Clase final" }],
+  "module-and-classes": [{ "type": 0, "value": "Módulo y clases" }],
+  "video-classes": [{ "type": 0, "value": "Videoclases" }],
+  "progress": [{ "type": 0, "value": "Progreso" }]
 }

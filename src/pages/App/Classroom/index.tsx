@@ -14,13 +14,12 @@ import {
   AccordionDetails,
   LoadingBox,
 } from "./styles";
-// import Vimeo from "@u-wave/react-vimeo";
-// import YouTube from "react-youtube";
 import { CourseSlider } from "../../../components/elements/CourseSlider";
 import { useClassRoom } from "../../../hooks/ClassRoomContext";
 import Stack from "@mui/material/Stack";
 import CircularProgress from "@mui/material/CircularProgress";
 import { FiArrowRight } from "react-icons/fi";
+import { FormattedMessage } from "react-intl";
 // import { Link } from "react-router-dom";
 
 function Classroom() {
@@ -61,7 +60,9 @@ function Classroom() {
                   rel="noreferrer"
                 >
                   <Button className="mx-auto" color="red">
-                    <span>Acessar o site</span>
+                    <span>
+                      <FormattedMessage id="access-the-website" />
+                    </span>
                     <FiArrowRight className="text-red ml-2" size={25} />
                   </Button>
                 </a>
@@ -73,7 +74,9 @@ function Classroom() {
                 onClick={() => completeLesson(currentActiveLesson.id)}
               >
                 <img src="/assets/objects/check-icon.svg" alt="Check" />
-                <span>Concluir Aula</span>
+                <span>
+                  <FormattedMessage id="end-class" />
+                </span>
               </Button>
             </CurrentClass>
           ) : (
@@ -87,10 +90,14 @@ function Classroom() {
           <ModuleAndCourses>
             <div className="flex flex-row justify-between w-full items-center mb-4 px-4">
               <div className="w-auto">
-                <h2>Modulo e aulas</h2>
+                <h2>
+                  <FormattedMessage id="module-and-classes" />
+                </h2>
               </div>
               <div className="flex w-auto flex-row items-center">
-                <span className="text-xs text-white mr-2">Progresso</span>
+                <span className="text-xs text-white mr-2">
+                  <FormattedMessage id="progress" />
+                </span>
                 <div className="w-24">
                   <BorderLinearProgress
                     variant="determinate"
@@ -133,7 +140,7 @@ function Classroom() {
                     <AccordionDetails>
                       <div className="flex flex-col w-full px-6">
                         <span className="text-white text-md font-semibold">
-                          Video Aulas
+                          <FormattedMessage id="video-classes" />
                         </span>
                       </div>
                       <CourseSlider lessons={moduleLession.lessons} />

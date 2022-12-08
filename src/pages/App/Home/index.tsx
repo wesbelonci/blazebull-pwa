@@ -22,12 +22,9 @@ import { useNavigate } from "react-router-dom";
 import { useCrashGame } from "../../../hooks/CrashGameContext";
 import { useDoubleGame } from "../../../hooks/DoubleGameContext";
 import { useLocale } from "../../../hooks/LocaleContext";
-// import Vimeo from "@u-wave/react-vimeo";
-// import YouTube from "react-youtube";
 import { useClassRoom } from "../../../hooks/ClassRoomContext";
 import { UserEntriesManager } from "../../../components/modules/UserEntriesManager";
-// import { useUserEntries } from "../../../hooks/UserEntriesContext";
-// import { FormattedMessage, useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -35,6 +32,7 @@ function HomePage() {
   const { daily: dataDouble } = useDoubleGame();
   const { locale } = useLocale();
   const { currentActiveLesson } = useClassRoom();
+  // const { formatMessage: f } = useIntl();
 
   return (
     <Layout>
@@ -42,12 +40,16 @@ function HomePage() {
         <Content>
           <Course>
             <CourseHeader>
-              <h2>Assista as aulas</h2>
+              <h2>
+                <FormattedMessage id="attended-classes" />
+              </h2>
               <div
                 className="flex flex-row w-auto items-center cursor-pointer"
                 onClick={() => navigate(`/${locale}/classroom`)}
               >
-                <span>Sala de aula</span>
+                <span>
+                  <FormattedMessage id="classroom" />
+                </span>
                 <FiChevronRight size={20} />
               </div>
             </CourseHeader>
@@ -69,10 +71,14 @@ function HomePage() {
             </KeepWatching>
           </Course>
           <Rooms>
-            <h2>Salas de sinais</h2>
+            <h2>
+              <FormattedMessage id="sign-room" />
+            </h2>
             <Crash onClick={() => navigate(`/${locale}/room-crash`)}>
               <Live>
-                <span>Ao vivo</span>
+                <span>
+                  <FormattedMessage id="live" />
+                </span>
               </Live>
               <RoomStats>
                 <div className="flex w-auto h-auto flex-row items-center justify-center">
@@ -95,13 +101,17 @@ function HomePage() {
                   </RoomStatsLoss>
                 </div>
                 <div className="text-white mt-1">
-                  <span>Nas últimas 24h</span>
+                  <span>
+                    <FormattedMessage id="in-the-last-24-hours" />
+                  </span>
                 </div>
                 <Title className="flex items-center h-20">
                   <span className="text-2xl">Sala Crash</span>
                 </Title>
                 <Rate className="">
-                  <span>Taxa de acertos:</span>
+                  <span>
+                    <FormattedMessage id="hit-rate" />:
+                  </span>
                   <span className="text-lime-green">
                     <strong className="text-lime-green font-bold">
                       {dataCrash.win === 0
@@ -117,7 +127,9 @@ function HomePage() {
             </Crash>
             <Double onClick={() => navigate(`/${locale}/room-double`)}>
               <Live>
-                <span>Ao vivo</span>
+                <span>
+                  <FormattedMessage id="live" />
+                </span>
               </Live>
               <RoomStats>
                 <div className="flex w-auto h-auto flex-row items-center justify-center">
@@ -140,13 +152,17 @@ function HomePage() {
                   </RoomStatsLoss>
                 </div>
                 <div className="text-white mt-1">
-                  <span>Nas últimas 24h</span>
+                  <span>
+                    <FormattedMessage id="in-the-last-24-hours" />
+                  </span>
                 </div>
                 <Title className="flex items-center h-20">
                   <span className="text-2xl">Sala Double</span>
                 </Title>
                 <Rate className="">
-                  <span>Taxa de acertos:</span>
+                  <span>
+                    <FormattedMessage id="hit-rate" />:
+                  </span>
                   <span className="text-lime-green">
                     <strong className="text-lime-green font-bold">
                       {dataDouble.win === 0

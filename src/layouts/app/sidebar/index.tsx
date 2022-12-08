@@ -18,6 +18,7 @@ import { FiChevronLeft, FiLogOut, FiAlertTriangle } from "react-icons/fi";
 import { useAuth } from "../../../hooks/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLocale } from "../../../hooks/LocaleContext";
+import { FormattedMessage } from "react-intl";
 
 type SidebarProps = {
   active: boolean;
@@ -28,6 +29,7 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
   const { signOut, user } = useAuth();
   const { locale } = useLocale();
   const navigate = useNavigate();
+  // const { formatMessage: f } = useIntl();
 
   return (
     <Container className={`${active ? "show" : ""}`}>
@@ -36,7 +38,9 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
           <FiChevronLeft size={25} />
         </BackButton>
         <LogOutButton onClick={signOut}>
-          <span>Sair</span>
+          <span>
+            <FormattedMessage id="logout" />
+          </span>
           <FiLogOut size={22} />
         </LogOutButton>
       </Header>
@@ -59,23 +63,33 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
           </span>
 
           <div className="flex w-full flex-row justify-center py-1">
-            <span className="text-white text-sm">Status de Assinatura:</span>
-            <span className="text-lime-green text-sm px-1">Ativo</span>
+            <span className="text-white text-sm">
+              <FormattedMessage id="subscription-status" />:
+            </span>
+            <span className="text-lime-green text-sm px-1">
+              <FormattedMessage id="active" />
+            </span>
           </div>
         </div>
       </UserInfo>
       <BetsInfo>
         <BetInfoDetail>
           <span className="text-white">0</span>
-          <span className="font-bold text-white">Entradas</span>
+          <span className="font-bold text-white">
+            <FormattedMessage id="entries" />
+          </span>
         </BetInfoDetail>
         <BetInfoDetail>
           <span className="text-white">0</span>
-          <span className="font-bold text-white">Perdas</span>
+          <span className="font-bold text-white">
+            <FormattedMessage id="losses" />
+          </span>
         </BetInfoDetail>
         <BetInfoDetail>
           <span className="text-white">0</span>
-          <span className="font-bold text-white">Ganhos</span>
+          <span className="font-bold text-white">
+            <FormattedMessage id="Ganancias" />
+          </span>
         </BetInfoDetail>
       </BetsInfo>
       <Nav className="sidebar-nav">
@@ -84,13 +98,17 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
             <Icon>
               <img src="/assets/objects/home.svg" alt="Home" />
             </Icon>
-            <span>Home</span>
+            <span>
+              <FormattedMessage id="home" />
+            </span>
           </NavItem>
           <NavItem onClick={() => navigate(`/${locale}/classroom`)}>
             <Icon>
               <img src="/assets/objects/curso.svg" alt="Curso" />
             </Icon>
-            <span>Curso</span>
+            <span>
+              <FormattedMessage id="course" />
+            </span>
           </NavItem>
           <NavItem onClick={() => navigate(`/${locale}/room-crash`)}>
             <Icon>
@@ -122,10 +140,14 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
               />
             </Icon>
             <div className="flex w-full justify-between row">
-              <span className="menu">Gerenciador de Banca</span>
+              <span className="menu">
+                <FormattedMessage id="banking-manager" />
+              </span>
               <div className="flex row w-auto items-center justify-center space-x-2">
                 <FiAlertTriangle size={20} className="text-red" />
-                <span className="warning">Manutenção</span>
+                <span className="warning">
+                  <FormattedMessage id="maintenance" />
+                </span>
               </div>
             </div>
           </NavItem>
@@ -134,13 +156,17 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActiveSidebar }) => {
             <Icon>
               <img src="/assets/objects/config.svg" alt="Configuraçoes" />
             </Icon>
-            <span>Configurações</span>
+            <span>
+              <FormattedMessage id="settings" />
+            </span>
           </NavItem>
           <NavItem onClick={() => navigate(`/${locale}/support`)}>
             <Icon>
               <img src="/assets/objects/suporte.svg" alt="Suporte" />
             </Icon>
-            <span>Suporte</span>
+            <span>
+              <FormattedMessage id="support" />
+            </span>
           </NavItem>
         </NavList>
       </Nav>

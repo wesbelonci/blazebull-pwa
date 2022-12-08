@@ -17,7 +17,7 @@ import { InputMask } from "../../../elements/InputMask";
 import { useLocale } from "../../../../hooks/LocaleContext";
 import { useAuth } from "../../../../hooks/AuthContext";
 import { useToast } from "../../../../hooks/ToastContext";
-import api from "../../../../services/api";
+// import api from "../../../../services/api";
 import { useDoubleGame } from "../../../../hooks/DoubleGameContext";
 
 interface IMarkManagerProps {
@@ -99,8 +99,10 @@ const DoubleMarkManager: React.FC<IMarkManagerProps> = ({
         round_id: entry?.round_id,
       };
 
+      console.log(formData);
+
       try {
-        await api.post("/entries", formData);
+        // await api.post("/entries", formData);
 
         addToast({
           title: "Salvo com sucesso!",

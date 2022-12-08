@@ -2,6 +2,7 @@
   "sign-in": [{ "type": 0, "value": "Entrar" }],
   "sign-out": [{ "type": 0, "value": "Sair" }],
   "sign-up": [{ "type": 0, "value": "Inscreva-se" }],
+  "logout": [{ "type": 0, "value": "Sair" }],
   "need-help": [{ "type": 0, "value": "Precisa de Ajuda?" }],
   "click-here": [{ "type": 0, "value": "Clique aqui" }],
   "email": [{ "type": 0, "value": "E-mail" }],
@@ -52,10 +53,12 @@
   "todays-results": [{ "type": 0, "value": "Resultados de hoje" }],
   "result": [{ "type": 0, "value": "Resultado" }],
   "entries": [{ "type": 0, "value": "Entradas" }],
+  "losses": [{ "type": 0, "value": "Perdas" }],
   "entry": [{ "type": 0, "value": "Entrada" }],
   "roll": [{ "type": 0, "value": "Giro" }],
   "wait-for-confirmation": [{ "type": 0, "value": "Aguarde a confirmação!" }],
   "live": [{ "type": 0, "value": "Ao vivo" }],
+  "earnings": [{ "type": 0, "value": "Ganhos" }],
 
   "win-loss-manager": [{ "type": 0, "value": "Gerenciador de Win e Loss" }],
   "bank-of-the-day": [{ "type": 0, "value": "Banca do dia" }],
@@ -87,5 +90,36 @@
   ],
   "email_is_not_valid": [{ "type": 0, "value": "Digite um e-mail válido!" }],
   "email_required": [{ "type": 0, "value": "Digite um e-mail válido!" }],
-  "speak-now": [{ "type": 0, "value": "Falar agora!" }]
+  "speak-now": [{ "type": 0, "value": "Falar agora!" }],
+
+  "home": [{ "type": 0, "value": "Início" }],
+  "course": [{ "type": 0, "value": "Curso" }],
+  "banking-manager": [{ "type": 0, "value": "Gerenciador de Banca" }],
+  "settings": [{ "type": 0, "value": "Configurações" }],
+  "support": [{ "type": 0, "value": "Suporte" }],
+  "maintenance": [{ "type": 0, "value": "Manutenção" }],
+  "subscription-status": [{ "type": 0, "value": "Status de Assinatura" }],
+  "active": [{ "type": 0, "value": "Ativo" }],
+
+  "attended-classes": [{ "type": 0, "value": "Assistia às aulas" }],
+  "classroom": [{ "type": 0, "value": "Sala de aula" }],
+
+  "sign-room": [{ "type": 0, "value": "Sala de sinais" }],
+
+  "in-the-last-24-hours": [{ "type": 0, "value": "Nas últimas 24h" }],
+  "hit-rate": [{ "type": 0, "value": "Taxa de acertos" }],
+  "my-results": [{ "type": 0, "value": "Meus Resultados" }],
+  "entries-made": [{ "type": 0, "value": "Entradas feitas" }],
+  "scoreboard": [{ "type": 0, "value": "Placar" }],
+
+  "total-invested": [{ "type": 0, "value": "Total investido" }],
+  "total-earnings": [{ "type": 0, "value": "Ganhos totais" }],
+  "total-losses": [{ "type": 0, "value": "Perdas totais" }],
+  "total": [{ "type": 0, "value": "Total" }],
+
+  "access-the-website": [{ "type": 0, "value": "Acessar o site" }],
+  "end-class": [{ "type": 0, "value": "Concluir Aula" }],
+  "module-and-classes": [{ "type": 0, "value": "Module e aulas" }],
+  "video-classes": [{ "type": 0, "value": "Video Aulas" }],
+  "progress": [{ "type": 0, "value": "Progresso" }]
 }

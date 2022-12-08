@@ -2,6 +2,7 @@
   "sign-in": [{ "type": 0, "value": "Sign In" }],
   "sign-out": [{ "type": 0, "value": "Sign Out" }],
   "sign-up": [{ "type": 0, "value": "Sign Up" }],
+  "logout": [{ "type": 0, "value": "Logout" }],
   "need-help": [{ "type": 0, "value": "Need Help?" }],
   "click-here": [{ "type": 0, "value": "Click here" }],
   "email": [{ "type": 0, "value": "E-mail" }],
@@ -53,9 +54,11 @@
   "result": [{ "type": 0, "value": "Result" }],
   "entry": [{ "type": 0, "value": "Entry" }],
   "entries": [{ "type": 0, "value": "Entries" }],
+  "losses": [{ "type": 0, "value": "Losses" }],
   "roll": [{ "type": 0, "value": "Roll" }],
   "wait-for-confirmation": [{ "type": 0, "value": "Wait for confirmation" }],
   "live": [{ "type": 0, "value": "Live" }],
+  "earnings": [{ "type": 0, "value": "Earnings" }],
 
   "win-loss-manager": [{ "type": 0, "value": "Win and Loss Manager" }],
   "bank-of-the-day": [{ "type": 0, "value": "Bank of the day" }],
@@ -87,5 +90,36 @@
   ],
   "email_is_not_valid": [{ "type": 0, "value": "Fill in with a valid e-mail" }],
   "email_required": [{ "type": 0, "value": "E-mail is required" }],
-  "speak-now": [{ "type": 0, "value": "Speak Now!" }]
+  "speak-now": [{ "type": 0, "value": "Speak Now!" }],
+
+  "home": [{ "type": 0, "value": "Home" }],
+  "course": [{ "type": 0, "value": "Course" }],
+  "banking-manager": [{ "type": 0, "value": "Banking Manager" }],
+  "settings": [{ "type": 0, "value": "Settings" }],
+  "support": [{ "type": 0, "value": "Support" }],
+  "maintenance": [{ "type": 0, "value": "Maintenance" }],
+  "subscription-status": [{ "type": 0, "value": "Subscription Status" }],
+  "active": [{ "type": 0, "value": "Active" }],
+
+  "attended-classes": [{ "type": 0, "value": "Attended classes" }],
+  "classroom": [{ "type": 0, "value": "Classrom" }],
+
+  "sign-room": [{ "type": 0, "value": "Sign room" }],
+
+  "in-the-last-24-hours": [{ "type": 0, "value": "In the last 24 hours" }],
+  "hit-rate": [{ "type": 0, "value": "Hit rate" }],
+  "my-results": [{ "type": 0, "value": "My Results" }],
+  "entries-made": [{ "type": 0, "value": "Entries made" }],
+  "scoreboard": [{ "type": 0, "value": "Scoreboard" }],
+
+  "total-invested": [{ "type": 0, "value": "Total invested" }],
+  "total-earnings": [{ "type": 0, "value": "Total earnings" }],
+  "total-losses": [{ "type": 0, "value": "Total losses" }],
+  "total": [{ "type": 0, "value": "Total" }],
+
+  "access-the-website": [{ "type": 0, "value": "Access the website" }],
+  "end-class": [{ "type": 0, "value": "End Class" }],
+  "module-and-classes": [{ "type": 0, "value": "Module and classes" }],
+  "video-classes": [{ "type": 0, "value": "Video classes" }],
+  "progress": [{ "type": 0, "value": "Progress" }]
 }

@@ -16,7 +16,7 @@ import { useUserEntries } from "../../../hooks/UserEntriesContext";
 // import { CardDouble } from "../../elements/Cards/Double";
 // import { useCrashGame } from "../../../hooks/CrashGameContext";
 // import { useDoubleGame } from "../../../hooks/DoubleGameContext";
-// import { FormattedMessage } from "react-intl";
+import { FormattedMessage, useIntl } from "react-intl";
 
 interface EntriesProps {
   // room: "crash" | "double";
@@ -24,13 +24,14 @@ interface EntriesProps {
 
 const UserEntriesManager: React.FC<EntriesProps> = () => {
   const { double, crash } = useUserEntries();
-
-  console.log(double, crash);
+  const { formatMessage: f } = useIntl();
 
   return (
     <Container>
       <Header>
-        <Title>Meus resultados</Title>
+        <Title>
+          <FormattedMessage id="my-results" />
+        </Title>
         <div className="flex w-6 justify-center items-center">
           <img src="../assets/objects/entries.svg" alt="Entries" />
         </div>
@@ -49,7 +50,9 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                 />
               </div>
               <div className="flex flex-row w-auto items-center justify-end">
-                <span>Entradas feitas</span>
+                <span>
+                  <FormattedMessage id="entries-made" />
+                </span>
                 <Badge>
                   {Number(double?.loss || 0) + Number(double?.win || 0)}
                 </Badge>
@@ -60,7 +63,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                 <ResponsiveRadialBar
                   data={[
                     {
-                      id: "Placar",
+                      id: f({ id: "scoreboard" }),
                       data: [
                         {
                           x: "win",
@@ -100,7 +103,9 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                 />
 
                 <div className="mx-auto w-full py-2">
-                  <span className="text-white font-bold text-xl">Placar</span>
+                  <span className="text-white font-bold text-xl">
+                    <FormattedMessage id="scoreboard" />
+                  </span>
                 </div>
               </div>
 
@@ -108,7 +113,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                 <ResponsiveRadialBar
                   data={[
                     {
-                      id: "Ganhos",
+                      id: f({ id: "earnings" }),
                       data: [
                         {
                           x: "win",
@@ -147,7 +152,9 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                   // legends={null}
                 />
                 <div className="mx-auto w-full py-2">
-                  <span className="text-white font-bold text-xl">Ganhos</span>
+                  <span className="text-white font-bold text-xl">
+                    <FormattedMessage id="earnings" />
+                  </span>
                 </div>
               </div>
             </div>
@@ -166,7 +173,9 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                 />
               </div>
               <div className="flex flex-row w-auto items-center justify-end">
-                <span>Entradas feitas</span>
+                <span>
+                  <FormattedMessage id="entries-made" />
+                </span>
                 <Badge>
                   {Number(crash?.loss || 0) + Number(crash?.win || 0)}
                 </Badge>
@@ -177,7 +186,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                 <ResponsiveRadialBar
                   data={[
                     {
-                      id: "Placar",
+                      id: f({ id: "scoreboard" }),
                       data: [
                         {
                           x: "win",
@@ -217,7 +226,9 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                 />
 
                 <div className="mx-auto w-full py-2">
-                  <span className="text-white font-bold text-xl">Placar</span>
+                  <span className="text-white font-bold text-xl">
+                    <FormattedMessage id="scoreboard" />
+                  </span>
                 </div>
               </div>
 
@@ -225,7 +236,7 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                 <ResponsiveRadialBar
                   data={[
                     {
-                      id: "Ganhos",
+                      id: f({ id: "earnings" }),
                       data: [
                         {
                           x: "win",
@@ -264,7 +275,9 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
                   // legends={null}
                 />
                 <div className="mx-auto w-full py-2">
-                  <span className="text-white font-bold text-xl">Ganhos</span>
+                  <span className="text-white font-bold text-xl">
+                    <FormattedMessage id="earnings" />
+                  </span>
                 </div>
               </div>
             </div>
@@ -274,32 +287,41 @@ const UserEntriesManager: React.FC<EntriesProps> = () => {
 
       <FinancialStatus>
         <div className="flex w-full flex-row justify-between text-white py-2">
-          <h3>Total investido:</h3>
+          <h3>
+            <FormattedMessage id="total-invested" />:
+          </h3>
           <span className="font-light">
-            R$ {Number(double?.amount || 0) + Number(crash?.amount || 0)}
+            <FormattedMessage id="currency" />{" "}
+            {Number(double?.amount || 0) + Number(crash?.amount || 0)}
           </span>
         </div>
         <Divider />
         <div className="flex w-full flex-row justify-between text-white py-2">
-          <h3>Ganhos totais:</h3>
+          <h3>
+            <FormattedMessage id="total-earnings" />:
+          </h3>
           <span className="font-light">
-            R${" "}
+            <FormattedMessage id="currency" />{" "}
             {Number(double?.win_amount || 0) + Number(crash?.win_amount || 0)}
           </span>
         </div>
         <Divider />
         <div className="flex w-full flex-row justify-between text-white py-2">
-          <h3>Perdas totais:</h3>
+          <h3>
+            <FormattedMessage id="total-losses" />:
+          </h3>
           <span className="font-light">
-            R${" "}
+            <FormattedMessage id="currency" />{" "}
             {Number(double?.loss_amount || 0) + Number(crash?.loss_amount || 0)}
           </span>
         </div>
         <Divider />
         <div className="flex w-full flex-row justify-between text-white py-2">
-          <h3>Total:</h3>
+          <h3>
+            <FormattedMessage id="total" />:
+          </h3>
           <span className="text-lime-green">
-            R${" "}
+            <FormattedMessage id="currency" />{" "}
             {Number(double?.win_amount || 0) +
               Number(crash?.win_amount || 0) -
               Number(double?.loss_amount || 0) +
