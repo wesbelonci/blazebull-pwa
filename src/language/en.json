@@ -121,5 +121,10 @@
   "end-class": [{ "type": 0, "value": "End Class" }],
   "module-and-classes": [{ "type": 0, "value": "Module and classes" }],
   "video-classes": [{ "type": 0, "value": "Video classes" }],
-  "progress": [{ "type": 0, "value": "Progress" }]
+  "progress": [{ "type": 0, "value": "Progress" }],
+
+  "create-password": [{ "type": 0, "value": "Create a password!" }],
+  "enter-password-to-access": [
+    { "type": 0, "value": "Enter a password to access BlazeBulls" }
+  ]
 }

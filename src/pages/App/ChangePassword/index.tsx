@@ -120,8 +120,12 @@ function ChangePassword() {
               <FiLock size={40} />
             </div>
             <div className="w-10/12">
-              <Title>Crie uma senha!</Title>
-              <HelpText>Digite uma senha para acessar a Blaze Bulls.</HelpText>
+              <Title>
+                <FormattedMessage id="create-password" />
+              </Title>
+              <HelpText>
+                <FormattedMessage id="enter-password-to-access" />
+              </HelpText>
             </div>
           </PageTitle>
 
